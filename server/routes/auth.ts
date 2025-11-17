@@ -519,7 +519,7 @@ export const sendResponseEmail: RequestHandler = async (req, res) => {
     }
 
     // First get the contact details
-    const contactResponse = await fetch(`${API_URL}?table=contacts&id=${id}`, {
+    const contactResponse = await fetchWithTimeout(`${API_URL}?table=contacts&id=${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
