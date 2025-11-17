@@ -30,6 +30,7 @@ pnpm dev:full
 ```
 
 This command:
+
 - Starts PHP server on `http://localhost:8000`
 - Starts Vite dev server on `http://localhost:8080`
 - Vite automatically proxies `/api.php` requests to PHP server
@@ -38,12 +39,14 @@ This command:
 #### Option B: Run Separately (If you prefer two terminals)
 
 **Terminal 1 - Start PHP API server:**
+
 ```bash
 pnpm dev:php
 # or manually: php -S localhost:8000
 ```
 
 **Terminal 2 - Start React dev server:**
+
 ```bash
 pnpm dev
 # Runs on http://localhost:8080
@@ -58,6 +61,7 @@ pnpm dev
 ## How the Proxy Works
 
 During development:
+
 1. React frontend makes a request to `/api.php`
 2. Vite intercepts this request
 3. Vite forwards it to `http://localhost:8000/api.php`
@@ -65,6 +69,7 @@ During development:
 5. Response is sent back to the frontend
 
 This setup allows you to:
+
 - Develop React and PHP independently
 - Keep the dev experience smooth with Vite's HMR (Hot Module Reload)
 - Test the full API locally without deploying
@@ -74,6 +79,7 @@ This setup allows you to:
 If you want to test with a local database:
 
 1. **Create a database** (MySQL):
+
    ```bash
    mysql -u root -p
    > CREATE DATABASE mwamunda;
@@ -81,6 +87,7 @@ If you want to test with a local database:
    ```
 
 2. **Configure connection** in `connection.php`:
+
    ```php
    $servername = "localhost";
    $username = "root";
@@ -92,6 +99,7 @@ If you want to test with a local database:
    - http://localhost:8080/admin/setup
 
    Or make a curl request:
+
    ```bash
    curl -X POST http://localhost:8000/api.php \
      -H "Content-Type: application/json" \
@@ -124,10 +132,13 @@ pnpm format.fix
 If port 8000 or 8080 is already in use:
 
 1. **Change PHP port:**
+
    ```bash
    php -S localhost:9000
    ```
+
    Then update `vite.config.ts`:
+
    ```typescript
    proxy: {
      "/api.php": {
@@ -145,6 +156,7 @@ If port 8000 or 8080 is already in use:
 ### API Returns HTML Instead of JSON
 
 If you see HTML error pages from PHP:
+
 1. Ensure PHP server is running: `pnpm dev:php`
 2. Check that `connection.php` has correct database credentials
 3. Look at PHP error logs in terminal
