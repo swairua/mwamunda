@@ -8,10 +8,18 @@ import {
   Eye,
   Copy,
   Send,
+  Loader,
 } from "lucide-react";
 import { getStoredUser, clearUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
-import { getAllContacts, Contact, updateContactStatus } from "@/lib/contacts";
+import {
+  getAllContacts,
+  Contact,
+  updateContactStatus,
+  deleteContact,
+  addInternalNote,
+  sendResponseEmail,
+} from "@/lib/contacts";
 import AdminSidebar from "@/components/AdminSidebar";
 
 export default function AdminContacts() {
@@ -25,6 +33,8 @@ export default function AdminContacts() {
   const [filter, setFilter] = useState<string>("all");
   const [internalNote, setInternalNote] = useState<string>("");
   const [responseEmail, setResponseEmail] = useState<string>("");
+  const [isSending, setIsSending] = useState(false);
+  const [isAddingNote, setIsAddingNote] = useState(false);
 
   // Redirect if not logged in
   useEffect(() => {
