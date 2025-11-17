@@ -139,7 +139,7 @@ export async function addInternalNote(
   notes: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -175,7 +175,7 @@ export async function sendResponseEmail(
   responseEmail: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -212,7 +212,7 @@ export async function sendResponseEmail(
 
 export async function deleteContact(id: number): Promise<ContactResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}?table=contacts&id=${id}`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}?table=contacts&id=${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
