@@ -26,7 +26,7 @@ export async function submitContact(
   contact: Contact,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export async function submitContact(
 
 export async function getAllContacts(): Promise<Contact[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}?table=contacts`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}?table=contacts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export async function updateContactStatus(
   status: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
