@@ -469,6 +469,7 @@ export default function AdminContacts() {
                               <Eye className="w-5 h-5" />
                             </button>
                             <button
+                              onClick={() => handleDeleteContact(contact.id)}
                               className="p-2 rounded-lg hover:bg-red-50 transition-colors text-muted-foreground hover:text-red-600"
                               title="Delete"
                             >
