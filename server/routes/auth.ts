@@ -349,7 +349,7 @@ export const submitContact: RequestHandler = async (req, res) => {
 // Get all contacts (admin only)
 export const getAllContacts: RequestHandler = async (req, res) => {
   try {
-    const response = await fetch(`${API_URL}?table=contacts`, {
+    const response = await fetchWithTimeout(`${API_URL}?table=contacts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
