@@ -258,7 +258,7 @@ export const getAllUsers: RequestHandler = async (req, res) => {
 // Initialize contacts table
 export const initializeContactsTable: RequestHandler = async (req, res) => {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetchWithTimeout(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
