@@ -20,7 +20,7 @@ export interface ContactResponse {
   error?: string;
 }
 
-const API_BASE_URL = "/api/contacts";
+const API_BASE_URL = "api.php";
 
 export async function submitContact(
   contact: Contact,
@@ -32,11 +32,15 @@ export async function submitContact(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: contact.name,
-        email: contact.email,
-        phone: contact.phone || null,
-        subject: contact.subject,
-        message: contact.message,
+        table: "contacts",
+        data: {
+          name: contact.name,
+          email: contact.email,
+          phone: contact.phone || null,
+          subject: contact.subject,
+          message: contact.message,
+          status: "new",
+        },
       }),
     });
 
@@ -61,7 +65,7 @@ export async function submitContact(
 
 export async function getAllContacts(): Promise<Contact[]> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(`${API_BASE_URL}?table=contacts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -97,12 +101,16 @@ export async function updateContactStatus(
   status: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/${id}`, {
+    const response = await fetch(API_BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ status }),
+      body: JSON.stringify({
+        table: "contacts",
+        id,
+        data: { status },
+      }),
     });
 
     if (!response.ok) {
@@ -131,12 +139,16 @@ export async function addInternalNote(
   notes: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/${id}/notes`, {
+    const response = await fetch(API_BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ internal_notes: notes }),
+      body: JSON.stringify({
+        table: "contacts",
+        id,
+        data: { internal_notes: notes },
+      }),
     });
 
     if (!response.ok) {
@@ -163,12 +175,20 @@ export async function sendResponseEmail(
   responseEmail: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/${id}/respond`, {
-      method: "POST",
+    const response = await fetch(API_BASE_URL, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ response_email: responseEmail }),
+      body: JSON.stringify({
+        table: "contacts",
+        id,
+        data: {
+          response_email: responseEmail,
+          response_sent_at: new Date().toISOString(),
+          status: "responded",
+        },
+      }),
     });
 
     if (!response.ok) {
@@ -192,7 +212,7 @@ export async function sendResponseEmail(
 
 export async function deleteContact(id: number): Promise<ContactResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/${id}`, {
+    const response = await fetch(`${API_BASE_URL}?table=contacts&id=${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
