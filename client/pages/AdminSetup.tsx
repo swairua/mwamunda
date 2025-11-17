@@ -19,17 +19,20 @@ export default function AdminSetup() {
     setMessage("Setting up system...");
 
     try {
-      const response = await fetch("/api/setup", {
+      const response = await fetch("api.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          action: "init_contacts_table",
+        }),
       });
 
       const data = await response.json();
       setDetails(data);
 
-      if (response.ok && data.success) {
+      if (response.ok && (data.success || data.message?.includes("created"))) {
         setStatus("success");
         setMessage("Contacts table created successfully!");
         toast({

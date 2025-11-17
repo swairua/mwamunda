@@ -16,14 +16,17 @@ export interface AuthResponse {
   error?: string;
 }
 
-const API_BASE_URL = "/api/auth";
+const API_BASE_URL = "api.php";
 
 export async function initializeUsersTable(): Promise<any> {
-  const response = await fetch(`${API_BASE_URL}/init-users-table`, {
+  const response = await fetch(API_BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      action: "init_users_table",
+    }),
   });
   return response.json();
 }
@@ -33,12 +36,12 @@ export async function registerUser(
   password: string,
   name?: string,
 ): Promise<AuthResponse> {
-  const response = await fetch(`${API_BASE_URL}/register`, {
+  const response = await fetch(API_BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password, name }),
+    body: JSON.stringify({ action: "register", email, password, name }),
   });
   return response.json();
 }
@@ -47,28 +50,32 @@ export async function loginUser(
   email: string,
   password: string,
 ): Promise<AuthResponse> {
-  const response = await fetch(`${API_BASE_URL}/login`, {
+  const response = await fetch(API_BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ action: "login", email, password }),
   });
   return response.json();
 }
 
 export async function getUser(id: number): Promise<User> {
-  const response = await fetch(`${API_BASE_URL}/user/${id}`, {
+  const response = await fetch(`${API_BASE_URL}?table=users&id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  return response.json();
+  const data = await response.json();
+  if (Array.isArray(data) && data.length > 0) {
+    return data[0];
+  }
+  throw new Error("User not found");
 }
 
 export async function getAllUsers(): Promise<User[]> {
-  const response = await fetch(`${API_BASE_URL}/users`, {
+  const response = await fetch(`${API_BASE_URL}?table=users`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -1,14 +1,15 @@
 # Fusion Starter
 
-A production-ready full-stack React application template with integrated Express server, featuring React Router 6 SPA mode, TypeScript, Vitest, Zod and modern tooling.
+A production-ready React SPA application template with PHP backend API, featuring React Router 6 SPA mode, TypeScript, Vitest, TailwindCSS and modern tooling.
 
-While the starter comes with a express server, only create endpoint when strictly neccesary, for example to encapsulate logic that must leave in the server, such as private keys handling, or certain DB operations, db...
+This project uses a PHP backend API (api.php) for all data operations. The system calls the PHP API directly from the frontend without an intermediary Node.js server.
 
 ## Tech Stack
 
 - **PNPM**: Prefer pnpm
-- **Frontend**: React 18 + React Router 6 (spa) + TypeScript + Vite + TailwindCSS 3
-- **Backend**: Express server integrated with Vite dev server
+- **Frontend**: React 18 + React Router 6 (SPA) + TypeScript + Vite + TailwindCSS 3
+- **Backend**: PHP API (api.php) - Direct REST API calls from frontend
+- **Database**: MySQL
 - **Testing**: Vitest
 - **UI**: Radix UI + TailwindCSS 3 + Lucide React icons
 
@@ -18,15 +19,13 @@ While the starter comes with a express server, only create endpoint when strictl
 client/                   # React SPA frontend
 ├── pages/                # Route components (Index.tsx = home)
 ├── components/ui/        # Pre-built UI component library
+├── lib/                   # Utility functions and API clients
 ├── App.tsx                # App entry point and with SPA routing setup
 └── global.css            # TailwindCSS 3 theming and global styles
 
-server/                   # Express API backend
-├── index.ts              # Main server setup (express config + routes)
-└── routes/               # API handlers
-
-shared/                   # Types used by both client & server
-└── api.ts                # Example of how to share api interfaces
+api.php                   # PHP Backend API - handles database operations
+connection.php            # Database connection configuration
+shared/                   # Shared types and utilities
 ```
 
 ## Key Features
@@ -54,7 +53,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 ### Styling System
 
 - **Primary**: TailwindCSS 3 utility classes
-- **Theme and design tokens**: Configure in `client/global.css` 
+- **Theme and design tokens**: Configure in `client/global.css`
 - **UI components**: Pre-built library in `client/components/ui/`
 - **Utility**: `cn()` function combines `clsx` + `tailwind-merge` for conditional classes
 
@@ -67,34 +66,52 @@ className={cn(
 )}
 ```
 
-### Express Server Integration
+### PHP API Integration
 
-- **Development**: Single port (8080) for both frontend/backend
-- **Hot reload**: Both client and server code
-- **API endpoints**: Prefixed with `/api/`
+- **API Location**: `api.php` in the root directory
+- **Database**: MySQL database configured in `connection.php`
+- **CORS**: Enabled for all origins in `api.php`
+- **Authentication**: Password hashing using SHA-256
+- **Direct Frontend Calls**: Frontend calls the PHP API directly from the browser
 
-#### Example API Routes
-- `GET /api/ping` - Simple ping api
-- `GET /api/demo` - Demo endpoint  
+#### Authentication Endpoints
 
-### Shared Types
-Import consistent types in both client and server:
-```typescript
-import { DemoResponse } from '@shared/api';
-```
+The PHP API provides the following authentication actions via POST requests:
+
+- `action=register` - Register a new user with email and password
+- `action=login` - Login a user with email and password
+- `action=init_users_table` - Initialize the users database table
+- `action=init_contacts_table` - Initialize the contacts database table
+
+#### CRUD Operations
+
+The PHP API supports standard CRUD operations:
+
+- `GET /api.php?table=users` - Fetch all users
+- `GET /api.php?table=users&id=1` - Fetch a specific user
+- `POST /api.php` - Create a new record (include `table` and `data` in JSON body)
+- `PUT /api.php` - Update a record (include `table`, `id`, and `data` in JSON body)
+- `DELETE /api.php?table=users&id=1` - Delete a record
+
+### Frontend API Clients
+
+Located in `client/lib/`:
+
+- `auth.ts` - Authentication and user management functions
+- `contacts.ts` - Contact form submission and admin functions
 
 Path aliases:
-- `@shared/*` - Shared folder
+
 - `@/*` - Client folder
 
 ## Development Commands
 
 ```bash
-pnpm dev        # Start dev server (client + server)
-pnpm build      # Production build
-pnpm start      # Start production server
+pnpm dev        # Start dev server (client only - Vite)
+pnpm build      # Production build (generates dist/spa/)
 pnpm typecheck  # TypeScript validation
-pnpm test          # Run Vitest tests
+pnpm test       # Run Vitest tests
+pnpm format.fix # Format code with Prettier
 ```
 
 ## Adding Features
@@ -103,62 +120,73 @@ pnpm test          # Run Vitest tests
 
 Open `client/global.css` and `tailwind.config.ts` and add new tailwind colors.
 
-### New API Route
-1. **Optional**: Create a shared interface in `shared/api.ts`:
-```typescript
-export interface MyRouteResponse {
-  message: string;
-  // Add other response properties here
-}
+### Adding a New PHP Database Table
+
+1. Define the table structure in `api.php` using the `init_*_table` action pattern
+2. For example, to add a "products" table, you would call the PHP API with:
+
+```javascript
+const response = await fetch("api.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    action: "init_products_table",
+    // The action handler would create the table structure
+  }),
+});
 ```
 
-2. Create a new route handler in `server/routes/my-route.ts`:
-```typescript
-import { RequestHandler } from "express";
-import { MyRouteResponse } from "@shared/api"; // Optional: for type safety
+3. Extend `api.php` to handle the new table's CRUD operations
+4. Create a client library in `client/lib/` to call the PHP API
+5. Use in React components:
 
-export const handleMyRoute: RequestHandler = (req, res) => {
-  const response: MyRouteResponse = {
-    message: 'Hello from my endpoint!'
-  };
-  res.json(response);
-};
+```typescript
+const response = await fetch("api.php?table=products", {
+  method: "GET",
+});
+const products = await response.json();
 ```
 
-3. Register the route in `server/index.ts`:
-```typescript
-import { handleMyRoute } from "./routes/my-route";
+### Extending Authentication
 
-// Add to the createServer function:
-app.get("/api/my-endpoint", handleMyRoute);
-```
+To add custom authentication logic:
 
-4. Use in React components with type safety:
-```typescript
-import { MyRouteResponse } from '@shared/api'; // Optional: for type safety
-
-const response = await fetch('/api/my-endpoint');
-const data: MyRouteResponse = await response.json();
-```
+1. Add new actions to `api.php` (e.g., `action=logout`, `action=change_password`)
+2. Update the authentication functions in `client/lib/auth.ts`
+3. Implement password hashing and verification using SHA-256 (or upgrade to bcrypt in PHP)
 
 ### New Page Route
+
 1. Create component in `client/pages/MyPage.tsx`
 2. Add route in `client/App.tsx`:
+
 ```typescript
 <Route path="/my-page" element={<MyPage />} />
 ```
 
 ## Production Deployment
 
-- **Standard**: `pnpm build`
-- **Binary**: Self-contained executables (Linux, macOS, Windows)
-- **Cloud Deployment**: Use either Netlify or Vercel via their MCP integrations for easy deployment. Both providers work well with this starter template.
+- **Frontend Build**: `pnpm build` - Generates optimized SPA in `dist/spa/`
+- **Deployment Options**:
+  - **Static Hosting** (Netlify, Vercel, GitHub Pages): Deploy the `dist/spa/` folder
+  - **PHP Server Hosting**: Ensure PHP 7.4+ and MySQL are available
+- **Required Files for Production**:
+  - `dist/spa/` - Built React application
+  - `api.php` - PHP API backend
+  - `connection.php` - Database connection configuration
+  - `public/` - Static assets
+- **Environment Setup**:
+  - Configure MySQL database settings in `connection.php`
+  - Ensure CORS is properly configured in `api.php` for your production domain
+  - Both frontend and PHP backend should be hosted on the same server or with proper CORS configuration
 
 ## Architecture Notes
 
-- Single-port development with Vite + Express integration
-- TypeScript throughout (client, server, shared)
-- Full hot reload for rapid development
-- Production-ready with multiple deployment options
-- Comprehensive UI component library included
-- Type-safe API communication via shared interfaces
+- **Frontend-Only Development**: Vite dev server runs on port 8080 for the React SPA
+- **Direct Backend Calls**: Frontend communicates directly with PHP API (no intermediary Node server)
+- **TypeScript Frontend**: Full TypeScript support for the client application
+- **Hot Module Reload**: Rapid development with Vite's HMR
+- **MySQL Database**: All data persisted in MySQL via PHP API
+- **Stateless API**: PHP API follows REST conventions with standard HTTP methods
+- **Authentication**: Client-side user state management with localStorage
+- **CORS-Enabled**: PHP API accepts requests from any origin in development
