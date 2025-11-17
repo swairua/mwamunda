@@ -595,7 +595,7 @@ export const sendResponseEmail: RequestHandler = async (req, res) => {
 export const setupSystem: RequestHandler = async (req, res) => {
   try {
     console.log("Initializing contacts table...");
-    const contactsTableRes = await fetch(API_URL, {
+    const contactsTableRes = await fetchWithTimeout(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
