@@ -31,13 +31,13 @@ export default function AdminSetup() {
 
       if (response.ok && data.success) {
         setStatus("success");
-        setMessage("System setup completed successfully!");
+        setMessage("Contacts table created successfully!");
         toast({
           title: "Success",
-          description: "Database initialized and admin user created",
+          description: "Contacts table initialized. Ready for submissions.",
         });
         setTimeout(() => {
-          navigate("/admin/login");
+          navigate("/admin/dashboard");
         }, 3000);
       } else {
         setStatus("error");
@@ -67,9 +67,9 @@ export default function AdminSetup() {
         <div className="bg-white rounded-2xl shadow-xl border border-border overflow-hidden animate-fade-in">
           {/* Header */}
           <div className="bg-gradient-to-r from-primary to-secondary p-8 text-white">
-            <h1 className="text-3xl font-bold mb-2">System Setup</h1>
+            <h1 className="text-3xl font-bold mb-2">Contacts Migration</h1>
             <p className="text-white/90">
-              Initialize database and create admin user
+              Initialize contacts table for message submissions
             </p>
           </div>
 
@@ -77,16 +77,16 @@ export default function AdminSetup() {
           <div className="p-8">
             <div className="mb-8">
               <h2 className="text-lg font-semibold text-foreground mb-4">
-                Welcome!
+                Database Migration
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                This setup will:
+                This setup will initialize the contacts table:
               </p>
               <ul className="text-sm text-muted-foreground space-y-2 mb-4 list-inside list-disc">
-                <li>Create the users table in the database</li>
-                <li>Seed admin@mwamunda.com user</li>
-                <li>Set password: Pass123</li>
-                <li>Assign admin role</li>
+                <li>Create the contacts table</li>
+                <li>Add fields for contact submissions</li>
+                <li>Enable admin moderation features</li>
+                <li>Store response history</li>
               </ul>
             </div>
 
@@ -120,7 +120,7 @@ export default function AdminSetup() {
                   disabled={loading}
                   className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loading ? "Setting up..." : "Execute Setup"}
+                  {loading ? "Initializing..." : "Initialize Contacts Table"}
                 </button>
 
                 <a href="/admin/login">
@@ -135,13 +135,13 @@ export default function AdminSetup() {
             ) : status === "success" ? (
               <div className="space-y-4">
                 <p className="text-center text-sm text-muted-foreground">
-                  Setup complete! Redirecting to login...
+                  Migration complete! Redirecting to dashboard...
                 </p>
                 <button
-                  onClick={() => navigate("/admin/login")}
+                  onClick={() => navigate("/admin/dashboard")}
                   className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300"
                 >
-                  Go to Login
+                  Go to Dashboard
                 </button>
               </div>
             ) : null}
