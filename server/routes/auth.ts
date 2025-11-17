@@ -184,7 +184,7 @@ export const getUser: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const response = await fetch(`${API_URL}?table=users&id=${id}`, {
+    const response = await fetchWithTimeout(`${API_URL}?table=users&id=${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
