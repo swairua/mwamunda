@@ -2,6 +2,29 @@ import { RequestHandler } from "express";
 import crypto from "crypto";
 
 const API_URL = "https://mwamunda.ziratech.com/api.php";
+const API_TIMEOUT = 10000; // 10 seconds
+
+// Helper function to fetch with timeout
+async function fetchWithTimeout(
+  url: string,
+  options: RequestInit = {},
+  timeoutMs: number = API_TIMEOUT,
+): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+    return response;
+  } catch (error) {
+    clearTimeout(timeout);
+    throw error;
+  }
+}
 
 interface ContactData {
   name: string;
