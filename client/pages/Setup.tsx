@@ -45,8 +45,7 @@ export default function Setup() {
       console.log("Admin Email: admin@mwamunda.com");
       console.log("Admin Password: Pass123");
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Setup failed";
+      const errorMessage = err instanceof Error ? err.message : "Setup failed";
       setError(errorMessage);
       toast({
         title: "Error",
@@ -74,8 +73,8 @@ export default function Setup() {
           <div className="space-y-6">
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <p className="text-sm text-blue-800">
-                This page will initialize the database tables and create an admin
-                account with default credentials.
+                This page will initialize the database tables and create an
+                admin account with default credentials.
               </p>
             </div>
 

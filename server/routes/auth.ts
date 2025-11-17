@@ -437,12 +437,15 @@ export const deleteContact: RequestHandler = async (req, res) => {
       return;
     }
 
-    const response = await fetchWithTimeout(`${API_URL}?table=contacts&id=${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetchWithTimeout(
+      `${API_URL}?table=contacts&id=${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     const data = await response.json();
 
@@ -519,12 +522,15 @@ export const sendResponseEmail: RequestHandler = async (req, res) => {
     }
 
     // First get the contact details
-    const contactResponse = await fetchWithTimeout(`${API_URL}?table=contacts&id=${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    const contactResponse = await fetchWithTimeout(
+      `${API_URL}?table=contacts&id=${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     const contacts = await contactResponse.json();
 
@@ -623,10 +629,12 @@ export const setupSystem: RequestHandler = async (req, res) => {
     const contactsTableData = await contactsTableRes.json();
     console.log("Contacts table initialization response:", contactsTableData);
 
-    if (!contactsTableData.success && !contactsTableData.message?.includes("already exists")) {
+    if (
+      !contactsTableData.success &&
+      !contactsTableData.message?.includes("already exists")
+    ) {
       throw new Error(
-        contactsTableData.error ||
-          "Failed to create contacts table"
+        contactsTableData.error || "Failed to create contacts table",
       );
     }
 

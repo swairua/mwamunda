@@ -578,8 +578,7 @@ export default function AdminContacts() {
                         >
                           {status === "in_progress"
                             ? "In Progress"
-                            : status.charAt(0).toUpperCase() +
-                              status.slice(1)}
+                            : status.charAt(0).toUpperCase() + status.slice(1)}
                         </button>
                       ),
                     )}
