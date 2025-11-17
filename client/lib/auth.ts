@@ -16,7 +16,7 @@ export interface AuthResponse {
   error?: string;
 }
 
-const API_BASE_URL = "api.php";
+const API_BASE_URL = "https://mwamunda.ziratech.com/api.php";
 
 export async function initializeUsersTable(): Promise<any> {
   const response = await fetch(API_BASE_URL, {
