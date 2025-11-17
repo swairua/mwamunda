@@ -189,12 +189,18 @@ export const getUser: RequestHandler = async (req, res) => {
 // Get all users (admin only)
 export const getAllUsers: RequestHandler = async (req, res) => {
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
     const response = await fetch(`${API_URL}?table=users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeout);
 
     if (!response.ok) {
       throw new Error(`API returned status ${response.status}`);
