@@ -36,7 +36,7 @@ export async function registerUser(
   password: string,
   name?: string,
 ): Promise<AuthResponse> {
-  const response = await fetch(API_BASE_URL, {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
