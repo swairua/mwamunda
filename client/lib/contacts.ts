@@ -1,3 +1,5 @@
+import { API_CONFIG } from "./config";
+
 export interface Contact {
   id?: number;
   name: string;
@@ -19,8 +21,6 @@ export interface ContactResponse {
   id?: number;
   error?: string;
 }
-
-const API_BASE_URL = "https://mwamunda.ziratech.com/api.php";
 
 export async function submitContact(
   contact: Contact,
