@@ -142,7 +142,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     }
 
     // Fetch user from database
-    const response = await fetch(`${API_URL}?table=users`, {
+    const response = await fetchWithTimeout(`${API_URL}?table=users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
