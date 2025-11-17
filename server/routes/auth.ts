@@ -437,7 +437,7 @@ export const deleteContact: RequestHandler = async (req, res) => {
       return;
     }
 
-    const response = await fetch(`${API_URL}?table=contacts&id=${id}`, {
+    const response = await fetchWithTimeout(`${API_URL}?table=contacts&id=${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
