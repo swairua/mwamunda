@@ -49,7 +49,7 @@ function hashPassword(password: string): string {
 // Initialize users table
 export const initializeUsersTable: RequestHandler = async (req, res) => {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetchWithTimeout(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
