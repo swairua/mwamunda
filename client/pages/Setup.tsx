@@ -22,7 +22,7 @@ export default function Setup() {
 
     try {
       // Call setup endpoint to initialize contacts table
-      const response = await fetch("api.php", {
+      const response = await fetch("https://mwamunda.ziratech.com/api.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
