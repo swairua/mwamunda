@@ -36,18 +36,18 @@ ls -la dist/    # Verify all files are present
 
 ## Deployment Architecture
 
-Your application consists of two parts:
+Everything builds into a single `dist/` folder:
 
 ```
-Production Server
-├── dist/spa/          # Built React application (static files)
-│   ├── index.html
-│   ├── assets/
-│   └── ...
-└── api.php            # PHP REST API backend
-└── connection.php     # Database configuration
-└── public/            # Static assets (optional)
+dist/                     # Complete application ready to deploy
+├── index.html            # React SPA entry point
+├── assets/               # Built JavaScript, CSS, images
+├── api.php               # PHP REST API backend
+├── connection.php        # Database configuration
+└── [other static files]
 ```
+
+This single folder can be deployed directly to any PHP-capable server.
 
 ## Deployment Options
 
