@@ -67,9 +67,9 @@ export default function AdminSetup() {
         <div className="bg-white rounded-2xl shadow-xl border border-border overflow-hidden animate-fade-in">
           {/* Header */}
           <div className="bg-gradient-to-r from-primary to-secondary p-8 text-white">
-            <h1 className="text-3xl font-bold mb-2">System Setup</h1>
+            <h1 className="text-3xl font-bold mb-2">Contacts Migration</h1>
             <p className="text-white/90">
-              Initialize database and create admin user
+              Initialize contacts table for message submissions
             </p>
           </div>
 
