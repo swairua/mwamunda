@@ -89,11 +89,11 @@ Path aliases:
 ## Development Commands
 
 ```bash
-pnpm dev        # Start dev server (client + server)
-pnpm build      # Production build
-pnpm start      # Start production server
+pnpm dev        # Start dev server (client only - Vite)
+pnpm build      # Production build (generates dist/spa/)
 pnpm typecheck  # TypeScript validation
-pnpm test          # Run Vitest tests
+pnpm test       # Run Vitest tests
+pnpm format.fix # Format code with Prettier
 ```
 
 ## Adding Features
