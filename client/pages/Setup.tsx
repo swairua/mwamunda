@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loader, CheckCircle, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { API_CONFIG } from "@/lib/config";
 
 interface SetupStatus {
   step: string;
