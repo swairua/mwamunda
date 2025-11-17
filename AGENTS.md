@@ -66,24 +66,35 @@ className={cn(
 )}
 ```
 
-### Express Server Integration
+### PHP API Integration
 
-- **Development**: Single port (8080) for both frontend/backend
-- **Hot reload**: Both client and server code
-- **API endpoints**: Prefixed with `/api/`
+- **API Location**: `api.php` in the root directory
+- **Database**: MySQL database configured in `connection.php`
+- **CORS**: Enabled for all origins in `api.php`
+- **Authentication**: Password hashing using SHA-256
+- **Direct Frontend Calls**: Frontend calls the PHP API directly from the browser
 
-#### Example API Routes
-- `GET /api/ping` - Simple ping api
-- `GET /api/demo` - Demo endpoint  
+#### Authentication Endpoints
+The PHP API provides the following authentication actions via POST requests:
+- `action=register` - Register a new user with email and password
+- `action=login` - Login a user with email and password
+- `action=init_users_table` - Initialize the users database table
+- `action=init_contacts_table` - Initialize the contacts database table
 
-### Shared Types
-Import consistent types in both client and server:
-```typescript
-import { DemoResponse } from '@shared/api';
-```
+#### CRUD Operations
+The PHP API supports standard CRUD operations:
+- `GET /api.php?table=users` - Fetch all users
+- `GET /api.php?table=users&id=1` - Fetch a specific user
+- `POST /api.php` - Create a new record (include `table` and `data` in JSON body)
+- `PUT /api.php` - Update a record (include `table`, `id`, and `data` in JSON body)
+- `DELETE /api.php?table=users&id=1` - Delete a record
+
+### Frontend API Clients
+Located in `client/lib/`:
+- `auth.ts` - Authentication and user management functions
+- `contacts.ts` - Contact form submission and admin functions
 
 Path aliases:
-- `@shared/*` - Shared folder
 - `@/*` - Client folder
 
 ## Development Commands
