@@ -120,7 +120,7 @@ export default function AdminSetup() {
                   disabled={loading}
                   className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loading ? "Setting up..." : "Execute Setup"}
+                  {loading ? "Initializing..." : "Initialize Contacts Table"}
                 </button>
 
                 <a href="/admin/login">
