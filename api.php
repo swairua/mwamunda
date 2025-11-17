@@ -4,6 +4,11 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
 include "connection.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -14,6 +19,148 @@ $action = $input['action'] ?? null;
 
 // Table name
 $table = $input['table'] ?? $_GET['table'] ?? null;
+
+// Utility function for password hashing
+function hashPassword($password) {
+    return hash('sha256', $password);
+}
+
+// Utility function for verifying password
+function verifyPassword($password, $hash) {
+    return hash('sha256', $password) === $hash;
+}
+
+// Handle authentication actions
+if ($action === "register" && $method === "POST") {
+    $email = $input['email'] ?? null;
+    $password = $input['password'] ?? null;
+    $name = $input['name'] ?? null;
+
+    if (!$email || !$password) {
+        echo json_encode(["error" => "Email and password are required"]);
+        exit;
+    }
+
+    $hashedPassword = hashPassword($password);
+    $name = $name ?: substr($email, 0, strpos($email, '@'));
+
+    $sql = "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, 'user')";
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        echo json_encode(["error" => "Database error: " . $conn->error]);
+        exit;
+    }
+
+    $stmt->bind_param("sss", $email, $hashedPassword, $name);
+
+    if ($stmt->execute()) {
+        echo json_encode([
+            "success" => true,
+            "message" => "User registered successfully",
+            "userId" => $stmt->insert_id
+        ]);
+    } else {
+        // Check if it's a duplicate email error
+        if (strpos($stmt->error, "Duplicate entry") !== false) {
+            echo json_encode(["error" => "Email already registered"]);
+        } else {
+            echo json_encode(["error" => "Registration failed: " . $stmt->error]);
+        }
+    }
+    exit;
+}
+
+if ($action === "login" && $method === "POST") {
+    $email = $input['email'] ?? null;
+    $password = $input['password'] ?? null;
+
+    if (!$email || !$password) {
+        echo json_encode(["error" => "Email and password are required"]);
+        exit;
+    }
+
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        echo json_encode(["error" => "Invalid email or password"]);
+        exit;
+    }
+
+    $user = $result->fetch_assoc();
+
+    if (!verifyPassword($password, $user['password'])) {
+        echo json_encode(["error" => "Invalid email or password"]);
+        exit;
+    }
+
+    // Return user without password
+    $userWithoutPassword = $user;
+    unset($userWithoutPassword['password']);
+
+    echo json_encode([
+        "success" => true,
+        "message" => "Login successful",
+        "user" => $userWithoutPassword,
+        "token" => base64_encode(json_encode($userWithoutPassword))
+    ]);
+    exit;
+}
+
+if ($action === "init_users_table" && $method === "POST") {
+    $sql = "CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        name VARCHAR(255),
+        role VARCHAR(50) DEFAULT 'user',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql)) {
+        echo json_encode(["success" => true, "message" => "Users table created successfully"]);
+    } else {
+        if (strpos($conn->error, "already exists") !== false) {
+            echo json_encode(["success" => true, "message" => "Users table already exists"]);
+        } else {
+            echo json_encode(["error" => $conn->error]);
+        }
+    }
+    exit;
+}
+
+if ($action === "init_contacts_table" && $method === "POST") {
+    $sql = "CREATE TABLE IF NOT EXISTS contacts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        phone VARCHAR(50),
+        subject VARCHAR(255) NOT NULL,
+        message TEXT NOT NULL,
+        status VARCHAR(50) DEFAULT 'new',
+        internal_notes TEXT,
+        response_email TEXT,
+        response_sent_at TIMESTAMP NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql)) {
+        echo json_encode(["success" => true, "message" => "Contacts table created successfully"]);
+    } else {
+        if (strpos($conn->error, "already exists") !== false) {
+            echo json_encode(["success" => true, "message" => "Contacts table already exists"]);
+        } else {
+            echo json_encode(["error" => $conn->error]);
+        }
+    }
+    exit;
+}
 
 if (!$table) {
     echo json_encode(["error" => "Table name is required"]);
