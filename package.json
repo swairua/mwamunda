@@ -4,7 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:php": "php -S localhost:8000",
+    "dev:full": "concurrently \"npm run dev:php\" \"npm run dev\"",
     "build": "vite build",
+    "build:copy-api": "cp api.php connection.php dist/ && cp -r public/* dist/ 2>/dev/null || true",
+    "build:full": "npm run build && npm run build:copy-api",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
     "typecheck": "tsc"
