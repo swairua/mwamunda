@@ -50,7 +50,7 @@ export async function loginUser(
   email: string,
   password: string,
 ): Promise<AuthResponse> {
-  const response = await fetch(API_BASE_URL, {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export async function loginUser(
 }
 
 export async function getUser(id: number): Promise<User> {
-  const response = await fetch(`${API_BASE_URL}?table=users&id=${id}`, {
+  const response = await fetch(`${API_CONFIG.BASE_URL}?table=users&id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export async function getUser(id: number): Promise<User> {
 }
 
 export async function getAllUsers(): Promise<User[]> {
-  const response = await fetch(`${API_BASE_URL}?table=users`, {
+  const response = await fetch(`${API_CONFIG.BASE_URL}?table=users`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
