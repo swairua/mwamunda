@@ -1,15 +1,15 @@
 [build]
-  command = "npm run build:client"
-  functions = "netlify/functions"
-  publish = "dist/spa"
+  command = "pnpm install && pnpm build:full"
+  publish = "dist"
 
-
-[functions]
-  external_node_modules = ["express"]
-  node_bundler = "esbuild"
-  
 [[redirects]]
-  force = true
-  from = "/api/*"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  to = "/.netlify/functions/api/:splat"
+
+# For PHP API - ensure it's served as PHP, not static
+[[headers]]
+  for = "/api.php"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"

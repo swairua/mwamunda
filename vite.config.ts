@@ -17,9 +17,16 @@ export default defineConfig({
         path.join(__dirname, "shared"),
       ],
     },
+    proxy: {
+      "/api.php": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   build: {
-    outDir: "dist/spa",
+    outDir: "dist",
   },
   plugins: [react()],
   resolve: {
