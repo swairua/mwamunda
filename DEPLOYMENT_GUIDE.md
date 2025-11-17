@@ -51,92 +51,64 @@ This single folder can be deployed directly to any PHP-capable server.
 
 ## Deployment Options
 
-### Option 1: Static Hosting + Separate PHP Server (Recommended)
+### Option 1: Deploy to Fly.io (Recommended for Fly.io users)
 
-**Deploy Frontend to Static Hosting (Netlify, Vercel, etc.):**
-1. Upload contents of `dist/spa/` folder
-2. Configure SPA routing to redirect all routes to `index.html`
-3. Set environment variable: `VITE_API_BASE_URL=https://your-api-domain.com/api.php`
+```bash
+# 1. Build locally
+pnpm build:full
 
-**Deploy Backend to PHP Server:**
-1. Upload `api.php` and `connection.php` to your PHP host
-2. Configure database connection in `connection.php`
-3. Ensure CORS is enabled (already configured in `api.php`)
-4. Initialize database tables (call `/init` endpoints first)
+# 2. Deploy using Fly.io CLI
+flyctl deploy
 
-### Option 2: Single Server (Same Domain)
-
-**Deploy Everything to One PHP Server:**
-
-1. Build the application:
-   ```bash
-   pnpm install
-   pnpm build
-   ```
-
-2. On your server, create the following structure:
-   ```
-   public_html/
-   ├── index.php           (Use code below)
-   ├── api.php
-   ├── connection.php
-   ├── spa/                (Copy contents of dist/spa/ here)
-   ```
-
-3. Create `index.php` to route SPA requests:
-   ```php
-   <?php
-   // Route SPA requests to index.html
-   $requested_file = __DIR__ . '/spa' . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-   
-   if (file_exists($requested_file) && !is_dir($requested_file)) {
-       return false; // Let the server serve the file
-   }
-   
-   // For any non-existent file, serve index.html (SPA routing)
-   require __DIR__ . '/spa/index.html';
-   ```
-
-4. Update API configuration in `client/lib/config.ts` (already set to `/api.php`):
-   ```typescript
-   const defaultApiUrl = "/api.php"; // Uses relative path
-   ```
-
-5. No environment variable needed - uses default relative path.
-
-### Option 3: Docker Deployment
-
-Create a `Dockerfile`:
-
-```dockerfile
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install
-COPY . .
-RUN pnpm build
-
-FROM php:8.1-apache
-WORKDIR /var/www/html
-RUN a2enmod rewrite
-COPY --from=builder /app/dist/spa ./spa
-COPY api.php connection.php ./
-COPY .htaccess ./
-EXPOSE 80
-CMD ["apache2-foreground"]
+# 3. Configure database
+flyctl ssh console
+# Then set environment variables in fly.toml and redeploy
 ```
 
-Create `.htaccess` for Apache SPA routing:
-```apache
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
+The `Dockerfile` and `fly.toml` are already configured and will:
+- Build the React frontend
+- Set up PHP/Apache runtime
+- Copy all files to the correct locations
+- Enable SPA routing automatically
+
+### Option 2: Deploy to Any PHP Server (cPanel, Shared Hosting, etc.)
+
+```bash
+# 1. Build locally
+pnpm build:full
+
+# 2. Upload `dist/` folder contents to your server root (public_html or www)
+# Copy all files from dist/ to your server, preserving the directory structure
+
+# 3. Ensure .htaccess is in the root (already provided)
+
+# 4. Configure database in api.php or via environment variables:
+#    DB_HOST, DB_USER, DB_PASSWORD, DB_NAME
 ```
+
+### Option 3: Docker Deployment (Any Docker-compatible host)
+
+```bash
+# 1. Build Docker image
+docker build -t fusion-app .
+
+# 2. Run container
+docker run -p 80:80 \
+  -e DB_HOST=your-db-host \
+  -e DB_USER=your-db-user \
+  -e DB_PASSWORD=your-db-password \
+  -e DB_NAME=your-db-name \
+  fusion-app
+
+# 3. Access at http://localhost
+```
+
+The `Dockerfile` is already configured to:
+- Build the React frontend
+- Set up PHP/Apache environment
+- Enable all required modules
+- Configure SPA routing via .htaccess
+- Serve everything from a single dist/ folder
 
 ## Environment Variables
 
