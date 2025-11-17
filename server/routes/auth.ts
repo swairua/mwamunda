@@ -568,35 +568,9 @@ export const sendResponseEmail: RequestHandler = async (req, res) => {
   }
 };
 
-// Setup route - Initialize table and seed admin user
+// Setup route - Initialize contacts table only (users table already exists)
 export const setupSystem: RequestHandler = async (req, res) => {
   try {
-    // Step 1: Initialize users table
-    console.log("Initializing users table...");
-    const tableRes = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        table: "users",
-        action: "create_table",
-        columns: {
-          email: "VARCHAR(255) UNIQUE NOT NULL",
-          password: "VARCHAR(255) NOT NULL",
-          name: "VARCHAR(255)",
-          role: "VARCHAR(50) DEFAULT 'user'",
-          created_at: "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
-          updated_at:
-            "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
-        },
-      }),
-    });
-
-    const tableData = await tableRes.json();
-    console.log("Table initialization response:", tableData);
-
-    // Step 2: Initialize contacts table
     console.log("Initializing contacts table...");
     const contactsTableRes = await fetch(API_URL, {
       method: "POST",
@@ -626,48 +600,24 @@ export const setupSystem: RequestHandler = async (req, res) => {
     const contactsTableData = await contactsTableRes.json();
     console.log("Contacts table initialization response:", contactsTableData);
 
-    // Step 3: Seed admin user
-    console.log("Seeding admin user...");
-    const adminEmail = "admin@mwamunda.com";
-    const adminPassword = "Pass123";
-    const hashedPassword = hashPassword(adminPassword);
-
-    const userRes = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        table: "users",
-        data: {
-          email: adminEmail,
-          password: hashedPassword,
-          name: "Admin",
-          role: "admin",
-        },
-      }),
-    });
-
-    const userData = await userRes.json();
-    console.log("User creation response:", userData);
+    if (!contactsTableData.success && !contactsTableData.message?.includes("already exists")) {
+      throw new Error(
+        contactsTableData.error ||
+          "Failed to create contacts table"
+      );
+    }
 
     res.json({
       success: true,
-      message: "System setup completed successfully",
-      tables: {
-        users: tableData,
+      message: "Contacts table initialized successfully",
+      table: {
         contacts: contactsTableData,
-      },
-      admin: {
-        email: adminEmail,
-        message: "Admin user created",
-        response: userData,
       },
     });
   } catch (error) {
     console.error("Setup error:", error);
     res.status(500).json({
-      error: "System setup failed",
+      error: "Setup failed",
       details: error instanceof Error ? error.message : "Unknown error",
     });
   }
