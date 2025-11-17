@@ -121,6 +121,72 @@ export default function AdminContacts() {
     }
   };
 
+  const handleDeleteContact = async (contactId: number | undefined) => {
+    if (!contactId) return;
+
+    if (!window.confirm("Are you sure you want to delete this contact?")) {
+      return;
+    }
+
+    try {
+      await deleteContact(contactId);
+      setContacts((prev) => prev.filter((c) => c.id !== contactId));
+      setShowDetails(false);
+      setSelectedContact(null);
+      toast({
+        title: "Success",
+        description: "Contact deleted successfully",
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to delete contact";
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleAddNote = async () => {
+    if (!selectedContact || !internalNote.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a note",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsAddingNote(true);
+    try {
+      await addInternalNote(selectedContact.id as number, internalNote);
+      setSelectedContact((prev) =>
+        prev
+          ? {
+              ...prev,
+              internal_notes: internalNote,
+            }
+          : null,
+      );
+      setInternalNote("");
+      toast({
+        title: "Success",
+        description: "Internal note added successfully",
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to add note";
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsAddingNote(false);
+    }
+  };
+
   const handleSendResponse = async () => {
     if (!selectedContact || !responseEmail.trim()) {
       toast({
@@ -131,20 +197,35 @@ export default function AdminContacts() {
       return;
     }
 
+    setIsSending(true);
     try {
-      await updateContactStatus(selectedContact.id, "responded");
+      await sendResponseEmail(selectedContact.id as number, responseEmail);
       setContacts((prev) =>
         prev.map((c) =>
-          c.id === selectedContact.id ? { ...c, status: "responded" } : c,
+          c.id === selectedContact.id
+            ? {
+                ...c,
+                status: "responded",
+                response_email: responseEmail,
+                response_sent_at: new Date().toISOString(),
+              }
+            : c,
         ),
       );
       setSelectedContact((prev) =>
-        prev ? { ...prev, status: "responded" } : null,
+        prev
+          ? {
+              ...prev,
+              status: "responded",
+              response_email: responseEmail,
+              response_sent_at: new Date().toISOString(),
+            }
+          : null,
       );
       setResponseEmail("");
       toast({
         title: "Success",
-        description: "Response recorded and contact marked as responded",
+        description: "Response sent and contact marked as responded",
       });
     } catch (error) {
       const errorMessage =
@@ -154,6 +235,8 @@ export default function AdminContacts() {
         description: errorMessage,
         variant: "destructive",
       });
+    } finally {
+      setIsSending(false);
     }
   };
 
