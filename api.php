@@ -12,7 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 include "connection.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
-$input  = json_decode(file_get_contents("php://input"), true);
+$rawInput = file_get_contents("php://input");
+$input = !empty($rawInput) ? json_decode($rawInput, true) : [];
+
+// Handle JSON decode errors
+if (json_last_error() !== JSON_ERROR_NONE) {
+    $input = [];
+}
+
+// Ensure $input is an array
+if (!is_array($input)) {
+    $input = [];
+}
 
 // Action (optional)
 $action = $input['action'] ?? null;
