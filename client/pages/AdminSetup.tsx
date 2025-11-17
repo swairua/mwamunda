@@ -31,13 +31,13 @@ export default function AdminSetup() {
 
       if (response.ok && data.success) {
         setStatus("success");
-        setMessage("System setup completed successfully!");
+        setMessage("Contacts table created successfully!");
         toast({
           title: "Success",
-          description: "Database initialized and admin user created",
+          description: "Contacts table initialized. Ready for submissions.",
         });
         setTimeout(() => {
-          navigate("/admin/login");
+          navigate("/admin/dashboard");
         }, 3000);
       } else {
         setStatus("error");
