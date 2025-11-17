@@ -489,12 +489,21 @@ export default function AdminContacts() {
         {/* Contact Details Modal */}
         {showDetails && selectedContact && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl max-w-2xl w-full p-6 animate-fade-in max-h-[90vh] overflow-y-auto">
-              <h2 className="text-2xl font-bold text-foreground mb-6">
-                Contact Details
-              </h2>
+            <div className="bg-white rounded-2xl max-w-3xl w-full p-6 animate-fade-in max-h-[90vh] overflow-y-auto">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-foreground">
+                  Contact Details
+                </h2>
+                <button
+                  onClick={() => handleDeleteContact(selectedContact.id)}
+                  className="p-2 rounded-lg hover:bg-red-50 transition-colors text-muted-foreground hover:text-red-600"
+                  title="Delete contact"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </div>
 
-              <div className="space-y-4 mb-6">
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <p className="text-sm text-muted-foreground font-medium">
                     Name
@@ -505,7 +514,16 @@ export default function AdminContacts() {
                   <p className="text-sm text-muted-foreground font-medium">
                     Email
                   </p>
-                  <p className="text-foreground">{selectedContact.email}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-foreground">{selectedContact.email}</p>
+                    <button
+                      onClick={handleCopyEmail}
+                      className="p-1 rounded hover:bg-gray-100 transition-colors"
+                      title="Copy email"
+                    >
+                      <Copy className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  </div>
                 </div>
                 {selectedContact.phone && (
                   <div>
@@ -523,40 +541,6 @@ export default function AdminContacts() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground font-medium">
-                    Message
-                  </p>
-                  <p className="text-foreground whitespace-pre-wrap">
-                    {selectedContact.message}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    Status
-                  </p>
-                  <div className="flex gap-2 mt-2">
-                    {["new", "in_progress", "resolved"].map((status) => (
-                      <button
-                        key={status}
-                        onClick={() =>
-                          handleStatusChange(selectedContact.id, status)
-                        }
-                        className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                          selectedContact.status === status
-                            ? status === "new"
-                              ? "bg-blue-100 text-blue-700"
-                              : status === "in_progress"
-                                ? "bg-yellow-100 text-yellow-700"
-                                : "bg-green-100 text-green-700"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }`}
-                      >
-                        {status === "in_progress" ? "In Progress" : status}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">
                     Submitted
                   </p>
                   <p className="text-foreground">
@@ -565,14 +549,139 @@ export default function AdminContacts() {
                       : "N/A"}
                   </p>
                 </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Status
+                  </p>
+                  <div className="flex gap-2 mt-2 flex-wrap">
+                    {["new", "in_progress", "resolved", "responded"].map(
+                      (status) => (
+                        <button
+                          key={status}
+                          onClick={() =>
+                            handleStatusChange(
+                              selectedContact.id as number,
+                              status,
+                            )
+                          }
+                          className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                            selectedContact.status === status
+                              ? status === "new"
+                                ? "bg-blue-100 text-blue-700"
+                                : status === "in_progress"
+                                  ? "bg-yellow-100 text-yellow-700"
+                                  : status === "responded"
+                                    ? "bg-purple-100 text-purple-700"
+                                    : "bg-green-100 text-green-700"
+                              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                          }`}
+                        >
+                          {status === "in_progress"
+                            ? "In Progress"
+                            : status.charAt(0).toUpperCase() +
+                              status.slice(1)}
+                        </button>
+                      ),
+                    )}
+                  </div>
+                </div>
               </div>
 
-              <button
-                onClick={() => setShowDetails(false)}
-                className="w-full px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:shadow-lg transition-all"
-              >
-                Close
-              </button>
+              <div className="border-t border-border pt-6 mb-6">
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium mb-2">
+                    Message
+                  </p>
+                  <div className="bg-gray-50 rounded-lg p-4 border border-border">
+                    <p className="text-foreground whitespace-pre-wrap text-sm">
+                      {selectedContact.message}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-border pt-6 mb-6">
+                <p className="text-sm text-muted-foreground font-medium mb-3">
+                  Internal Notes
+                </p>
+                {selectedContact.internal_notes && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-blue-900">
+                      {selectedContact.internal_notes}
+                    </p>
+                  </div>
+                )}
+                <div className="space-y-2">
+                  <textarea
+                    value={internalNote}
+                    onChange={(e) => setInternalNote(e.target.value)}
+                    placeholder="Add internal notes..."
+                    rows={3}
+                    className="w-full px-3 py-2 rounded-lg border border-border bg-white text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
+                  ></textarea>
+                  <button
+                    onClick={handleAddNote}
+                    disabled={isAddingNote || !internalNote.trim()}
+                    className="px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    {isAddingNote && (
+                      <Loader className="w-4 h-4 animate-spin" />
+                    )}
+                    {isAddingNote ? "Adding..." : "Add Note"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="border-t border-border pt-6">
+                <p className="text-sm text-muted-foreground font-medium mb-3">
+                  Send Response Email
+                </p>
+                {selectedContact.response_email && (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                    <p className="text-xs text-green-600 font-medium mb-1">
+                      Response Sent
+                    </p>
+                    <p className="text-sm text-green-900">
+                      {selectedContact.response_email}
+                    </p>
+                    {selectedContact.response_sent_at && (
+                      <p className="text-xs text-green-700 mt-2">
+                        Sent:{" "}
+                        {new Date(
+                          selectedContact.response_sent_at,
+                        ).toLocaleString()}
+                      </p>
+                    )}
+                  </div>
+                )}
+                <div className="space-y-2">
+                  <textarea
+                    value={responseEmail}
+                    onChange={(e) => setResponseEmail(e.target.value)}
+                    placeholder="Write your response message..."
+                    rows={4}
+                    className="w-full px-3 py-2 rounded-lg border border-border bg-white text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
+                  ></textarea>
+                  <button
+                    onClick={handleSendResponse}
+                    disabled={isSending || !responseEmail.trim()}
+                    className="px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    {isSending && <Loader className="w-4 h-4 animate-spin" />}
+                    <Send className="w-4 h-4" />
+                    {isSending ? "Sending..." : "Send Response"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="border-t border-border pt-6 mt-6">
+                <button
+                  onClick={() => setShowDetails(false)}
+                  className="w-full px-4 py-2 rounded-lg border border-border text-foreground font-semibold hover:bg-gray-50 transition-all"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         )}
