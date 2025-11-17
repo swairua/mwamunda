@@ -1,13 +1,15 @@
 [build]
-  command = "pnpm install && pnpm build"
-  publish = "dist/spa"
-
-[[redirects]]
-  from = "/api.php"
-  to = "/api.php"
-  status = 200
+  command = "pnpm install && pnpm build:full"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# For PHP API - ensure it's served as PHP, not static
+[[headers]]
+  for = "/api.php"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
