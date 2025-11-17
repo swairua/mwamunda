@@ -19,15 +19,13 @@ This project uses a PHP backend API (api.php) for all data operations. The syste
 client/                   # React SPA frontend
 ├── pages/                # Route components (Index.tsx = home)
 ├── components/ui/        # Pre-built UI component library
+├── lib/                   # Utility functions and API clients
 ├── App.tsx                # App entry point and with SPA routing setup
 └── global.css            # TailwindCSS 3 theming and global styles
 
-server/                   # Express API backend
-├── index.ts              # Main server setup (express config + routes)
-└── routes/               # API handlers
-
-shared/                   # Types used by both client & server
-└── api.ts                # Example of how to share api interfaces
+api.php                   # PHP Backend API - handles database operations
+connection.php            # Database connection configuration
+shared/                   # Shared types and utilities
 ```
 
 ## Key Features
