@@ -212,12 +212,15 @@ export async function sendResponseEmail(
 
 export async function deleteContact(id: number): Promise<ContactResponse> {
   try {
-    const response = await fetch(`${API_CONFIG.BASE_URL}?table=contacts&id=${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${API_CONFIG.BASE_URL}?table=contacts&id=${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
