@@ -20,7 +20,7 @@ export interface ContactResponse {
   error?: string;
 }
 
-const API_BASE_URL = "api.php";
+const API_BASE_URL = "https://mwamunda.ziratech.com/api.php";
 
 export async function submitContact(
   contact: Contact,
