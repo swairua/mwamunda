@@ -4,7 +4,7 @@
  * Use environment variable VITE_API_BASE_URL to override the default
  */
 
-const defaultApiUrl = "https://mwamunda.ziratech.com/api.php";
+const defaultApiUrl = "/api.php";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || defaultApiUrl;
 
 export const API_CONFIG = {
