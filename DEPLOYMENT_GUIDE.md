@@ -18,18 +18,20 @@ pnpm install
 
 ### Step 2: Build the Application
 ```bash
-pnpm build
+# Build frontend and copy API files
+pnpm build:full
 ```
 
-This generates:
-- **Frontend**: `dist/spa/` - Complete React SPA with all assets
-- **Backend**: `api.php` and `connection.php` - PHP backend files
-- **Public Assets**: `public/` folder content
+This generates in `dist/` folder:
+- **Frontend**: `index.html`, `assets/` - Complete React SPA with all assets
+- **Backend**: `api.php` and `connection.php` - PHP backend files (copied to dist/)
+- **Public Assets**: Static assets from `public/` folder
 
 ### Step 3: Verify Build
 ```bash
 pnpm typecheck  # Verify TypeScript
 pnpm test       # Run tests (optional)
+ls -la dist/    # Verify all files are present
 ```
 
 ## Deployment Architecture
