@@ -19,7 +19,7 @@ export interface AuthResponse {
 }
 
 export async function initializeUsersTable(): Promise<any> {
-  const response = await fetch(API_BASE_URL, {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
