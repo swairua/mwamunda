@@ -53,7 +53,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 ### Styling System
 
 - **Primary**: TailwindCSS 3 utility classes
-- **Theme and design tokens**: Configure in `client/global.css` 
+- **Theme and design tokens**: Configure in `client/global.css`
 - **UI components**: Pre-built library in `client/components/ui/`
 - **Utility**: `cn()` function combines `clsx` + `tailwind-merge` for conditional classes
 
@@ -75,14 +75,18 @@ className={cn(
 - **Direct Frontend Calls**: Frontend calls the PHP API directly from the browser
 
 #### Authentication Endpoints
+
 The PHP API provides the following authentication actions via POST requests:
+
 - `action=register` - Register a new user with email and password
 - `action=login` - Login a user with email and password
 - `action=init_users_table` - Initialize the users database table
 - `action=init_contacts_table` - Initialize the contacts database table
 
 #### CRUD Operations
+
 The PHP API supports standard CRUD operations:
+
 - `GET /api.php?table=users` - Fetch all users
 - `GET /api.php?table=users&id=1` - Fetch a specific user
 - `POST /api.php` - Create a new record (include `table` and `data` in JSON body)
@@ -90,11 +94,14 @@ The PHP API supports standard CRUD operations:
 - `DELETE /api.php?table=users&id=1` - Delete a record
 
 ### Frontend API Clients
+
 Located in `client/lib/`:
+
 - `auth.ts` - Authentication and user management functions
 - `contacts.ts` - Contact form submission and admin functions
 
 Path aliases:
+
 - `@/*` - Client folder
 
 ## Development Commands
@@ -114,38 +121,45 @@ pnpm format.fix # Format code with Prettier
 Open `client/global.css` and `tailwind.config.ts` and add new tailwind colors.
 
 ### Adding a New PHP Database Table
+
 1. Define the table structure in `api.php` using the `init_*_table` action pattern
 2. For example, to add a "products" table, you would call the PHP API with:
+
 ```javascript
-const response = await fetch('api.php', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("api.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
-    action: 'init_products_table',
+    action: "init_products_table",
     // The action handler would create the table structure
-  })
+  }),
 });
 ```
 
 3. Extend `api.php` to handle the new table's CRUD operations
 4. Create a client library in `client/lib/` to call the PHP API
 5. Use in React components:
+
 ```typescript
-const response = await fetch('api.php?table=products', {
-  method: 'GET'
+const response = await fetch("api.php?table=products", {
+  method: "GET",
 });
 const products = await response.json();
 ```
 
 ### Extending Authentication
+
 To add custom authentication logic:
+
 1. Add new actions to `api.php` (e.g., `action=logout`, `action=change_password`)
 2. Update the authentication functions in `client/lib/auth.ts`
 3. Implement password hashing and verification using SHA-256 (or upgrade to bcrypt in PHP)
 
 ### New Page Route
+
 1. Create component in `client/pages/MyPage.tsx`
 2. Add route in `client/App.tsx`:
+
 ```typescript
 <Route path="/my-page" element={<MyPage />} />
 ```
