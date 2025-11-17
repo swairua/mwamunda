@@ -552,7 +552,7 @@ export const sendResponseEmail: RequestHandler = async (req, res) => {
     }
 
     // Update contact with response details
-    const updateResponse = await fetch(API_URL, {
+    const updateResponse = await fetchWithTimeout(API_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
