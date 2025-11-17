@@ -20,7 +20,7 @@ export default function AdminSetup() {
     setMessage("Setting up system...");
 
     try {
-      const response = await fetch("https://mwamunda.ziratech.com/api.php", {
+      const response = await fetch(API_CONFIG.BASE_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
