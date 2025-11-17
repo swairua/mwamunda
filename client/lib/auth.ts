@@ -1,3 +1,5 @@
+import { API_CONFIG } from "./config";
+
 export interface User {
   id: number;
   email: string;
@@ -15,8 +17,6 @@ export interface AuthResponse {
   userId?: number;
   error?: string;
 }
-
-const API_BASE_URL = "https://mwamunda.ziratech.com/api.php";
 
 export async function initializeUsersTable(): Promise<any> {
   const response = await fetch(API_BASE_URL, {
