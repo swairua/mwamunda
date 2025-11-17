@@ -135,13 +135,13 @@ export default function AdminSetup() {
             ) : status === "success" ? (
               <div className="space-y-4">
                 <p className="text-center text-sm text-muted-foreground">
-                  Setup complete! Redirecting to login...
+                  Migration complete! Redirecting to dashboard...
                 </p>
                 <button
-                  onClick={() => navigate("/admin/login")}
+                  onClick={() => navigate("/admin/dashboard")}
                   className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300"
                 >
-                  Go to Login
+                  Go to Dashboard
                 </button>
               </div>
             ) : null}
