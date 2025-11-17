@@ -21,17 +21,20 @@ export default function Setup() {
     setSetupStatus([]);
 
     try {
-      // Call setup endpoint
-      const response = await fetch("/api/setup", {
+      // Call setup endpoint to initialize contacts table
+      const response = await fetch("api.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          action: "init_contacts_table",
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || data.error) {
         throw new Error(data.error || "Setup failed");
       }
 
