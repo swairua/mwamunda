@@ -19,7 +19,7 @@ This project uses a PHP backend API (api.php) for all data operations. The syste
 client/                   # React SPA frontend
 ├── pages/                # Route components (Index.tsx = home)
 ├── components/ui/        # Pre-built UI component library
-├── lib/                   # Utility functions and API clients
+��── lib/                   # Utility functions and API clients
 ├── App.tsx                # App entry point and with SPA routing setup
 └── global.css            # TailwindCSS 3 theming and global styles
 
@@ -152,9 +152,19 @@ To add custom authentication logic:
 
 ## Production Deployment
 
-- **Standard**: `pnpm build`
-- **Binary**: Self-contained executables (Linux, macOS, Windows)
-- **Cloud Deployment**: Use either Netlify or Vercel via their MCP integrations for easy deployment. Both providers work well with this starter template.
+- **Frontend Build**: `pnpm build` - Generates optimized SPA in `dist/spa/`
+- **Deployment Options**:
+  - **Static Hosting** (Netlify, Vercel, GitHub Pages): Deploy the `dist/spa/` folder
+  - **PHP Server Hosting**: Ensure PHP 7.4+ and MySQL are available
+- **Required Files for Production**:
+  - `dist/spa/` - Built React application
+  - `api.php` - PHP API backend
+  - `connection.php` - Database connection configuration
+  - `public/` - Static assets
+- **Environment Setup**:
+  - Configure MySQL database settings in `connection.php`
+  - Ensure CORS is properly configured in `api.php` for your production domain
+  - Both frontend and PHP backend should be hosted on the same server or with proper CORS configuration
 
 ## Architecture Notes
 
