@@ -1,3 +1,5 @@
+import { API_CONFIG } from "./config";
+
 export interface Contact {
   id?: number;
   name: string;
@@ -20,13 +22,11 @@ export interface ContactResponse {
   error?: string;
 }
 
-const API_BASE_URL = "api.php";
-
 export async function submitContact(
   contact: Contact,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export async function submitContact(
 
 export async function getAllContacts(): Promise<Contact[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}?table=contacts`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}?table=contacts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export async function updateContactStatus(
   status: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export async function addInternalNote(
   notes: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -175,7 +175,7 @@ export async function sendResponseEmail(
   responseEmail: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(API_CONFIG.BASE_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -212,12 +212,15 @@ export async function sendResponseEmail(
 
 export async function deleteContact(id: number): Promise<ContactResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}?table=contacts&id=${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${API_CONFIG.BASE_URL}?table=contacts&id=${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
