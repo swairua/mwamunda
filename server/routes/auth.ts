@@ -94,7 +94,7 @@ export const registerUser: RequestHandler = async (req, res) => {
 
     const hashedPassword = hashPassword(password);
 
-    const response = await fetch(API_URL, {
+    const response = await fetchWithTimeout(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
