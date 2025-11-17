@@ -395,7 +395,7 @@ export const updateContactStatus: RequestHandler = async (req, res) => {
       return;
     }
 
-    const response = await fetch(API_URL, {
+    const response = await fetchWithTimeout(API_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
