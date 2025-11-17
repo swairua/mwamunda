@@ -186,17 +186,48 @@ After deploying, initialize the database:
 # 1. Install dependencies (one time or after updates)
 pnpm install
 
-# 2. Build application
-pnpm build
+# 2. Verify code quality (optional)
+pnpm typecheck
+pnpm test
 
-# 3. Verify build output
-ls -la dist/spa/
+# 3. Build application (includes all files: frontend + API)
+pnpm build:full
 
-# 4. Deploy
-# - Copy dist/spa/* to your static host
-# - Copy api.php, connection.php to your PHP server
-# - Update connection.php with your database credentials
-# - Test all endpoints
+# 4. Verify build output has everything needed
+ls -la dist/
+# Should see: index.html, api.php, connection.php, assets/, etc.
+
+# 5. Deploy dist/ folder to your server
+# Option A: Copy to server
+scp -r dist/* user@your-server:/var/www/html/
+
+# Option B: Docker
+docker build -t myapp .
+docker push myregistry/myapp
+# Then deploy container to your platform
+
+# 6. Configure database credentials on server
+#    Update DB_HOST, DB_USER, DB_PASSWORD, DB_NAME environment variables
+
+# 7. Initialize database (call once)
+curl -X POST http://your-domain/api.php \
+  -H "Content-Type: application/json" \
+  -d '{"action": "init_users_table"}'
+```
+
+## Development
+
+For local development with PHP API support:
+
+```bash
+# Terminal 1: Start PHP server (serves api.php on port 8000)
+pnpm dev:php
+
+# Terminal 2: Start Vite dev server (proxies /api.php to localhost:8000)
+pnpm dev
+
+# Or run both together
+pnpm dev:full
 ```
 
 Your application is now ready for offline building and direct deployment!
