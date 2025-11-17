@@ -113,43 +113,35 @@ pnpm format.fix # Format code with Prettier
 
 Open `client/global.css` and `tailwind.config.ts` and add new tailwind colors.
 
-### New API Route
-1. **Optional**: Create a shared interface in `shared/api.ts`:
-```typescript
-export interface MyRouteResponse {
-  message: string;
-  // Add other response properties here
-}
+### Adding a New PHP Database Table
+1. Define the table structure in `api.php` using the `init_*_table` action pattern
+2. For example, to add a "products" table, you would call the PHP API with:
+```javascript
+const response = await fetch('api.php', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    action: 'init_products_table',
+    // The action handler would create the table structure
+  })
+});
 ```
 
-2. Create a new route handler in `server/routes/my-route.ts`:
+3. Extend `api.php` to handle the new table's CRUD operations
+4. Create a client library in `client/lib/` to call the PHP API
+5. Use in React components:
 ```typescript
-import { RequestHandler } from "express";
-import { MyRouteResponse } from "@shared/api"; // Optional: for type safety
-
-export const handleMyRoute: RequestHandler = (req, res) => {
-  const response: MyRouteResponse = {
-    message: 'Hello from my endpoint!'
-  };
-  res.json(response);
-};
+const response = await fetch('api.php?table=products', {
+  method: 'GET'
+});
+const products = await response.json();
 ```
 
-3. Register the route in `server/index.ts`:
-```typescript
-import { handleMyRoute } from "./routes/my-route";
-
-// Add to the createServer function:
-app.get("/api/my-endpoint", handleMyRoute);
-```
-
-4. Use in React components with type safety:
-```typescript
-import { MyRouteResponse } from '@shared/api'; // Optional: for type safety
-
-const response = await fetch('/api/my-endpoint');
-const data: MyRouteResponse = await response.json();
-```
+### Extending Authentication
+To add custom authentication logic:
+1. Add new actions to `api.php` (e.g., `action=logout`, `action=change_password`)
+2. Update the authentication functions in `client/lib/auth.ts`
+3. Implement password hashing and verification using SHA-256 (or upgrade to bcrypt in PHP)
 
 ### New Page Route
 1. Create component in `client/pages/MyPage.tsx`
