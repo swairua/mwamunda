@@ -77,16 +77,16 @@ export default function AdminSetup() {
           <div className="p-8">
             <div className="mb-8">
               <h2 className="text-lg font-semibold text-foreground mb-4">
-                Welcome!
+                Database Migration
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                This setup will:
+                This setup will initialize the contacts table:
               </p>
               <ul className="text-sm text-muted-foreground space-y-2 mb-4 list-inside list-disc">
-                <li>Create the users table in the database</li>
-                <li>Seed admin@mwamunda.com user</li>
-                <li>Set password: Pass123</li>
-                <li>Assign admin role</li>
+                <li>Create the contacts table</li>
+                <li>Add fields for contact submissions</li>
+                <li>Enable admin moderation features</li>
+                <li>Store response history</li>
               </ul>
             </div>
 
