@@ -19,7 +19,7 @@ This project uses a PHP backend API (api.php) for all data operations. The syste
 client/                   # React SPA frontend
 ├── pages/                # Route components (Index.tsx = home)
 ├── components/ui/        # Pre-built UI component library
-��── lib/                   # Utility functions and API clients
+├── lib/                   # Utility functions and API clients
 ├── App.tsx                # App entry point and with SPA routing setup
 └── global.css            # TailwindCSS 3 theming and global styles
 
@@ -168,9 +168,11 @@ To add custom authentication logic:
 
 ## Architecture Notes
 
-- Single-port development with Vite + Express integration
-- TypeScript throughout (client, server, shared)
-- Full hot reload for rapid development
-- Production-ready with multiple deployment options
-- Comprehensive UI component library included
-- Type-safe API communication via shared interfaces
+- **Frontend-Only Development**: Vite dev server runs on port 8080 for the React SPA
+- **Direct Backend Calls**: Frontend communicates directly with PHP API (no intermediary Node server)
+- **TypeScript Frontend**: Full TypeScript support for the client application
+- **Hot Module Reload**: Rapid development with Vite's HMR
+- **MySQL Database**: All data persisted in MySQL via PHP API
+- **Stateless API**: PHP API follows REST conventions with standard HTTP methods
+- **Authentication**: Client-side user state management with localStorage
+- **CORS-Enabled**: PHP API accepts requests from any origin in development
