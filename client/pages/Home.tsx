@@ -29,7 +29,7 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-16 sm:pb-20 md:pb-32 overflow-hidden">
+      <section className="relative pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl top-20 left-10 animate-float"></div>
           <div
@@ -178,9 +178,9 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16 animate-fade-in">
+          <div className="text-center mb-8 sm:mb-12 animate-fade-in">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
               Why Choose Mwamunda?
             </h2>
@@ -250,9 +250,9 @@ export default function Home() {
       </section>
 
       {/* Products Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-gradient-to-b from-blue-50/50 to-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-blue-50/50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16 animate-fade-in">
+          <div className="text-center mb-8 sm:mb-12 animate-fade-in">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
               Our Financial Products
             </h2>
@@ -422,9 +422,9 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 md:py-32 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Our Core Values
             </h2>
@@ -476,7 +476,7 @@ export default function Home() {
       </section>
 
       {/* How We Work Section */}
-      <section className="py-20 md:py-32 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
@@ -565,9 +565,9 @@ export default function Home() {
       </section>
 
       {/* Success Stories Section */}
-      <section className="py-20 md:py-32 bg-gray-50">
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Success Stories
             </h2>
@@ -650,7 +650,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
+      <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary/80 opacity-90"></div>
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl -top-48 -right-48 animate-float"></div>
@@ -692,7 +692,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground/95 text-white py-16 md:py-20">
+      <footer className="bg-foreground/95 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
