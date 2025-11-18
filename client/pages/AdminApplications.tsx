@@ -71,7 +71,7 @@ export default function AdminApplications() {
     if (currentUser) {
       fetchApplications();
     }
-  }, [currentUser, toast]);
+  }, [currentUser, toast]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const handleLogout = () => {
     clearUser();
