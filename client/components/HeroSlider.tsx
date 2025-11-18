@@ -42,9 +42,9 @@ export default function HeroSlider({
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden bg-white p-4 sm:p-6 rounded-3xl">
       {/* Slides */}
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full rounded-2xl overflow-hidden">
         {slides.map((slide, index) => (
           <div
             key={index}
