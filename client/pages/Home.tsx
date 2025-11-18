@@ -72,10 +72,11 @@ export default function Home() {
                 </Link>
 
                 <Link
-                  to="/about"
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-primary text-primary font-semibold text-sm sm:text-base hover:bg-primary/5 transition-all duration-300"
+                  to="/contact?type=partner"
+                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-primary text-primary font-semibold text-sm sm:text-base hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 group"
                 >
-                  Learn More
+                  Become a Partner
+                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
