@@ -1,5 +1,27 @@
 import { API_CONFIG } from "./config";
 
+export async function initApplicationsTable(): Promise<{
+  success?: boolean;
+  message?: string;
+  error?: string;
+}> {
+  const response = await fetch(API_CONFIG.BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      action: "init_applications_table",
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to initialize applications table");
+  }
+
+  return response.json();
+}
+
 export type ApplicationStatus = "pending" | "approved" | "rejected";
 export type ProductType =
   | "fair-personal-loans"
