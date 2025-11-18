@@ -58,6 +58,7 @@ export const App = () => (
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/contacts" element={<AdminContacts />} />
           <Route path="/admin/applications" element={<AdminApplications />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
