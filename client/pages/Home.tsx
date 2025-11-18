@@ -43,22 +43,23 @@ export default function Home() {
             <div className="animate-slide-in-left">
               <div className="inline-block mb-6 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
                 <span className="text-sm font-semibold text-primary">
-                  🚀 Empowering Financial Inclusion
+                  💰 Fast, Flexible & Reliable
                 </span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Financial Solutions for the{" "}
+                Fast, Flexible & Reliable Loans for{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                  Underserved
-                </span>
+                  Chamas and Small Businesses
+                </span>{" "}
+                in Rural Mombasa
               </h1>
 
               <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
-                Mwamunda Investment Limited provides affordable, accessible
-                financial products designed to help micro and small businesses
-                thrive. We're committed to putting predatory lenders out of
-                business.
+                Empowering hardworking groups and individuals through affordable
+                lending, training, and financial inclusion. Mwamunda Investment
+                Limited puts accessible financial solutions directly in the
+                hands of those left behind by mainstream finance.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
