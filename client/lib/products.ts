@@ -42,7 +42,9 @@ export async function initProductsTable(): Promise<{
     return data;
   } catch (error) {
     const errorMessage =
-      error instanceof Error ? error.message : "Failed to initialize products table";
+      error instanceof Error
+        ? error.message
+        : "Failed to initialize products table";
     console.error("Error initializing products table:", errorMessage);
     throw new Error(errorMessage);
   }
@@ -82,12 +84,15 @@ export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
 }
 
 export async function getProductById(id: number): Promise<Product> {
-  const response = await fetch(`${API_CONFIG.BASE_URL}?table=products&id=${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch product");
@@ -152,12 +157,15 @@ export async function deleteProduct(id: number): Promise<{
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(`${API_CONFIG.BASE_URL}?table=products&id=${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     throw new Error("Failed to delete product");

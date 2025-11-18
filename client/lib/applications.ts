@@ -29,7 +29,9 @@ export async function initApplicationsTable(): Promise<{
     return data;
   } catch (error) {
     const errorMessage =
-      error instanceof Error ? error.message : "Failed to initialize applications table";
+      error instanceof Error
+        ? error.message
+        : "Failed to initialize applications table";
     console.error("Error initializing applications table:", errorMessage);
     throw new Error(errorMessage);
   }

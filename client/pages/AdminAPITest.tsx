@@ -13,7 +13,10 @@ export default function AdminAPITest() {
 
     try {
       console.log("API Base URL:", API_CONFIG.BASE_URL);
-      console.log("Request body:", JSON.stringify({ action: "init_products_table" }));
+      console.log(
+        "Request body:",
+        JSON.stringify({ action: "init_products_table" }),
+      );
 
       const response = await fetch(API_CONFIG.BASE_URL, {
         method: "POST",
@@ -46,7 +49,10 @@ export default function AdminAPITest() {
 
     try {
       console.log("API Base URL:", API_CONFIG.BASE_URL);
-      console.log("Request body:", JSON.stringify({ action: "init_applications_table" }));
+      console.log(
+        "Request body:",
+        JSON.stringify({ action: "init_applications_table" }),
+      );
 
       const response = await fetch(API_CONFIG.BASE_URL, {
         method: "POST",
@@ -80,7 +86,8 @@ export default function AdminAPITest() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">Configuration</h2>
           <p className="text-sm text-gray-600 mb-2">
-            API Base URL: <code className="bg-gray-100 px-2 py-1">{API_CONFIG.BASE_URL}</code>
+            API Base URL:{" "}
+            <code className="bg-gray-100 px-2 py-1">{API_CONFIG.BASE_URL}</code>
           </p>
         </div>
 
