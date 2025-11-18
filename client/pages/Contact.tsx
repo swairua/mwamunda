@@ -77,7 +77,7 @@ export default function Contact() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-16 sm:pb-20 bg-gradient-to-br from-primary/10 to-secondary/10">
+      <section className="relative pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-slide-in-down">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
@@ -92,7 +92,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-16 sm:py-20 md:py-32">
+      <section className="py-12 sm:py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-20">
             {/* Email */}
@@ -180,7 +180,7 @@ export default function Contact() {
           </div>
 
           {/* Alternative Location */}
-          <div className="mb-20 p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-teal-50 border border-primary/20 animate-fade-in">
+          <div className="mb-12 p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-teal-50 border border-primary/20 animate-fade-in">
             <h3 className="text-2xl font-bold text-foreground mb-4">
               Kilifi Branch Office
             </h3>
@@ -197,9 +197,9 @@ export default function Contact() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-slide-in-down">
+          <div className="text-center mb-12 animate-slide-in-down">
             <h2 className="text-4xl font-bold text-foreground mb-4">
               Send Us a Message
             </h2>
@@ -339,7 +339,7 @@ export default function Contact() {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
             Find Us
@@ -365,7 +365,7 @@ export default function Contact() {
       </section>
 
       {/* Additional Info */}
-      <section className="py-16 sm:py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
             Why Get In Touch?
@@ -414,7 +414,7 @@ export default function Contact() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground/95 text-white py-16 md:py-20">
+      <footer className="bg-foreground/95 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>

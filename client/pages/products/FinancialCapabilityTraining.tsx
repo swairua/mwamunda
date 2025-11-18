@@ -25,7 +25,7 @@ export default function FinancialCapabilityTraining() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-16 sm:pb-20 md:pb-32 overflow-hidden">
+      <section className="relative pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-96 h-96 bg-amber-500/10 rounded-full blur-3xl top-20 left-10 animate-float"></div>
           <div
@@ -77,9 +77,9 @@ export default function FinancialCapabilityTraining() {
       </section>
 
       {/* Programs Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Our Training Programs
             </h2>
@@ -134,9 +134,9 @@ export default function FinancialCapabilityTraining() {
       </section>
 
       {/* Course Levels Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-blue-50/30">
+      <section className="py-12 sm:py-16 md:py-20 bg-blue-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Training Levels
             </h2>
@@ -207,7 +207,7 @@ export default function FinancialCapabilityTraining() {
       </section>
 
       {/* Learning Benefits Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-8 text-center">
             What You'll Gain
@@ -237,9 +237,9 @@ export default function FinancialCapabilityTraining() {
       </section>
 
       {/* Delivery Methods Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-blue-50/30">
+      <section className="py-12 sm:py-16 md:py-20 bg-blue-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               How We Train
             </h2>
@@ -279,9 +279,9 @@ export default function FinancialCapabilityTraining() {
       </section>
 
       {/* Application Form Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-fade-in">
+          <div className="text-center mb-8 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Enroll in Financial Capability Training
             </h2>
@@ -299,7 +299,7 @@ export default function FinancialCapabilityTraining() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
+      <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-amber-500 via-primary to-amber-500/80 opacity-90"></div>
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl -top-48 -right-48 animate-float"></div>
@@ -329,7 +329,7 @@ export default function FinancialCapabilityTraining() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground/95 text-white py-16 md:py-20">
+      <footer className="bg-foreground/95 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>

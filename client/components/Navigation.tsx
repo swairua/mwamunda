@@ -31,7 +31,7 @@ export default function Navigation() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20 md:h-24 lg:h-28">
+        <div className="flex justify-between items-center h-14 sm:h-16 md:h-20">
           {/* Logo */}
           <Link
             to="/"
@@ -40,7 +40,7 @@ export default function Navigation() {
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
               alt="Mwamunda Investment Limited"
-              className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto"
+              className="h-10 sm:h-12 md:h-16 w-auto"
             />
           </Link>
 

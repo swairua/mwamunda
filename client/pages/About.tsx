@@ -8,7 +8,7 @@ export default function About() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-32 md:pt-40 pb-20 bg-gradient-to-br from-primary/10 to-secondary/10">
+      <section className="relative pt-24 md:pt-28 pb-12 bg-gradient-to-br from-primary/10 to-secondary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-slide-in-down">
             <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
@@ -23,9 +23,9 @@ export default function About() {
       </section>
 
       {/* Overview Section */}
-      <section className="py-20 md:py-32">
+      <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
             <div className="animate-slide-in-left">
               <h2 className="text-4xl font-bold text-foreground mb-6">
                 Who We Are
@@ -78,7 +78,7 @@ export default function About() {
           </div>
 
           {/* Detailed Overview */}
-          <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-3xl p-12 mb-20 animate-fade-in border border-primary/10">
+          <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-3xl p-12 mb-12 animate-fade-in border border-primary/10">
             <h3 className="text-3xl font-bold text-foreground mb-6">
               Our Journey & Impact
             </h3>
@@ -120,7 +120,7 @@ export default function About() {
           </div>
 
           {/* Presence Section */}
-          <div className="mb-20 text-center animate-slide-in-up">
+          <div className="mb-12 text-center animate-slide-in-up">
             <h3 className="text-3xl font-bold text-foreground mb-6">
               Our Presence
             </h3>
@@ -137,10 +137,10 @@ export default function About() {
       </section>
 
       {/* Mission, Vision, Values */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Mission */}
-          <div className="mb-20 animate-slide-in-left">
+          <div className="mb-12 animate-slide-in-left">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-12 rounded-lg bg-primary/20 text-primary flex items-center justify-center">
                 <Target className="w-6 h-6" />
@@ -159,7 +159,7 @@ export default function About() {
           </div>
 
           {/* Vision */}
-          <div className="mb-20 animate-slide-in-right">
+          <div className="mb-12 animate-slide-in-right">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-12 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center">
                 <Eye className="w-6 h-6" />
@@ -232,7 +232,7 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 md:py-32 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-foreground text-center mb-6">
             Our Leadership
@@ -267,9 +267,9 @@ export default function About() {
       </section>
 
       {/* Team Gallery Section */}
-      <section className="py-20 md:py-32 bg-gray-50">
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-4xl font-bold text-foreground mb-4">
               Meet Our Team
             </h2>
@@ -329,7 +329,7 @@ export default function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
+      <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-90"></div>
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl -top-48 -right-48 animate-float"></div>
@@ -355,7 +355,7 @@ export default function About() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground/95 text-white py-16 md:py-20">
+      <footer className="bg-foreground/95 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
