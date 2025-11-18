@@ -1,4 +1,4 @@
-import { API_URL } from "./config";
+import { getApiUrl } from "./config";
 
 export interface Product {
   id: number;
