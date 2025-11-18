@@ -47,12 +47,64 @@ export default function Home() {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Fast, Flexible & Reliable Loans for{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                  Chamas and Small Businesses
-                </span>{" "}
-                in Rural Mombasa
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.1s" }}
+                >
+                  Fast,
+                </span>
+                {" "}
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-200% animate-gradient-shift animate-word-pop font-extrabold"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  Flexible &
+                </span>
+                {" "}
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.3s" }}
+                >
+                  Reliable Loans
+                </span>
+                {" "}
+                <br className="hidden sm:block" />
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.4s" }}
+                >
+                  for
+                </span>
+                {" "}
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary bg-200% animate-gradient-shift animate-word-pop font-extrabold drop-shadow-lg"
+                  style={{ animationDelay: "0.5s" }}
+                >
+                  Chamas and Small
+                </span>
+                {" "}
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary bg-200% animate-gradient-shift animate-word-pop font-extrabold"
+                  style={{ animationDelay: "0.6s" }}
+                >
+                  Businesses
+                </span>
+                {" "}
+                <br className="hidden sm:block" />
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.7s" }}
+                >
+                  in Rural
+                </span>
+                {" "}
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-secondary bg-200% animate-gradient-shift animate-word-pop font-extrabold drop-shadow-lg"
+                  style={{ animationDelay: "0.8s" }}
+                >
+                  Mombasa
+                </span>
               </h1>
 
               <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
