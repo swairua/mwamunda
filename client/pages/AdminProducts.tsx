@@ -65,7 +65,8 @@ export default function AdminProducts() {
     if (currentUser) {
       fetchProducts();
     }
-  }, [currentUser, toast]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
 
   const handleLogout = () => {
     clearUser();
