@@ -57,8 +57,6 @@ export default function HeroSlider({
               alt={`Hero slide ${index + 1}`}
               className="w-full h-full object-cover"
             />
-            {/* Dark overlay for text readability */}
-            <div className="absolute inset-0 bg-black/30" />
           </div>
         ))}
       </div>
