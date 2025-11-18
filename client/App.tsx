@@ -17,6 +17,7 @@ import FinancialCapabilityTraining from "./pages/products/FinancialCapabilityTra
 import AdminSetup from "./pages/AdminSetup";
 import AdminInit from "./pages/AdminInit";
 import AdminInitProducts from "./pages/AdminInitProducts";
+import AdminInitApplications from "./pages/AdminInitApplications";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -55,6 +56,10 @@ export const App = () => (
           <Route path="/admin/setup" element={<AdminSetup />} />
           <Route path="/admin/init" element={<AdminInit />} />
           <Route path="/admin/init-products" element={<AdminInitProducts />} />
+          <Route
+            path="/admin/init-applications"
+            element={<AdminInitApplications />}
+          />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegister />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />

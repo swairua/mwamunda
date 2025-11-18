@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, Plus, Trash2, Eye, Package } from "lucide-react";
+import { Users, Plus, Trash2, Eye, Package, FileText } from "lucide-react";
 import { getStoredUser, clearUser, getAllUsers, User } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
@@ -142,7 +142,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <button
               onClick={() => navigate("/admin/init-products")}
               className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-2xl p-6 hover:shadow-lg transition-all text-left hover:border-blue-300"
@@ -153,8 +153,7 @@ export default function AdminDashboard() {
                     Initialize Products
                   </h3>
                   <p className="text-sm text-blue-700">
-                    Set up the products database table for managing financial
-                    products
+                    Set up the products database table
                   </p>
                 </div>
                 <div className="w-12 h-12 rounded-lg bg-blue-200 text-blue-600 flex items-center justify-center flex-shrink-0">
@@ -173,11 +172,30 @@ export default function AdminDashboard() {
                     Manage Products
                   </h3>
                   <p className="text-sm text-green-700">
-                    Create, edit, and delete financial products
+                    Create, edit, and delete products
                   </p>
                 </div>
                 <div className="w-12 h-12 rounded-lg bg-green-200 text-green-600 flex items-center justify-center flex-shrink-0">
                   <Package className="w-6 h-6" />
+                </div>
+              </div>
+            </button>
+
+            <button
+              onClick={() => navigate("/admin/init-applications")}
+              className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-2xl p-6 hover:shadow-lg transition-all text-left hover:border-purple-300"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-purple-900 mb-2">
+                    Initialize Applications
+                  </h3>
+                  <p className="text-sm text-purple-700">
+                    Set up the applications database table
+                  </p>
+                </div>
+                <div className="w-12 h-12 rounded-lg bg-purple-200 text-purple-600 flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-6 h-6" />
                 </div>
               </div>
             </button>
