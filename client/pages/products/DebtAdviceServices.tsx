@@ -214,7 +214,10 @@ export default function DebtAdviceServices() {
       </section>
 
       {/* Application Form Section */}
-      <section id="application-form" className="py-16 sm:py-20 md:py-32 bg-white scroll-mt-20">
+      <section
+        id="application-form"
+        className="py-16 sm:py-20 md:py-32 bg-white scroll-mt-20"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">

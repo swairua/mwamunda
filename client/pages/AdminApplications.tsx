@@ -53,7 +53,9 @@ export default function AdminApplications() {
         setApplications(fetchedApplications);
       } catch (error) {
         const errorMessage =
-          error instanceof Error ? error.message : "Failed to fetch applications";
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch applications";
         console.error("Error fetching applications:", error);
         toast({
           title: "Error",
@@ -133,7 +135,9 @@ export default function AdminApplications() {
       });
     } catch (error) {
       const errorMessage =
-        error instanceof Error ? error.message : "Failed to approve application";
+        error instanceof Error
+          ? error.message
+          : "Failed to approve application";
       console.error("Error approving application:", error);
       toast({
         title: "Error",
@@ -260,10 +264,7 @@ export default function AdminApplications() {
 
   const filteredApplications = applications.filter((app) => {
     if (filterStatus !== "all" && app.status !== filterStatus) return false;
-    if (
-      filterProduct !== "all" &&
-      app.product_type !== filterProduct
-    )
+    if (filterProduct !== "all" && app.product_type !== filterProduct)
       return false;
     return true;
   });
@@ -292,7 +293,9 @@ export default function AdminApplications() {
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
                 Loan Applications
               </h1>
-              <p className="text-white/90">Manage and review loan applications</p>
+              <p className="text-white/90">
+                Manage and review loan applications
+              </p>
             </div>
           </div>
         </div>
@@ -395,9 +398,13 @@ export default function AdminApplications() {
                   className="w-full px-4 py-2 rounded-lg border border-border bg-white focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <option value="all">All Products</option>
-                  <option value="fair-personal-loans">Fair Personal Loans</option>
+                  <option value="fair-personal-loans">
+                    Fair Personal Loans
+                  </option>
                   <option value="chama-loans">Chama Loans</option>
-                  <option value="debt-advice-services">Debt Advice Services</option>
+                  <option value="debt-advice-services">
+                    Debt Advice Services
+                  </option>
                   <option value="financial-capability-training">
                     Financial Capability Training
                   </option>
@@ -409,7 +416,9 @@ export default function AdminApplications() {
           {/* Applications Table */}
           <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
             <div className="p-6 border-b border-border bg-gray-50">
-              <h2 className="text-2xl font-bold text-foreground">Applications</h2>
+              <h2 className="text-2xl font-bold text-foreground">
+                Applications
+              </h2>
             </div>
 
             {loading ? (
@@ -465,8 +474,9 @@ export default function AdminApplications() {
                           <p className="text-sm text-foreground">
                             {application.product_type
                               .split("-")
-                              .map((word) =>
-                                word.charAt(0).toUpperCase() + word.slice(1),
+                              .map(
+                                (word) =>
+                                  word.charAt(0).toUpperCase() + word.slice(1),
                               )
                               .join(" ")}
                           </p>
@@ -476,7 +486,9 @@ export default function AdminApplications() {
                             className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(application.status)}`}
                           >
                             {getStatusIcon(application.status)}
-                            {(application.status || "pending").charAt(0).toUpperCase() +
+                            {(application.status || "pending")
+                              .charAt(0)
+                              .toUpperCase() +
                               (application.status || "pending").slice(1)}
                           </span>
                         </td>
@@ -506,7 +518,9 @@ export default function AdminApplications() {
                             {application.status === "pending" && (
                               <>
                                 <button
-                                  onClick={() => handleApproveClick(application)}
+                                  onClick={() =>
+                                    handleApproveClick(application)
+                                  }
                                   className="p-2 rounded-lg hover:bg-green-50 transition-colors text-muted-foreground hover:text-green-600"
                                   title="Approve"
                                 >
@@ -608,8 +622,9 @@ export default function AdminApplications() {
                       <p className="text-foreground">
                         {selectedApplication.product_type
                           .split("-")
-                          .map((word) =>
-                            word.charAt(0).toUpperCase() + word.slice(1),
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() + word.slice(1),
                           )
                           .join(" ")}
                       </p>
@@ -622,7 +637,9 @@ export default function AdminApplications() {
                         className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(selectedApplication.status)}`}
                       >
                         {getStatusIcon(selectedApplication.status)}
-                        {(selectedApplication.status || "pending").charAt(0).toUpperCase() +
+                        {(selectedApplication.status || "pending")
+                          .charAt(0)
+                          .toUpperCase() +
                           (selectedApplication.status || "pending").slice(1)}
                       </span>
                     </div>

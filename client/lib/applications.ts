@@ -90,9 +90,7 @@ export async function submitApplication(
     return data;
   } catch (error) {
     const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to submit application";
+      error instanceof Error ? error.message : "Failed to submit application";
     console.error("Error submitting application:", error);
     throw new Error(errorMessage);
   }
@@ -100,15 +98,12 @@ export async function submitApplication(
 
 export async function getAllApplications(): Promise<Application[]> {
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=applications`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const response = await fetch(`${API_CONFIG.BASE_URL}?table=applications`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+    });
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
@@ -128,9 +123,7 @@ export async function getAllApplications(): Promise<Application[]> {
     return data;
   } catch (error) {
     const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to fetch applications";
+      error instanceof Error ? error.message : "Failed to fetch applications";
     console.error("Error fetching applications:", error);
     throw new Error(errorMessage);
   }
@@ -167,9 +160,7 @@ export async function getApplicationById(
     return data[0];
   } catch (error) {
     const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to fetch application";
+      error instanceof Error ? error.message : "Failed to fetch application";
     console.error("Error fetching application:", error);
     throw new Error(errorMessage);
   }
@@ -250,9 +241,7 @@ export async function addAdminNotes(
     return data;
   } catch (error) {
     const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to add admin notes";
+      error instanceof Error ? error.message : "Failed to add admin notes";
     console.error("Error adding admin notes:", error);
     throw new Error(errorMessage);
   }
@@ -291,9 +280,7 @@ export async function rejectApplication(
     return data;
   } catch (error) {
     const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to reject application";
+      error instanceof Error ? error.message : "Failed to reject application";
     console.error("Error rejecting application:", error);
     throw new Error(errorMessage);
   }
@@ -326,9 +313,7 @@ export async function deleteApplication(
     return data;
   } catch (error) {
     const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to delete application";
+      error instanceof Error ? error.message : "Failed to delete application";
     console.error("Error deleting application:", error);
     throw new Error(errorMessage);
   }

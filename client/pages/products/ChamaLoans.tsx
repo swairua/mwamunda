@@ -214,15 +214,18 @@ export default function ChamaLoans() {
       </section>
 
       {/* Application Form Section */}
-      <section id="application-form" className="py-16 sm:py-20 md:py-32 bg-white scroll-mt-20">
+      <section
+        id="application-form"
+        className="py-16 sm:py-20 md:py-32 bg-white scroll-mt-20"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Apply for a Chama Loan
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Fill out the form below to submit your group application. We review
-              all applications within 24-48 hours.
+              Fill out the form below to submit your group application. We
+              review all applications within 24-48 hours.
             </p>
           </div>
 
@@ -249,8 +252,8 @@ export default function ChamaLoans() {
             Questions? Get in Touch
           </h2>
           <p className="text-lg text-white/90 mb-10 max-w-2xl mx-auto animate-slide-in-up">
-            Our team is here to help. Contact us for more information about Chama
-            Loans.
+            Our team is here to help. Contact us for more information about
+            Chama Loans.
           </p>
 
           <a

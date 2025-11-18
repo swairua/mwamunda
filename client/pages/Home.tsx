@@ -53,52 +53,45 @@ export default function Home() {
                   style={{ animationDelay: "0.1s" }}
                 >
                   Fast,
-                </span>
-                {" "}
+                </span>{" "}
                 <span
                   className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.2s" }}
                 >
                   Flexible &
-                </span>
-                {" "}
+                </span>{" "}
                 <span
                   className="inline-block text-foreground animate-word-pop"
                   style={{ animationDelay: "0.3s" }}
                 >
                   Reliable Loans
-                </span>
-                {" "}
+                </span>{" "}
                 <br className="hidden sm:block" />
                 <span
                   className="inline-block text-foreground animate-word-pop"
                   style={{ animationDelay: "0.4s" }}
                 >
                   for
-                </span>
-                {" "}
+                </span>{" "}
                 <span
                   className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.5s" }}
                 >
                   Chamas and Small
-                </span>
-                {" "}
+                </span>{" "}
                 <span
                   className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.6s" }}
                 >
                   Businesses
-                </span>
-                {" "}
+                </span>{" "}
                 <br className="hidden sm:block" />
                 <span
                   className="inline-block text-foreground animate-word-pop"
                   style={{ animationDelay: "0.7s" }}
                 >
                   in Rural
-                </span>
-                {" "}
+                </span>{" "}
                 <span
                   className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.8s" }}

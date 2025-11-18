@@ -286,8 +286,8 @@ export default function FinancialCapabilityTraining() {
               Enroll in Financial Capability Training
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Fill out the form below to register for our training program. We'll
-              contact you to confirm your enrollment within 24 hours.
+              Fill out the form below to register for our training program.
+              We'll contact you to confirm your enrollment within 24 hours.
             </p>
           </div>
 
@@ -314,8 +314,8 @@ export default function FinancialCapabilityTraining() {
             Questions About Our Training?
           </h2>
           <p className="text-lg text-white/90 mb-10 max-w-2xl mx-auto animate-slide-in-up">
-            Our team can answer any questions you have about the program and help
-            you get started on your financial learning journey.
+            Our team can answer any questions you have about the program and
+            help you get started on your financial learning journey.
           </p>
 
           <Link
