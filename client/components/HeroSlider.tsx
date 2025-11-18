@@ -11,20 +11,12 @@ export default function HeroSlider({
 }: HeroSliderProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Mix of Unsplash images: rural/agricultural, professional business, and community/people
+  // Mwamunda brand images: real clients and community
   const slides = [
-    // Rural/Agricultural - farmers and rural communities
-    "https://images.unsplash.com/photo-1574263867373-f78145e8e10b?w=1600&h=900&fit=crop",
-    // Professional business - office and business settings
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=900&fit=crop",
-    // Community/People - teamwork and cooperation
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=900&fit=crop",
-    // Financial/Growth - business growth and success
-    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=900&fit=crop",
-    // Agricultural/Rural - farming community
-    "https://images.unsplash.com/photo-1500382017468-f049863256f0?w=1600&h=900&fit=crop",
-    // Diverse community - people working together
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=900&fit=crop",
+    // Street vendors/mechanics - real community Mwamunda serves
+    "https://cdn.builder.io/api/v1/image/assets%2F2edf8b9f099644bda003dd7b63a9e04f%2F0e3b98b6d92440d8b34eea498d449a84?format=webp&width=800",
+    // Mwamunda Investment Limited Head Office
+    "https://cdn.builder.io/api/v1/image/assets%2F2edf8b9f099644bda003dd7b63a9e04f%2F92c79749ff094e0da72a7efa9104ce7e?format=webp&width=800",
   ];
 
   useEffect(() => {
