@@ -278,6 +278,26 @@ export default function FinancialCapabilityTraining() {
         </div>
       </section>
 
+      {/* Application Form Section */}
+      <section className="py-16 sm:py-20 md:py-32 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Enroll in Financial Capability Training
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Fill out the form below to register for our training program. We'll
+              contact you to confirm your enrollment within 24 hours.
+            </p>
+          </div>
+
+          <ApplicationForm
+            productType="financial-capability-training"
+            productName="Financial Capability Training"
+          />
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-amber-500 via-primary to-amber-500/80 opacity-90"></div>
@@ -291,18 +311,18 @@ export default function FinancialCapabilityTraining() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-slide-in-down">
-            Start Your Financial Learning Journey Today
+            Questions About Our Training?
           </h2>
           <p className="text-lg text-white/90 mb-10 max-w-2xl mx-auto animate-slide-in-up">
-            Invest in yourself and take control of your financial future through
-            quality education and practical skills.
+            Our team can answer any questions you have about the program and help
+            you get started on your financial learning journey.
           </p>
 
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-amber-600 font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group"
           >
-            Enroll Now
+            Contact Us
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
