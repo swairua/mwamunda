@@ -16,6 +16,7 @@ import DebtAdviceServices from "./pages/products/DebtAdviceServices";
 import FinancialCapabilityTraining from "./pages/products/FinancialCapabilityTraining";
 import AdminSetup from "./pages/AdminSetup";
 import AdminInit from "./pages/AdminInit";
+import AdminInitProducts from "./pages/AdminInitProducts";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
 import AdminDashboard from "./pages/AdminDashboard";
