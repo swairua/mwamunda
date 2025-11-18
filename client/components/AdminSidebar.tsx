@@ -38,6 +38,12 @@ export default function AdminSidebar({
       path: "/admin/dashboard",
     },
     {
+      id: "products",
+      icon: <Package className="w-5 h-5" />,
+      label: "Products",
+      path: "/admin/products",
+    },
+    {
       id: "applications",
       icon: <FileText className="w-5 h-5" />,
       label: "Applications",
