@@ -9,6 +9,7 @@ import {
   Award,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import ApplicationForm from "@/components/ApplicationForm";
 
 export default function FinancialCapabilityTraining() {
   const [scrollY, setScrollY] = useState(0);
