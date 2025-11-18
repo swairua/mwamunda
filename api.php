@@ -173,6 +173,47 @@ if ($action === "init_contacts_table" && $method === "POST") {
     exit;
 }
 
+if ($action === "init_applications_table" && $method === "POST") {
+    $sql = "CREATE TABLE IF NOT EXISTS applications (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        product_type VARCHAR(100) NOT NULL,
+        full_name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        phone VARCHAR(50) NOT NULL,
+        national_id VARCHAR(50),
+        date_of_birth DATE,
+        residential_address TEXT,
+        business_type VARCHAR(100),
+        business_name VARCHAR(255),
+        business_registration VARCHAR(100),
+        monthly_income DECIMAL(12, 2),
+        requested_amount DECIMAL(12, 2),
+        loan_purpose TEXT,
+        employment_status VARCHAR(50),
+        nearest_branch VARCHAR(100),
+        bank_account VARCHAR(50),
+        bank_name VARCHAR(100),
+        additional_info TEXT,
+        status VARCHAR(50) DEFAULT 'pending',
+        admin_notes TEXT,
+        approved_amount DECIMAL(12, 2),
+        rejection_reason TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql)) {
+        echo json_encode(["success" => true, "message" => "Applications table created successfully"]);
+    } else {
+        if (strpos($conn->error, "already exists") !== false) {
+            echo json_encode(["success" => true, "message" => "Applications table already exists"]);
+        } else {
+            echo json_encode(["error" => $conn->error]);
+        }
+    }
+    exit;
+}
+
 if (!$table) {
     echo json_encode(["error" => "Table name is required"]);
     exit;
