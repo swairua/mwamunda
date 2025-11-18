@@ -13,6 +13,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import HeroSlider from "@/components/HeroSlider";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
