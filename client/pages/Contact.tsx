@@ -414,7 +414,7 @@ export default function Contact() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground/95 text-white py-16 md:py-20">
+      <footer className="bg-foreground/95 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
