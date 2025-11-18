@@ -291,7 +291,22 @@ switch ($method) {
             $stmt = $conn->prepare("SELECT * FROM $table WHERE id=?");
             $stmt->bind_param("i", $id);
         } else {
-            $stmt = $conn->prepare("SELECT * FROM $table");
+            $sql = "SELECT * FROM $table";
+
+            // Support ordering by column
+            if (isset($_GET['orderBy'])) {
+                $orderBy = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['orderBy']);
+                $order = isset($_GET['order']) && strtoupper($_GET['order']) === 'ASC' ? 'ASC' : 'DESC';
+                $sql .= " ORDER BY $orderBy $order";
+            }
+
+            // Support limiting results
+            if (isset($_GET['limit'])) {
+                $limit = intval($_GET['limit']);
+                $sql .= " LIMIT $limit";
+            }
+
+            $stmt = $conn->prepare($sql);
         }
 
         $stmt->execute();
