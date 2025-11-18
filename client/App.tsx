@@ -16,11 +16,13 @@ import DebtAdviceServices from "./pages/products/DebtAdviceServices";
 import FinancialCapabilityTraining from "./pages/products/FinancialCapabilityTraining";
 import AdminSetup from "./pages/AdminSetup";
 import AdminInit from "./pages/AdminInit";
+import AdminInitProducts from "./pages/AdminInitProducts";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminContacts from "./pages/AdminContacts";
 import AdminApplications from "./pages/AdminApplications";
+import AdminProducts from "./pages/AdminProducts";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,11 +54,13 @@ export const App = () => (
           />
           <Route path="/admin/setup" element={<AdminSetup />} />
           <Route path="/admin/init" element={<AdminInit />} />
+          <Route path="/admin/init-products" element={<AdminInitProducts />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegister />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/contacts" element={<AdminContacts />} />
           <Route path="/admin/applications" element={<AdminApplications />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
