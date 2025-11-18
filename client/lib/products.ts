@@ -58,7 +58,7 @@ export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -84,7 +84,9 @@ export async function getProductById(id: number): Promise<Product> {
   return products[0];
 }
 
-export async function createProduct(data: Omit<Product, "id" | "created_at" | "updated_at">): Promise<{
+export async function createProduct(
+  data: Omit<Product, "id" | "created_at" | "updated_at">,
+): Promise<{
   success: boolean;
   id?: number;
   error?: string;
@@ -109,7 +111,7 @@ export async function createProduct(data: Omit<Product, "id" | "created_at" | "u
 
 export async function updateProduct(
   id: number,
-  data: Partial<Omit<Product, "id" | "created_at" | "updated_at">>
+  data: Partial<Omit<Product, "id" | "created_at" | "updated_at">>,
 ): Promise<{
   success: boolean;
   error?: string;

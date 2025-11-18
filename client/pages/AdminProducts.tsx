@@ -93,7 +93,9 @@ export default function AdminProducts() {
   };
 
   const handleFormChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -184,7 +186,10 @@ export default function AdminProducts() {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <AdminSidebar onLogout={handleLogout} userName={currentUser.name || currentUser.email} />
+      <AdminSidebar
+        onLogout={handleLogout}
+        userName={currentUser.name || currentUser.email}
+      />
 
       <main className="flex-1 overflow-auto">
         <div className="p-6 md:p-8 max-w-7xl mx-auto">
@@ -337,7 +342,9 @@ export default function AdminProducts() {
                       disabled={isSubmitting}
                       className="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium disabled:opacity-50 flex items-center justify-center gap-2"
                     >
-                      {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                      {isSubmitting && (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      )}
                       {selectedProduct ? "Update" : "Create"} Product
                     </button>
                   </div>
@@ -388,7 +395,10 @@ export default function AdminProducts() {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {products.map((product) => (
-                    <tr key={product.id} className="hover:bg-gray-50 transition-colors">
+                    <tr
+                      key={product.id}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
                       <td className="px-6 py-4 text-sm text-foreground font-medium">
                         {product.name}
                       </td>
@@ -396,7 +406,9 @@ export default function AdminProducts() {
                         {product.category || "-"}
                       </td>
                       <td className="px-6 py-4 text-sm text-muted-foreground">
-                        {product.price ? `KES ${product.price.toLocaleString()}` : "-"}
+                        {product.price
+                          ? `KES ${product.price.toLocaleString()}`
+                          : "-"}
                       </td>
                       <td className="px-6 py-4 text-sm">
                         <span

@@ -8,18 +8,18 @@ The products table stores information about financial products and services.
 
 ### Table Structure
 
-| Column       | Type            | Notes                                    |
-| ------------ | --------------- | ---------------------------------------- |
-| id           | INT AUTO_INC    | Primary key                              |
-| name         | VARCHAR(255)    | Product name (required)                  |
-| description  | TEXT            | Detailed product description             |
-| category     | VARCHAR(100)    | Product category (e.g., Loans, Training) |
-| price        | DECIMAL(12, 2)  | Product price in KES                     |
-| features     | TEXT            | Product features (comma-separated)       |
-| image_url    | VARCHAR(500)    | URL to product image                     |
-| status       | VARCHAR(50)     | active, inactive, or draft               |
-| created_at   | TIMESTAMP       | Auto-generated creation timestamp        |
-| updated_at   | TIMESTAMP       | Auto-updated modification timestamp      |
+| Column      | Type           | Notes                                    |
+| ----------- | -------------- | ---------------------------------------- |
+| id          | INT AUTO_INC   | Primary key                              |
+| name        | VARCHAR(255)   | Product name (required)                  |
+| description | TEXT           | Detailed product description             |
+| category    | VARCHAR(100)   | Product category (e.g., Loans, Training) |
+| price       | DECIMAL(12, 2) | Product price in KES                     |
+| features    | TEXT           | Product features (comma-separated)       |
+| image_url   | VARCHAR(500)   | URL to product image                     |
+| status      | VARCHAR(50)    | active, inactive, or draft               |
+| created_at  | TIMESTAMP      | Auto-generated creation timestamp        |
+| updated_at  | TIMESTAMP      | Auto-updated modification timestamp      |
 
 ## API Endpoints
 
@@ -203,9 +203,7 @@ Display recent products in a component:
 import RecentProducts from "@/components/RecentProducts";
 
 export default function MyPage() {
-  return (
-    <RecentProducts limit={10} className="my-8" />
-  );
+  return <RecentProducts limit={10} className="my-8" />;
 }
 ```
 
@@ -270,6 +268,7 @@ Features:
 ## Best Practices
 
 1. **Always initialize the table** before using:
+
    ```typescript
    await initProductsTable();
    ```
@@ -280,6 +279,7 @@ Features:
    - Status should be one of: active, inactive, draft
 
 3. **Handle errors gracefully**:
+
    ```typescript
    try {
      const products = await getRecentProducts(5);

@@ -8,7 +8,10 @@ interface RecentProductsProps {
   className?: string;
 }
 
-export default function RecentProducts({ limit = 5, className = "" }: RecentProductsProps) {
+export default function RecentProducts({
+  limit = 5,
+  className = "",
+}: RecentProductsProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +25,8 @@ export default function RecentProducts({ limit = 5, className = "" }: RecentProd
         const data = await getRecentProducts(limit);
         setProducts(data);
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to load products";
+        const message =
+          err instanceof Error ? err.message : "Failed to load products";
         setError(message);
         toast({
           title: "Error",
@@ -47,10 +51,14 @@ export default function RecentProducts({ limit = 5, className = "" }: RecentProd
 
   if (error) {
     return (
-      <div className={`flex items-start gap-3 p-4 bg-destructive/10 rounded-lg ${className}`}>
+      <div
+        className={`flex items-start gap-3 p-4 bg-destructive/10 rounded-lg ${className}`}
+      >
         <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
         <div>
-          <h3 className="font-semibold text-destructive">Error loading products</h3>
+          <h3 className="font-semibold text-destructive">
+            Error loading products
+          </h3>
           <p className="text-sm text-muted-foreground">{error}</p>
         </div>
       </div>
@@ -83,10 +91,14 @@ export default function RecentProducts({ limit = 5, className = "" }: RecentProd
             <div className="flex-1">
               <h3 className="font-semibold text-foreground">{product.name}</h3>
               {product.category && (
-                <p className="text-xs text-muted-foreground capitalize">{product.category}</p>
+                <p className="text-xs text-muted-foreground capitalize">
+                  {product.category}
+                </p>
               )}
               {product.description && (
-                <p className="text-sm text-muted-foreground mt-1">{product.description}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {product.description}
+                </p>
               )}
               <div className="flex items-center justify-between mt-2">
                 {product.price && (
