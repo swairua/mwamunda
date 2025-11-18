@@ -18,7 +18,7 @@ export async function initProductsTable(): Promise<{
   message?: string;
   error?: string;
 }> {
-  const response = await fetch(API_URL, {
+  const response = await fetch(getApiUrl(), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export async function initProductsTable(): Promise<{
 }
 
 export async function getProducts(): Promise<Product[]> {
-  const response = await fetch(`${API_URL}?table=products`, {
+  const response = await fetch(`${getApiUrl()}?table=products`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
   const response = await fetch(
-    `${API_URL}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
+    `${getApiUrl()}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
     {
       method: "GET",
       headers: {
@@ -69,7 +69,7 @@ export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
 }
 
 export async function getProductById(id: number): Promise<Product> {
-  const response = await fetch(`${API_URL}?table=products&id=${id}`, {
+  const response = await fetch(`${getApiUrl()}?table=products&id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export async function createProduct(data: Omit<Product, "id" | "created_at" | "u
   id?: number;
   error?: string;
 }> {
-  const response = await fetch(API_URL, {
+  const response = await fetch(getApiUrl(), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -114,7 +114,7 @@ export async function updateProduct(
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(API_URL, {
+  const response = await fetch(getApiUrl(), {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export async function deleteProduct(id: number): Promise<{
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(`${API_URL}?table=products&id=${id}`, {
+  const response = await fetch(`${getApiUrl()}?table=products&id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
