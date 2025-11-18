@@ -299,7 +299,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/fair-personal-loans"
                   className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More
@@ -338,7 +338,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/chama-loans"
                   className="inline-flex items-center gap-2 text-secondary font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More
@@ -377,7 +377,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/debt-advice-services"
                   className="inline-flex items-center gap-2 text-blue-500 font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More
@@ -416,7 +416,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/financial-capability-training"
                   className="inline-flex items-center gap-2 text-amber-500 font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More
