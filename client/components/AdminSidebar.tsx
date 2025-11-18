@@ -9,6 +9,7 @@ import {
   Home,
   Mail,
   FileText,
+  Package,
 } from "lucide-react";
 
 interface AdminSidebarProps {
