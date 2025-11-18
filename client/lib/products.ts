@@ -18,21 +18,34 @@ export async function initProductsTable(): Promise<{
   message?: string;
   error?: string;
 }> {
-  const response = await fetch(API_CONFIG.BASE_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      action: "init_products_table",
-    }),
-  });
+  try {
+    const response = await fetch(API_CONFIG.BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: "init_products_table",
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to initialize products table");
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    if (!response.ok) {
+      throw new Error("Failed to initialize products table");
+    }
+
+    return data;
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to initialize products table";
+    console.error("Error initializing products table:", errorMessage);
+    throw new Error(errorMessage);
   }
-
-  return response.json();
 }
 
 export async function getProducts(): Promise<Product[]> {
