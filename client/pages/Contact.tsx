@@ -199,7 +199,7 @@ export default function Contact() {
       {/* Contact Form Section */}
       <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-slide-in-down">
+          <div className="text-center mb-12 animate-slide-in-down">
             <h2 className="text-4xl font-bold text-foreground mb-4">
               Send Us a Message
             </h2>
