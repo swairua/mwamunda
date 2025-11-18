@@ -9,6 +9,7 @@ import {
   Shield,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import ApplicationForm from "@/components/ApplicationForm";
 
 export default function FairPersonalLoans() {
   const [scrollY, setScrollY] = useState(0);
@@ -211,6 +212,26 @@ export default function FairPersonalLoans() {
         </div>
       </section>
 
+      {/* Application Form Section */}
+      <section className="py-16 sm:py-20 md:py-32 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Apply for a Fair Personal Loan
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Fill out the form below to submit your application. We review all
+              applications within 24-48 hours.
+            </p>
+          </div>
+
+          <ApplicationForm
+            productType="fair-personal-loans"
+            productName="Fair Personal Loans"
+          />
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary/80 opacity-90"></div>
@@ -224,18 +245,18 @@ export default function FairPersonalLoans() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-slide-in-down">
-            Ready to Get Your Fair Personal Loan?
+            Questions? Get in Touch
           </h2>
           <p className="text-lg text-white/90 mb-10 max-w-2xl mx-auto animate-slide-in-up">
-            Join hundreds of satisfied customers who've improved their financial
-            situation with our fair personal loans.
+            Our team is here to help. Contact us for more information about Fair
+            Personal Loans.
           </p>
 
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group"
           >
-            Apply Now
+            Contact Us
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
