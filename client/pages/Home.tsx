@@ -29,8 +29,14 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-16 sm:pb-20 md:pb-32 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
+      <section className="relative pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-16 sm:pb-20 md:pb-32 overflow-hidden min-h-screen md:min-h-[80vh]">
+        {/* Full-width Hero Slider Background */}
+        <div className="absolute inset-0 w-screen left-1/2 -translate-x-1/2 z-0">
+          <HeroSlider />
+        </div>
+
+        {/* Decorative Blobs */}
+        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <div className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl top-20 left-10 animate-float"></div>
           <div
             className="absolute w-96 h-96 bg-secondary/10 rounded-full blur-3xl bottom-20 right-10 animate-float"
@@ -38,9 +44,10 @@ export default function Home() {
           ></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-in-left">
+        {/* Content Container */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full">
+          <div className="flex items-center h-full">
+            <div className="w-full md:w-1/2 animate-slide-in-left">
               <div className="inline-block mb-6 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
                 <span className="text-sm font-semibold text-primary">
                   💰 Fast, Flexible & Reliable
@@ -113,18 +120,6 @@ export default function Home() {
                   <p className="text-xs sm:text-sm text-muted-foreground">
                     Families Empowered
                   </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="relative animate-slide-in-right"
-              style={{ transform: `translateY(${scrollY * 0.1}px)` }}
-            >
-              <div className="relative w-full h-96 md:h-full min-h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
-                <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                  <HeroSlider />
                 </div>
               </div>
             </div>
