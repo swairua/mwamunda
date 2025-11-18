@@ -1,4 +1,4 @@
-import { getApiUrl, getExternalApiUrl } from "./config";
+import { API_CONFIG } from "./config";
 
 export interface Product {
   id: number;
@@ -18,25 +18,40 @@ export async function initProductsTable(): Promise<{
   message?: string;
   error?: string;
 }> {
-  const response = await fetch(getExternalApiUrl(), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      action: "init_products_table",
-    }),
-  });
+  try {
+    const response = await fetch(API_CONFIG.BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: "init_products_table",
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to initialize products table");
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    if (!response.ok) {
+      throw new Error("Failed to initialize products table");
+    }
+
+    return data;
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Failed to initialize products table";
+    console.error("Error initializing products table:", errorMessage);
+    throw new Error(errorMessage);
   }
-
-  return response.json();
 }
 
 export async function getProducts(): Promise<Product[]> {
-  const response = await fetch(`${getApiUrl()}?table=products`, {
+  const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +67,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
   const response = await fetch(
-    `${getApiUrl()}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
+    `${API_CONFIG.BASE_URL}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
     {
       method: "GET",
       headers: {
@@ -69,12 +84,15 @@ export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
 }
 
 export async function getProductById(id: number): Promise<Product> {
-  const response = await fetch(`${getApiUrl()}?table=products&id=${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch product");
@@ -91,7 +109,7 @@ export async function createProduct(
   id?: number;
   error?: string;
 }> {
-  const response = await fetch(getApiUrl(), {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -116,7 +134,7 @@ export async function updateProduct(
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(getApiUrl(), {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -139,12 +157,15 @@ export async function deleteProduct(id: number): Promise<{
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(`${getApiUrl()}?table=products&id=${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     throw new Error("Failed to delete product");

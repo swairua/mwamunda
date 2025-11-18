@@ -5,21 +5,36 @@ export async function initApplicationsTable(): Promise<{
   message?: string;
   error?: string;
 }> {
-  const response = await fetch(API_CONFIG.BASE_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      action: "init_applications_table",
-    }),
-  });
+  try {
+    const response = await fetch(API_CONFIG.BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: "init_applications_table",
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to initialize applications table");
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    if (!response.ok) {
+      throw new Error("Failed to initialize applications table");
+    }
+
+    return data;
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Failed to initialize applications table";
+    console.error("Error initializing applications table:", errorMessage);
+    throw new Error(errorMessage);
   }
-
-  return response.json();
 }
 
 export type ApplicationStatus = "pending" | "approved" | "rejected";

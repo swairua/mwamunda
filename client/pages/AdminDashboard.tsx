@@ -46,7 +46,8 @@ export default function AdminDashboard() {
     if (currentUser) {
       fetchUsers();
     }
-  }, [currentUser, toast]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
 
   const handleLogout = () => {
     clearUser();
