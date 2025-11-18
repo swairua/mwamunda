@@ -1,4 +1,4 @@
-import { getApiUrl, getExternalApiUrl } from "./config";
+import { API_CONFIG } from "./config";
 
 export interface Product {
   id: number;
@@ -18,7 +18,7 @@ export async function initProductsTable(): Promise<{
   message?: string;
   error?: string;
 }> {
-  const response = await fetch(getExternalApiUrl(), {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export async function initProductsTable(): Promise<{
 }
 
 export async function getProducts(): Promise<Product[]> {
-  const response = await fetch(`${getApiUrl()}?table=products`, {
+  const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
   const response = await fetch(
-    `${getApiUrl()}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
+    `${API_CONFIG.BASE_URL}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
     {
       method: "GET",
       headers: {
@@ -69,7 +69,7 @@ export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
 }
 
 export async function getProductById(id: number): Promise<Product> {
-  const response = await fetch(`${getApiUrl()}?table=products&id=${id}`, {
+  const response = await fetch(`${API_CONFIG.BASE_URL}?table=products&id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -91,7 +91,7 @@ export async function createProduct(
   id?: number;
   error?: string;
 }> {
-  const response = await fetch(getApiUrl(), {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export async function updateProduct(
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(getApiUrl(), {
+  const response = await fetch(API_CONFIG.BASE_URL, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export async function deleteProduct(id: number): Promise<{
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(`${getApiUrl()}?table=products&id=${id}`, {
+  const response = await fetch(`${API_CONFIG.BASE_URL}?table=products&id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
