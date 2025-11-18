@@ -57,6 +57,8 @@ export default function HeroSlider({
               alt={`Hero slide ${index + 1}`}
               className="w-full h-full object-cover"
             />
+            {/* Transparent green overlay */}
+            <div className="absolute inset-0 bg-green-600/40" />
           </div>
         ))}
       </div>
