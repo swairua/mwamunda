@@ -56,7 +56,7 @@ export default function Home() {
                 </span>
                 {" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-200% animate-gradient-shift animate-word-pop font-extrabold"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.2s" }}
                 >
                   Flexible &
@@ -78,14 +78,14 @@ export default function Home() {
                 </span>
                 {" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary bg-200% animate-gradient-shift animate-word-pop font-extrabold drop-shadow-lg"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.5s" }}
                 >
                   Chamas and Small
                 </span>
                 {" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary bg-200% animate-gradient-shift animate-word-pop font-extrabold"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.6s" }}
                 >
                   Businesses
@@ -100,7 +100,7 @@ export default function Home() {
                 </span>
                 {" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-secondary bg-200% animate-gradient-shift animate-word-pop font-extrabold drop-shadow-lg"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
                   style={{ animationDelay: "0.8s" }}
                 >
                   Mombasa
