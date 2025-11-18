@@ -124,11 +124,7 @@ export default function Home() {
               <div className="relative w-full h-96 md:h-full min-h-96">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F5c4477d10db1458d81e223d3d709fb74?format=webp&width=800"
-                    alt="Mwamunda Investment Limited Head Office"
-                    className="w-full h-full object-cover"
-                  />
+                  <HeroSlider />
                 </div>
               </div>
             </div>
