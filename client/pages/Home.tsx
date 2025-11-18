@@ -13,6 +13,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import HeroSlider from "@/components/HeroSlider";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -42,22 +43,23 @@ export default function Home() {
             <div className="animate-slide-in-left">
               <div className="inline-block mb-6 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
                 <span className="text-sm font-semibold text-primary">
-                  🚀 Empowering Financial Inclusion
+                  💰 Fast, Flexible & Reliable
                 </span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Financial Solutions for the{" "}
+                Fast, Flexible & Reliable Loans for{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                  Underserved
-                </span>
+                  Chamas and Small Businesses
+                </span>{" "}
+                in Rural Mombasa
               </h1>
 
               <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
-                Mwamunda Investment Limited provides affordable, accessible
-                financial products designed to help micro and small businesses
-                thrive. We're committed to putting predatory lenders out of
-                business.
+                Empowering hardworking groups and individuals through affordable
+                lending, training, and financial inclusion. Mwamunda Investment
+                Limited puts accessible financial solutions directly in the
+                hands of those left behind by mainstream finance.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -70,10 +72,11 @@ export default function Home() {
                 </Link>
 
                 <Link
-                  to="/about"
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-primary text-primary font-semibold text-sm sm:text-base hover:bg-primary/5 transition-all duration-300"
+                  to="/contact?type=partner"
+                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-primary text-primary font-semibold text-sm sm:text-base hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 group"
                 >
-                  Learn More
+                  Become a Partner
+                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
@@ -119,13 +122,9 @@ export default function Home() {
               style={{ transform: `translateY(${scrollY * 0.1}px)` }}
             >
               <div className="relative w-full h-96 md:h-full min-h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
-                <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F5c4477d10db1458d81e223d3d709fb74?format=webp&width=800"
-                    alt="Mwamunda Investment Limited Head Office"
-                    className="w-full h-full object-cover"
-                  />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl z-0"></div>
+                <div className="absolute inset-0 rounded-3xl overflow-hidden z-0">
+                  <HeroSlider />
                 </div>
               </div>
             </div>
