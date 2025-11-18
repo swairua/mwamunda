@@ -1,4 +1,4 @@
-import { getApiUrl } from "./config";
+import { getApiUrl, getExternalApiUrl } from "./config";
 
 export interface Product {
   id: number;
@@ -18,7 +18,7 @@ export async function initProductsTable(): Promise<{
   message?: string;
   error?: string;
 }> {
-  const response = await fetch(getApiUrl(), {
+  const response = await fetch(getExternalApiUrl(), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
