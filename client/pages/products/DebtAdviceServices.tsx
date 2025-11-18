@@ -214,7 +214,7 @@ export default function DebtAdviceServices() {
       </section>
 
       {/* Application Form Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-white">
+      <section id="application-form" className="py-16 sm:py-20 md:py-32 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -253,13 +253,13 @@ export default function DebtAdviceServices() {
             your financial situation.
           </p>
 
-          <Link
-            to="/contact"
+          <a
+            href="#application-form"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group"
           >
-            Contact Us
+            Apply Now
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
         </div>
       </section>
 
