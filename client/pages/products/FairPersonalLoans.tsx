@@ -57,13 +57,13 @@ export default function FairPersonalLoans() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
+              <a
+                href="#application-form"
                 className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 group"
               >
                 Apply Now
                 <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
 
               <Link
                 to="/"
@@ -213,7 +213,7 @@ export default function FairPersonalLoans() {
       </section>
 
       {/* Application Form Section */}
-      <section className="py-16 sm:py-20 md:py-32 bg-white">
+      <section id="application-form" className="py-16 sm:py-20 md:py-32 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -252,13 +252,13 @@ export default function FairPersonalLoans() {
             Personal Loans.
           </p>
 
-          <Link
-            to="/contact"
+          <a
+            href="#application-form"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group"
           >
-            Contact Us
+            Apply Now
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
         </div>
       </section>
 
