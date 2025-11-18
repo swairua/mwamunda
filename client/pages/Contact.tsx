@@ -180,7 +180,7 @@ export default function Contact() {
           </div>
 
           {/* Alternative Location */}
-          <div className="mb-20 p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-teal-50 border border-primary/20 animate-fade-in">
+          <div className="mb-12 p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-teal-50 border border-primary/20 animate-fade-in">
             <h3 className="text-2xl font-bold text-foreground mb-4">
               Kilifi Branch Office
             </h3>
@@ -197,7 +197,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 animate-slide-in-down">
             <h2 className="text-4xl font-bold text-foreground mb-4">
