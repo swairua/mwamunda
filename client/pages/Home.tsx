@@ -47,12 +47,57 @@ export default function Home() {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Fast, Flexible & Reliable Loans for{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                  Chamas and Small Businesses
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.1s" }}
+                >
+                  Fast,
                 </span>{" "}
-                in Rural Mombasa
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  Flexible &
+                </span>{" "}
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.3s" }}
+                >
+                  Reliable Loans
+                </span>{" "}
+                <br className="hidden sm:block" />
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.4s" }}
+                >
+                  for
+                </span>{" "}
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
+                  style={{ animationDelay: "0.5s" }}
+                >
+                  Chamas and Small
+                </span>{" "}
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
+                  style={{ animationDelay: "0.6s" }}
+                >
+                  Businesses
+                </span>{" "}
+                <br className="hidden sm:block" />
+                <span
+                  className="inline-block text-foreground animate-word-pop"
+                  style={{ animationDelay: "0.7s" }}
+                >
+                  in Rural
+                </span>{" "}
+                <span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
+                  style={{ animationDelay: "0.8s" }}
+                >
+                  Mombasa
+                </span>
               </h1>
 
               <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
@@ -247,7 +292,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/fair-personal-loans"
                   className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More
@@ -286,7 +331,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/chama-loans"
                   className="inline-flex items-center gap-2 text-secondary font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More
@@ -325,7 +370,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/debt-advice-services"
                   className="inline-flex items-center gap-2 text-blue-500 font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More
@@ -364,7 +409,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link
-                  to="/contact"
+                  to="/products/financial-capability-training"
                   className="inline-flex items-center gap-2 text-amber-500 font-semibold text-sm hover:gap-3 transition-all group/link"
                 >
                   Learn More

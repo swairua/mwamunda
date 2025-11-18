@@ -8,6 +8,7 @@ import {
   X,
   Home,
   Mail,
+  FileText,
 } from "lucide-react";
 
 interface AdminSidebarProps {
@@ -34,6 +35,12 @@ export default function AdminSidebar({
       icon: <Users className="w-5 h-5" />,
       label: "Users",
       path: "/admin/dashboard",
+    },
+    {
+      id: "applications",
+      icon: <FileText className="w-5 h-5" />,
+      label: "Applications",
+      path: "/admin/applications",
     },
     {
       id: "contacts",

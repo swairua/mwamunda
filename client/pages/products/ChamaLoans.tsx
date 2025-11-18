@@ -9,6 +9,7 @@ import {
   Award,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import ApplicationForm from "@/components/ApplicationForm";
 
 export default function ChamaLoans() {
   const [scrollY, setScrollY] = useState(0);
@@ -56,13 +57,13 @@ export default function ChamaLoans() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
+              <a
+                href="#application-form"
                 className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-secondary to-primary text-white font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-secondary/40 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 group"
               >
                 Apply Now
                 <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
 
               <Link
                 to="/"
@@ -212,6 +213,29 @@ export default function ChamaLoans() {
         </div>
       </section>
 
+      {/* Application Form Section */}
+      <section
+        id="application-form"
+        className="py-16 sm:py-20 md:py-32 bg-white scroll-mt-20"
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Apply for a Chama Loan
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Fill out the form below to submit your group application. We
+              review all applications within 24-48 hours.
+            </p>
+          </div>
+
+          <ApplicationForm
+            productType="chama-loans"
+            productName="Chama Loans"
+          />
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-secondary/80 opacity-90"></div>
@@ -225,20 +249,20 @@ export default function ChamaLoans() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-slide-in-down">
-            Ready to Grow Your Group Together?
+            Questions? Get in Touch
           </h2>
           <p className="text-lg text-white/90 mb-10 max-w-2xl mx-auto animate-slide-in-up">
-            Join hundreds of groups across Kenya who've scaled their operations
-            with our Chama loans.
+            Our team is here to help. Contact us for more information about
+            Chama Loans.
           </p>
 
-          <Link
-            to="/contact"
+          <a
+            href="#application-form"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group"
           >
             Apply Now
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
         </div>
       </section>
 
