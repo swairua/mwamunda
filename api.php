@@ -214,6 +214,32 @@ if ($action === "init_applications_table" && $method === "POST") {
     exit;
 }
 
+if ($action === "init_products_table" && $method === "POST") {
+    $sql = "CREATE TABLE IF NOT EXISTS products (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        category VARCHAR(100),
+        price DECIMAL(12, 2),
+        features TEXT,
+        image_url VARCHAR(500),
+        status VARCHAR(50) DEFAULT 'active',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql)) {
+        echo json_encode(["success" => true, "message" => "Products table created successfully"]);
+    } else {
+        if (strpos($conn->error, "already exists") !== false) {
+            echo json_encode(["success" => true, "message" => "Products table already exists"]);
+        } else {
+            echo json_encode(["error" => $conn->error]);
+        }
+    }
+    exit;
+}
+
 if (!$table) {
     echo json_encode(["error" => "Table name is required"]);
     exit;
