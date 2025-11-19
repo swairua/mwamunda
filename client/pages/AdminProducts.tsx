@@ -106,6 +106,10 @@ export default function AdminProducts() {
 
   const handleLogout = () => {
     clearUser();
+    toast({
+      title: "Success",
+      description: "Logged out successfully",
+    });
     navigate("/admin/login");
   };
 
