@@ -37,12 +37,12 @@ export default function Navigation() {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 group hover:opacity-80 transition-opacity flex-shrink-0"
+            className="flex items-center gap-2 group hover:opacity-85 transition-opacity flex-shrink-0"
           >
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
               alt="Mwamunda Investment Limited"
-              className="h-10 sm:h-12 md:h-16 w-auto"
+              className="h-12 sm:h-14 md:h-20 w-auto drop-shadow-sm"
             />
           </Link>
 
