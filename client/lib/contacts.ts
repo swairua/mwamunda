@@ -64,13 +64,19 @@ export async function submitContact(
 }
 
 export async function getAllContacts(): Promise<Contact[]> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
+
   try {
     const response = await fetch(`${API_CONFIG.BASE_URL}?table=contacts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
@@ -89,6 +95,14 @@ export async function getAllContacts(): Promise<Contact[]> {
 
     return data;
   } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error(
+        "API request timed out (30s). Please check if the server is running and the contacts table has been initialized.",
+      );
+    }
+
     const errorMessage =
       error instanceof Error ? error.message : "Failed to fetch contacts";
     console.error("Error fetching contacts:", error);

@@ -134,13 +134,19 @@ export async function submitApplication(
 }
 
 export async function getAllApplications(): Promise<Application[]> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
+
   try {
     const response = await fetch(`${API_CONFIG.BASE_URL}?table=applications`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
@@ -159,6 +165,14 @@ export async function getAllApplications(): Promise<Application[]> {
 
     return data;
   } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error(
+        "API request timed out (30s). Please check if the server is running and the applications table has been initialized.",
+      );
+    }
+
     const errorMessage =
       error instanceof Error ? error.message : "Failed to fetch applications";
     console.error("Error fetching applications:", error);
