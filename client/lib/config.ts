@@ -1,10 +1,12 @@
 /**
  * Centralized API configuration
- * Default: https://mwamunda.ziratech.com/api.php (for both dev and production)
+ * Default: /api.php (relative path - works with proxies in both dev and production)
  * Override: Use environment variable VITE_API_BASE_URL if needed
+ *
+ * For production, set: VITE_API_BASE_URL=https://mwamunda.ziratech.com/api.php
  */
 
-const defaultApiUrl = "https://mwamunda.ziratech.com/api.php";
+const defaultApiUrl = "/api.php";
 const apiBaseUrl =
   import.meta.env.VITE_API_BASE_URL || defaultApiUrl;
 
