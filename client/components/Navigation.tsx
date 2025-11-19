@@ -73,7 +73,12 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors flex-shrink-0"
+            className={`md:hidden p-2 rounded-lg transition-all duration-300 flex-shrink-0 ${
+              isScrolled
+                ? "hover:bg-gray-200 text-foreground"
+                : "hover:bg-white/20 text-white"
+            }`}
+            aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
