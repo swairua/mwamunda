@@ -135,30 +135,46 @@ export async function submitApplication(
 
 export async function getAllApplications(): Promise<Application[]> {
   try {
-    const response = await fetch(`${API_CONFIG.BASE_URL}?table=applications`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    try {
+      const response = await fetch(`${API_CONFIG.BASE_URL}?table=applications`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      if (!Array.isArray(data)) {
+        console.warn("getAllApplications returned non-array response:", data);
+        return [];
+      }
+
+      return data;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
     }
-
-    const data = await response.json();
-
-    if (data.error) {
-      throw new Error(data.error);
-    }
-
-    if (!Array.isArray(data)) {
-      console.warn("getAllApplications returned non-array response:", data);
-      return [];
-    }
-
-    return data;
   } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error(
+        "API request timed out. The server may be slow or unreachable.",
+      );
+    }
     const errorMessage =
       error instanceof Error ? error.message : "Failed to fetch applications";
     console.error("Error fetching applications:", error);
