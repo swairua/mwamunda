@@ -14,7 +14,9 @@ COPY client ./client
 COPY shared ./shared
 COPY vite.config.ts tsconfig.json tailwind.config.ts postcss.config.js components.json ./
 
-# Build the React app
+# Build the React app with API configuration
+ARG VITE_API_BASE_URL=https://mwamunda.ziratech.com/api.php
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
 RUN pnpm build:full
 
 # Stage 2: Runtime
