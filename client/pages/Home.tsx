@@ -100,7 +100,6 @@ export default function Home() {
                 >
                   Businesses
                 </span>{" "}
-                <br className="hidden sm:block" />
                 <span
                   className="inline-block animate-word-pop opacity-85"
                   style={{ animationDelay: "0.7s" }}
