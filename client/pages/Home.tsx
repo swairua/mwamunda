@@ -43,7 +43,7 @@ export default function Home() {
             <div className="animate-slide-in-left">
               <div className="inline-block mb-6 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
                 <span className="text-sm font-semibold text-primary">
-                  💰 Fast, Flexible & Reliable
+                  ���� Fast, Flexible & Reliable
                 </span>
               </div>
 
@@ -417,6 +417,190 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership Opportunities Section */}
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-blue-50/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 animate-fade-in">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
+              Partner With Us to Create Impact
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Join a growing network of impact investors and funders transforming rural financial inclusion
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 md:mb-16">
+            <div className="animate-slide-in-left">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">
+                Why Fund Mwamunda?
+              </h3>
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Proven Track Record
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Operating since 2019 with expanding reach across 47+ counties and thousands of families empowered
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <Target className="w-5 sm:w-6 h-5 sm:h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Underserved Market
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Access billions in untapped potential by serving communities excluded by mainstream finance
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <Users className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Community Deep Roots
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      On-the-ground presence and trusted relationships that drive repayment and sustainable growth
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <Award className="w-5 sm:w-6 h-5 sm:h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Experienced Leadership
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Expert team with deep expertise in microfinance, investment, and community development
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                to="/contact?type=partner"
+                className="inline-flex items-center gap-2 mt-8 px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1 group"
+              >
+                Explore Partnership Opportunities
+                <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            <div className="animate-slide-in-right">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-primary/30 transition-all duration-300">
+                  <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">
+                    47+
+                  </div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Counties Reached
+                  </p>
+                </div>
+
+                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-secondary/30 transition-all duration-300">
+                  <div className="text-3xl sm:text-4xl font-bold text-secondary mb-2">
+                    1000s
+                  </div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Families Empowered
+                  </p>
+                </div>
+
+                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-accent/30 transition-all duration-300">
+                  <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">
+                    2019
+                  </div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Year Founded
+                  </p>
+                </div>
+
+                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-blue-500/30 transition-all duration-300">
+                  <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+                    Rural
+                  </div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Community Focus
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            {[
+              {
+                icon: <CheckCircle className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Funding Partnerships",
+                description:
+                  "Flexible funding structures aligned with your investment thesis and social impact goals",
+              },
+              {
+                icon: <Users className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Grant Opportunities",
+                description:
+                  "Access grant funding for expansion, training programs, and community development initiatives",
+              },
+              {
+                icon: <Zap className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Corporate Partnerships",
+                description:
+                  "Collaborate with corporate sponsors to enhance social responsibility and market reach",
+              },
+              {
+                icon: <Shield className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Impact Reporting",
+                description:
+                  "Transparent metrics and regular reporting on social and financial outcomes",
+              },
+              {
+                icon: <TrendingUp className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Growth Potential",
+                description:
+                  "Scale your impact by supporting expansion into new markets and product lines",
+              },
+              {
+                icon: <Award className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Strategic Advisory",
+                description:
+                  "Partner with experienced leaders in microfinance and community development",
+              },
+            ].map((opportunity, idx) => (
+              <div
+                key={idx}
+                className="group p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 animate-slide-in-up"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  {opportunity.icon}
+                </div>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-foreground mb-2 sm:mb-3">
+                  {opportunity.title}
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
+                  {opportunity.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
