@@ -47,15 +47,15 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-8">
+          <div className="hidden md:flex items-center gap-2 lg:gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className="text-xs lg:text-sm font-medium text-foreground hover:text-primary transition-colors duration-300 relative group"
+                className="px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 relative group hover:bg-primary/10 text-foreground"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-1 left-3 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:right-3 group-hover:left-auto transition-all duration-300"></span>
               </Link>
             ))}
           </div>
