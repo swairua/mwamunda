@@ -51,18 +51,25 @@ export async function initProductsTable(): Promise<{
 }
 
 export async function getProducts(): Promise<Product[]> {
-  const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    if (error instanceof TypeError && error.message === "Failed to fetch") {
+      throw new Error("Unable to connect to the API server. Please ensure the API is running.");
+    }
+    throw error;
   }
-
-  return response.json();
 }
 
 export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
