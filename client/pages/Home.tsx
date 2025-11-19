@@ -31,7 +31,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section
-        className="relative w-full h-80 md:h-[450px] my-8 md:my-12 mx-4 md:mx-6 lg:mx-auto rounded-3xl overflow-hidden bg-white max-w-6xl"
+        className="relative w-full h-96 md:h-screen my-8 md:my-12 mx-4 md:mx-6 lg:mx-auto rounded-3xl overflow-hidden bg-white max-w-6xl"
         style={{ marginLeft: "auto", marginRight: "auto" }}
       >
         {/* Full width slider background - behind everything */}
@@ -52,9 +52,9 @@ export default function Home() {
         </div>
 
         {/* Content overlay */}
-        <div className="absolute inset-0 z-10 flex items-start md:items-center justify-center pt-4 md:pt-0">
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
           <div className="w-full px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl animate-slide-in-left bg-white/15 backdrop-blur-md rounded-2xl p-2 sm:p-3 md:p-5 border border-white/20">
+            <div className="max-w-2xl animate-slide-in-left bg-white/15 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 border border-white/20">
               <div className="inline-block mb-6 px-4 py-2 bg-white/30 backdrop-blur border border-white/40 rounded-full">
                 <span className="text-sm font-semibold text-white flex items-center gap-2">
                   <Wallet className="w-4 h-4" />
@@ -62,7 +62,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 leading-snug text-white">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
                 <span
                   className="inline-block animate-word-pop opacity-90"
                   style={{ animationDelay: "0.1s" }}
@@ -100,6 +100,7 @@ export default function Home() {
                 >
                   Businesses
                 </span>{" "}
+                <br className="hidden sm:block" />
                 <span
                   className="inline-block animate-word-pop opacity-85"
                   style={{ animationDelay: "0.7s" }}
