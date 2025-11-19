@@ -62,7 +62,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 leading-snug text-white">
+              <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 leading-snug text-white">
                 <span
                   className="inline-block animate-word-pop opacity-90"
                   style={{ animationDelay: "0.1s" }}
