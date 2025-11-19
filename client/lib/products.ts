@@ -51,7 +51,9 @@ export async function initProductsTable(): Promise<{
     clearTimeout(timeoutId);
 
     if (error instanceof DOMException && error.name === "AbortError") {
-      throw new Error("API request timed out (30s). Server may be slow or unreachable.");
+      throw new Error(
+        "API request timed out (30s). Server may be slow or unreachable.",
+      );
     }
 
     const errorMessage =
@@ -136,10 +138,14 @@ export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
     clearTimeout(timeoutId);
 
     if (error instanceof DOMException && error.name === "AbortError") {
-      throw new Error("API request timed out (30s). Server may be slow or unreachable.");
+      throw new Error(
+        "API request timed out (30s). Server may be slow or unreachable.",
+      );
     }
     if (error instanceof TypeError) {
-      throw new Error(`Cannot connect to API at ${API_CONFIG.BASE_URL}. The server may be down, unreachable, or have CORS issues.`);
+      throw new Error(
+        `Cannot connect to API at ${API_CONFIG.BASE_URL}. The server may be down, unreachable, or have CORS issues.`,
+      );
     }
     throw error;
   }
@@ -174,7 +180,9 @@ export async function getProductById(id: number): Promise<Product> {
     clearTimeout(timeoutId);
 
     if (error instanceof DOMException && error.name === "AbortError") {
-      throw new Error("API request timed out (30s). Server may be slow or unreachable.");
+      throw new Error(
+        "API request timed out (30s). Server may be slow or unreachable.",
+      );
     }
     if (error instanceof TypeError) {
       throw new Error(`Cannot connect to API at ${API_CONFIG.BASE_URL}`);
