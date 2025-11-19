@@ -821,10 +821,12 @@ export default function Home() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fe02d9fa55b634777b9da5ef97090d668?format=webp&width=800"
                 alt="Team success"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <div className="flex gap-1 mb-3">
