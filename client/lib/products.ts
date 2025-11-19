@@ -52,24 +52,41 @@ export async function initProductsTable(): Promise<{
 
 export async function getProducts(): Promise<Product[]> {
   try {
-    const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch products: ${response.status} ${response.statusText}`,
-      );
+    try {
+      const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch products: ${response.status} ${response.statusText}`,
+        );
+      }
+
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
     }
-
-    return response.json();
   } catch (error) {
     if (error instanceof TypeError && error.message === "Failed to fetch") {
       throw new Error(
         "Unable to connect to the API server. Please ensure the API is running.",
+      );
+    }
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error(
+        "API request timed out. The server may be slow or unreachable.",
       );
     }
     throw error;
