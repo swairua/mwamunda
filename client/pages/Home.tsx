@@ -46,7 +46,6 @@ export default function Home() {
                 <span className="text-sm font-semibold text-primary flex items-center gap-2">
                   <Wallet className="w-4 h-4" />
                   Fast, Flexible & Reliable
-                  ���� Fast, Flexible & Reliable
                 </span>
               </div>
 
