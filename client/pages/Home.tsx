@@ -509,12 +509,6 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 {[
                   {
-                    value: "47+",
-                    label: "Counties Reached",
-                    colorClass: "text-primary",
-                    borderColor: "hover:border-primary/30",
-                  },
-                  {
                     value: "1000s",
                     label: "Families Empowered",
                     colorClass: "text-secondary",
