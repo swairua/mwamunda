@@ -11,6 +11,7 @@ import {
 import Navigation from "@/components/Navigation";
 import { submitContact } from "@/lib/contacts";
 import { useToast } from "@/hooks/use-toast";
+import OptimizedImage from "@/components/OptimizedImage";
 
 export default function Contact() {
   const { toast } = useToast();
