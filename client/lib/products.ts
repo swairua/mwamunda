@@ -55,12 +55,14 @@ export async function getProducts(): Promise<Product[]> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
+    console.log(`Fetching products from: ${API_CONFIG.BASE_URL}`);
     const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
       signal: controller.signal,
+      mode: "cors",
     });
 
     clearTimeout(timeoutId);
@@ -77,13 +79,15 @@ export async function getProducts(): Promise<Product[]> {
     clearTimeout(timeoutId);
 
     if (error instanceof DOMException && error.name === "AbortError") {
+      console.error("API timeout - server may be slow or unreachable");
       throw new Error(
-        "API request timed out (30s). Please check if the server is running and the products table has been initialized.",
+        "API request timed out (30s). Server may be slow or unreachable.",
       );
     }
-    if (error instanceof TypeError && error.message === "Failed to fetch") {
+    if (error instanceof TypeError) {
+      console.error("Network error:", error.message);
       throw new Error(
-        "Unable to connect to the API server. Please ensure the API is running.",
+        `Cannot connect to API at ${API_CONFIG.BASE_URL}. The server may be down, unreachable, or have CORS issues.`,
       );
     }
     throw error;
