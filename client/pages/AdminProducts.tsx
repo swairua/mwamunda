@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, Trash2, Edit2, AlertCircle, Loader2, Search, X } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+  Edit2,
+  AlertCircle,
+  Loader2,
+  Search,
+  X,
+} from "lucide-react";
 import {
   getProducts,
   createProduct,
@@ -83,7 +91,7 @@ export default function AdminProducts() {
       result = result.filter(
         (product) =>
           product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.category?.toLowerCase().includes(searchTerm.toLowerCase())
+          product.category?.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -176,7 +184,11 @@ export default function AdminProducts() {
 
   const handleCloseForm = () => {
     if (hasUnsavedChanges) {
-      if (!window.confirm("You have unsaved changes. Are you sure you want to discard them?")) {
+      if (
+        !window.confirm(
+          "You have unsaved changes. Are you sure you want to discard them?",
+        )
+      ) {
         return;
       }
     }
@@ -261,7 +273,7 @@ export default function AdminProducts() {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedProducts = filteredProducts.slice(
     startIndex,
-    startIndex + ITEMS_PER_PAGE
+    startIndex + ITEMS_PER_PAGE,
   );
 
   const formatDate = (dateString: string): string => {
@@ -343,8 +355,8 @@ export default function AdminProducts() {
           {!loading && (
             <p className="text-sm text-muted-foreground mb-4">
               Showing {paginatedProducts.length > 0 ? startIndex + 1 : 0} to{" "}
-              {Math.min(startIndex + ITEMS_PER_PAGE, filteredProducts.length)} of{" "}
-              {filteredProducts.length} products
+              {Math.min(startIndex + ITEMS_PER_PAGE, filteredProducts.length)}{" "}
+              of {filteredProducts.length} products
             </p>
           )}
 
@@ -380,7 +392,9 @@ export default function AdminProducts() {
                       placeholder="e.g., Fair Personal Loans"
                     />
                     {formErrors.name && (
-                      <p className="text-sm text-red-600 mt-1">{formErrors.name}</p>
+                      <p className="text-sm text-red-600 mt-1">
+                        {formErrors.name}
+                      </p>
                     )}
                   </div>
 
@@ -415,7 +429,9 @@ export default function AdminProducts() {
                       min="0"
                     />
                     {formErrors.price && (
-                      <p className="text-sm text-red-600 mt-1">{formErrors.price}</p>
+                      <p className="text-sm text-red-600 mt-1">
+                        {formErrors.price}
+                      </p>
                     )}
                   </div>
 
@@ -457,12 +473,16 @@ export default function AdminProducts() {
                       value={formData.image_url || ""}
                       onChange={handleFormChange}
                       className={`w-full px-4 py-2 rounded-lg border ${
-                        formErrors.image_url ? "border-red-500" : "border-border"
+                        formErrors.image_url
+                          ? "border-red-500"
+                          : "border-border"
                       } bg-white focus:outline-none focus:ring-2 focus:ring-primary`}
                       placeholder="https://..."
                     />
                     {formErrors.image_url && (
-                      <p className="text-sm text-red-600 mt-1">{formErrors.image_url}</p>
+                      <p className="text-sm text-red-600 mt-1">
+                        {formErrors.image_url}
+                      </p>
                     )}
                     {formData.image_url && !formErrors.image_url && (
                       <div className="mt-2 w-full h-32 rounded-lg overflow-hidden bg-gray-100">
@@ -470,10 +490,12 @@ export default function AdminProducts() {
                           src={formData.image_url}
                           alt="Preview"
                           className="w-full h-full object-cover"
-                          onError={() => setFormErrors((prev) => ({
-                            ...prev,
-                            image_url: "Failed to load image",
-                          }))}
+                          onError={() =>
+                            setFormErrors((prev) => ({
+                              ...prev,
+                              image_url: "Failed to load image",
+                            }))
+                          }
                         />
                       </div>
                     )}
@@ -538,7 +560,9 @@ export default function AdminProducts() {
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-semibold text-yellow-900">No products match</h3>
+                <h3 className="font-semibold text-yellow-900">
+                  No products match
+                </h3>
                 <p className="text-sm text-yellow-800 mt-1">
                   Try adjusting your search or filter criteria.
                 </p>
@@ -678,11 +702,13 @@ export default function AdminProducts() {
                       >
                         {page}
                       </button>
-                    )
+                    ),
                   )}
 
                   <button
-                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    onClick={() =>
+                      setCurrentPage((p) => Math.min(totalPages, p + 1))
+                    }
                     disabled={currentPage === totalPages}
                     className="px-4 py-2 rounded-lg border border-border bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >

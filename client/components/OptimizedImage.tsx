@@ -45,10 +45,7 @@ export default function OptimizedImage({
     <div className={cn("relative overflow-hidden", containerClassName)}>
       {!isLoaded && (
         <div
-          className={cn(
-            "absolute inset-0 animate-pulse",
-            placeholderColor,
-          )}
+          className={cn("absolute inset-0 animate-pulse", placeholderColor)}
         />
       )}
       <img
