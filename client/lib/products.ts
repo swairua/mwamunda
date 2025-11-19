@@ -84,7 +84,9 @@ export async function getProducts(): Promise<Product[]> {
 
     clearTimeout(timeoutId);
 
-    console.log(`[getProducts] Response status: ${response.status} ${response.statusText}`);
+    console.log(
+      `[getProducts] Response status: ${response.status} ${response.statusText}`,
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -95,7 +97,9 @@ export async function getProducts(): Promise<Product[]> {
     }
 
     const data = await response.json();
-    console.log(`[getProducts] Successfully parsed ${data.length || 0} products`);
+    console.log(
+      `[getProducts] Successfully parsed ${data.length || 0} products`,
+    );
     return Array.isArray(data) ? data : [];
   } catch (error) {
     clearTimeout(timeoutId);

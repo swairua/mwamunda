@@ -8,7 +8,7 @@ const defaultApiUrl = "/api.php";
 const apiBaseUrl = defaultApiUrl;
 
 // Log the configured API URL for debugging
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   console.log(`[API Config] Using API endpoint: ${apiBaseUrl}`);
 }
 
