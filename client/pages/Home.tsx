@@ -43,7 +43,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
               <div className="inline-block mb-6 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
-                <span className="text-sm font-semibold text-primary">
+                <span className="text-sm font-semibold text-primary flex items-center gap-2">
+                  <Wallet className="w-4 h-4" />
                   ���� Fast, Flexible & Reliable
                 </span>
               </div>
