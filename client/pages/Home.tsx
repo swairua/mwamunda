@@ -32,22 +32,12 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-full h-screen overflow-hidden bg-white">
         {/* Full width slider background - behind everything */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            opacity: Math.max(0, 1 - scrollY / 600),
-          }}
-        >
+        <div className="absolute inset-0 w-full h-full">
           <HeroSlider />
         </div>
 
         {/* Dark overlay for readability */}
-        <div
-          className="absolute inset-0 bg-black"
-          style={{
-            opacity: Math.max(0, (scrollY / 600) * 0.3),
-          }}
-        ></div>
+        <div className="absolute inset-0 bg-black/20"></div>
 
         {/* Decorative blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
