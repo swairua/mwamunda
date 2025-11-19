@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import HeroSlider from "@/components/HeroSlider";
+import OptimizedImage from "@/components/OptimizedImage";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
