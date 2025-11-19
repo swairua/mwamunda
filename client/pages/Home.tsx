@@ -30,7 +30,10 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative w-full h-96 md:h-screen my-8 md:my-12 mx-4 md:mx-6 lg:mx-auto rounded-3xl overflow-hidden bg-white max-w-6xl" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+      <section
+        className="relative w-full h-96 md:h-screen my-8 md:my-12 mx-4 md:mx-6 lg:mx-auto rounded-3xl overflow-hidden bg-white max-w-6xl"
+        style={{ marginLeft: "auto", marginRight: "auto" }}
+      >
         {/* Full width slider background - behind everything */}
         <div className="absolute inset-0 w-full h-full">
           <HeroSlider />
@@ -138,17 +141,36 @@ export default function Home() {
               </div>
 
               <div className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 pt-6 sm:pt-8 border-t border-white/20">
-                <div className="animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
-                  <div className="text-3xl sm:text-4xl font-bold text-white">2019</div>
+                <div
+                  className="animate-slide-in-up"
+                  style={{ animationDelay: "0.1s" }}
+                >
+                  <div className="text-3xl sm:text-4xl font-bold text-white">
+                    2019
+                  </div>
                   <p className="text-xs sm:text-sm text-white/70">Founded</p>
                 </div>
-                <div className="animate-slide-in-up" style={{ animationDelay: "0.2s" }}>
-                  <div className="text-3xl sm:text-4xl font-bold text-blue-200">47+</div>
-                  <p className="text-xs sm:text-sm text-white/70">Counties Served</p>
+                <div
+                  className="animate-slide-in-up"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  <div className="text-3xl sm:text-4xl font-bold text-blue-200">
+                    47+
+                  </div>
+                  <p className="text-xs sm:text-sm text-white/70">
+                    Counties Served
+                  </p>
                 </div>
-                <div className="animate-slide-in-up" style={{ animationDelay: "0.3s" }}>
-                  <div className="text-3xl sm:text-4xl font-bold text-green-200">1000s</div>
-                  <p className="text-xs sm:text-sm text-white/70">Families Empowered</p>
+                <div
+                  className="animate-slide-in-up"
+                  style={{ animationDelay: "0.3s" }}
+                >
+                  <div className="text-3xl sm:text-4xl font-bold text-green-200">
+                    1000s
+                  </div>
+                  <p className="text-xs sm:text-sm text-white/70">
+                    Families Empowered
+                  </p>
                 </div>
               </div>
             </div>
@@ -408,7 +430,8 @@ export default function Home() {
               Partner With Us to Create Impact
             </h2>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join a growing network of impact investors and funders transforming rural financial inclusion
+              Join a growing network of impact investors and funders
+              transforming rural financial inclusion
             </p>
           </div>
 
@@ -427,7 +450,8 @@ export default function Home() {
                       Proven Track Record
                     </h4>
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      Operating since 2019 with expanding reach across 47+ counties and thousands of families empowered
+                      Operating since 2019 with expanding reach across 47+
+                      counties and thousands of families empowered
                     </p>
                   </div>
                 </div>
@@ -441,7 +465,8 @@ export default function Home() {
                       Underserved Market
                     </h4>
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      Access billions in untapped potential by serving communities excluded by mainstream finance
+                      Access billions in untapped potential by serving
+                      communities excluded by mainstream finance
                     </p>
                   </div>
                 </div>
@@ -455,7 +480,8 @@ export default function Home() {
                       Community Deep Roots
                     </h4>
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      On-the-ground presence and trusted relationships that drive repayment and sustainable growth
+                      On-the-ground presence and trusted relationships that
+                      drive repayment and sustainable growth
                     </p>
                   </div>
                 </div>
@@ -469,7 +495,8 @@ export default function Home() {
                       Experienced Leadership
                     </h4>
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      Expert team with deep expertise in microfinance, investment, and community development
+                      Expert team with deep expertise in microfinance,
+                      investment, and community development
                     </p>
                   </div>
                 </div>
@@ -510,7 +537,9 @@ export default function Home() {
                     key={idx}
                     className={`rounded-2xl p-6 sm:p-8 bg-white border border-border ${metric.borderColor} transition-all duration-300`}
                   >
-                    <div className={`text-3xl sm:text-4xl font-bold ${metric.colorClass} mb-2`}>
+                    <div
+                      className={`text-3xl sm:text-4xl font-bold ${metric.colorClass} mb-2`}
+                    >
                       {metric.value}
                     </div>
                     <p className="text-xs sm:text-sm text-muted-foreground">
