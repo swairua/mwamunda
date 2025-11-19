@@ -86,26 +86,29 @@ export default function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-3 sm:pb-4 space-y-2 animate-slide-in-down bg-white/95 backdrop-blur-md rounded-b-2xl">
-            {navLinks.map((link) => (
+          <div className="md:hidden pb-4 sm:pb-6 space-y-1 animate-slide-in-down bg-white/98 backdrop-blur-lg border-t border-gray-100">
+            {navLinks.map((link, index) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className="block px-3 sm:px-4 py-2.5 rounded-lg text-sm text-foreground hover:bg-muted transition-colors"
+                className="block px-4 sm:px-6 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/5 transition-all duration-200 transform hover:translate-x-1"
                 onClick={() => setIsOpen(false)}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 {link.label}
               </Link>
             ))}
-            <button
-              onClick={() => {
-                setIsContactModalOpen(true);
-                setIsOpen(false);
-              }}
-              className="block w-full mx-3 sm:mx-4 px-3 sm:px-4 py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-center text-sm hover:shadow-lg transition-all duration-300"
-            >
-              Get Started
-            </button>
+            <div className="px-4 sm:px-6 pt-2">
+              <button
+                onClick={() => {
+                  setIsContactModalOpen(true);
+                  setIsOpen(false);
+                }}
+                className="block w-full px-4 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+              >
+                Get Started
+              </button>
+            </div>
           </div>
         )}
       </div>
