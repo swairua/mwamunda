@@ -30,8 +30,27 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
+      <section className="relative w-full h-screen overflow-hidden bg-white">
+        {/* Full width slider background - behind everything */}
+        <div
+          className="absolute inset-0 w-full h-full"
+          style={{
+            opacity: Math.max(0, 1 - scrollY / 600),
+          }}
+        >
+          <HeroSlider />
+        </div>
+
+        {/* Dark overlay for readability */}
+        <div
+          className="absolute inset-0 bg-black"
+          style={{
+            opacity: Math.max(0, (scrollY / 600) * 0.3),
+          }}
+        ></div>
+
+        {/* Decorative blobs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl top-20 left-10 animate-float"></div>
           <div
             className="absolute w-96 h-96 bg-secondary/10 rounded-full blur-3xl bottom-20 right-10 animate-float"
@@ -39,80 +58,81 @@ export default function Home() {
           ></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-in-left">
-              <div className="inline-block mb-6 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
-                <span className="text-sm font-semibold text-primary flex items-center gap-2">
+        {/* Content overlay */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 sm:py-24 md:py-28">
+            <div className="max-w-3xl animate-slide-in-left">
+              <div className="inline-block mb-6 px-4 py-2 bg-white/20 backdrop-blur border border-white/30 rounded-full">
+                <span className="text-sm font-semibold text-white flex items-center gap-2">
                   <Wallet className="w-4 h-4" />
                   Fast, Flexible & Reliable
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
                 <span
-                  className="inline-block text-foreground animate-word-pop"
+                  className="inline-block animate-word-pop opacity-90"
                   style={{ animationDelay: "0.1s" }}
                 >
                   Fast,
                 </span>{" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-blue-200 animate-gradient-shift animate-word-pop font-extrabold opacity-90"
                   style={{ animationDelay: "0.2s" }}
                 >
                   Flexible &
                 </span>{" "}
                 <span
-                  className="inline-block text-foreground animate-word-pop"
+                  className="inline-block animate-word-pop opacity-90"
                   style={{ animationDelay: "0.3s" }}
                 >
                   Reliable Loans
                 </span>{" "}
                 <br className="hidden sm:block" />
                 <span
-                  className="inline-block text-foreground animate-word-pop"
+                  className="inline-block animate-word-pop opacity-85"
                   style={{ animationDelay: "0.4s" }}
                 >
                   for
                 </span>{" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary animate-gradient-shift animate-word-pop font-extrabold"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-blue-200 animate-gradient-shift animate-word-pop font-extrabold opacity-90"
                   style={{ animationDelay: "0.5s" }}
                 >
                   Chamas and Small
                 </span>{" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-green-200 animate-gradient-shift animate-word-pop font-extrabold opacity-90"
                   style={{ animationDelay: "0.6s" }}
                 >
                   Businesses
                 </span>{" "}
                 <br className="hidden sm:block" />
                 <span
-                  className="inline-block text-foreground animate-word-pop"
+                  className="inline-block animate-word-pop opacity-85"
                   style={{ animationDelay: "0.7s" }}
                 >
                   in Rural
                 </span>{" "}
                 <span
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-secondary animate-gradient-shift animate-word-pop font-extrabold"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-200 via-blue-200 to-green-200 animate-gradient-shift animate-word-pop font-extrabold opacity-90"
                   style={{ animationDelay: "0.8s" }}
                 >
                   Mombasa
                 </span>
               </h1>
 
-              <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-white/85 mb-8 sm:mb-10 leading-relaxed max-w-2xl">
                 Empowering hardworking groups and individuals through affordable
                 lending, training, and financial inclusion. Mwamunda Investment
                 Limited puts accessible financial solutions directly in the
                 hands of those left behind by mainstream finance.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-10">
                 <Link
                   to="/contact"
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 group"
+                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-white text-primary font-semibold text-sm sm:text-base hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 group"
                 >
                   Get Started Today
                   <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -120,58 +140,25 @@ export default function Home() {
 
                 <Link
                   to="/contact?type=partner"
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-primary text-primary font-semibold text-sm sm:text-base hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 group"
+                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-white text-white font-semibold text-sm sm:text-base hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 group"
                 >
                   Become a Partner
                   <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
-              <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-border">
-                <div
-                  className="animate-slide-in-up"
-                  style={{ animationDelay: "0.1s" }}
-                >
-                  <div className="text-2xl sm:text-3xl font-bold text-primary">
-                    2019
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Founded
-                  </p>
+              <div className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 pt-6 sm:pt-8 border-t border-white/20">
+                <div className="animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
+                  <div className="text-3xl sm:text-4xl font-bold text-white">2019</div>
+                  <p className="text-xs sm:text-sm text-white/70">Founded</p>
                 </div>
-                <div
-                  className="animate-slide-in-up"
-                  style={{ animationDelay: "0.2s" }}
-                >
-                  <div className="text-2xl sm:text-3xl font-bold text-secondary">
-                    47+
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Counties Served
-                  </p>
+                <div className="animate-slide-in-up" style={{ animationDelay: "0.2s" }}>
+                  <div className="text-3xl sm:text-4xl font-bold text-blue-200">47+</div>
+                  <p className="text-xs sm:text-sm text-white/70">Counties Served</p>
                 </div>
-                <div
-                  className="animate-slide-in-up"
-                  style={{ animationDelay: "0.3s" }}
-                >
-                  <div className="text-2xl sm:text-3xl font-bold text-accent">
-                    1000s
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Families Empowered
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="relative animate-slide-in-right"
-              style={{ transform: `translateY(${scrollY * 0.1}px)` }}
-            >
-              <div className="relative w-full h-96 md:h-full min-h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl z-0"></div>
-                <div className="absolute inset-0 rounded-3xl overflow-hidden z-0">
-                  <HeroSlider />
+                <div className="animate-slide-in-up" style={{ animationDelay: "0.3s" }}>
+                  <div className="text-3xl sm:text-4xl font-bold text-green-200">1000s</div>
+                  <p className="text-xs sm:text-sm text-white/70">Families Empowered</p>
                 </div>
               </div>
             </div>
