@@ -70,8 +70,10 @@ export async function getProducts(): Promise<Product[]> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    console.log(`Fetching products from: ${API_CONFIG.BASE_URL}`);
-    const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
+    const url = `${API_CONFIG.BASE_URL}?table=products`;
+    console.log(`[getProducts] Fetching from: ${url}`);
+
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -82,29 +84,39 @@ export async function getProducts(): Promise<Product[]> {
 
     clearTimeout(timeoutId);
 
+    console.log(
+      `[getProducts] Response status: ${response.status} ${response.statusText}`,
+    );
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`[getProducts] Error response body: ${errorText}`);
       throw new Error(
         `Failed to fetch products: ${response.status} ${response.statusText}`,
       );
     }
 
     const data = await response.json();
+    console.log(
+      `[getProducts] Successfully parsed ${data.length || 0} products`,
+    );
     return Array.isArray(data) ? data : [];
   } catch (error) {
     clearTimeout(timeoutId);
 
     if (error instanceof DOMException && error.name === "AbortError") {
-      console.error("API timeout - server may be slow or unreachable");
+      console.error("[getProducts] Request timed out after 30s");
       throw new Error(
         "API request timed out (30s). Server may be slow or unreachable.",
       );
     }
     if (error instanceof TypeError) {
-      console.error("Network error:", error.message);
+      console.error("[getProducts] Network error:", error.message);
       throw new Error(
         `Cannot connect to API at ${API_CONFIG.BASE_URL}. The server may be down, unreachable, or have CORS issues.`,
       );
     }
+    console.error("[getProducts] Unexpected error:", error);
     throw error;
   }
 }

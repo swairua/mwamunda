@@ -1,11 +1,16 @@
 /**
  * Centralized API configuration
- * Update this URL to change the API endpoint across the entire application
- * Use environment variable VITE_API_BASE_URL to override the default
+ * Default: /api.php (relative path - works with proxies in both dev and production)
+ * This ensures Apache proxy on fly.dev can intercept and forward to the actual API
  */
 
-const apiBaseUrl =
-  import.meta.env.VITE_API_BASE_URL || "https://mwamunda.ziratech.com/api.php";
+const defaultApiUrl = "/api.php";
+const apiBaseUrl = defaultApiUrl;
+
+// Log the configured API URL for debugging
+if (typeof window !== "undefined") {
+  console.log(`[API Config] Using API endpoint: ${apiBaseUrl}`);
+}
 
 export const API_CONFIG = {
   BASE_URL: apiBaseUrl,
