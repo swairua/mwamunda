@@ -18,6 +18,9 @@ export async function initProductsTable(): Promise<{
   message?: string;
   error?: string;
 }> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
+
   try {
     const response = await fetch(API_CONFIG.BASE_URL, {
       method: "POST",
@@ -27,7 +30,11 @@ export async function initProductsTable(): Promise<{
       body: JSON.stringify({
         action: "init_products_table",
       }),
+      signal: controller.signal,
+      mode: "cors",
     });
+
+    clearTimeout(timeoutId);
 
     const data = await response.json();
 
@@ -41,6 +48,12 @@ export async function initProductsTable(): Promise<{
 
     return data;
   } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error("API request timed out (30s). Server may be slow or unreachable.");
+    }
+
     const errorMessage =
       error instanceof Error
         ? error.message
