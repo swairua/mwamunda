@@ -61,10 +61,10 @@ export default function Navigation() {
           </div>
 
           {/* Desktop CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:block flex-shrink-0">
             <button
               onClick={() => setIsContactModalOpen(true)}
-              className="px-4 lg:px-6 py-2 lg:py-2.5 text-sm lg:text-base rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 transform hover:-translate-y-0.5 whitespace-nowrap"
+              className="px-5 lg:px-7 py-2.5 lg:py-3 text-sm lg:text-base rounded-lg bg-gradient-to-r from-primary via-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
             >
               Get Started
             </button>
