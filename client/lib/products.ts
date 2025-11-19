@@ -95,21 +95,41 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
-  const response = await fetch(
-    `${API_CONFIG.BASE_URL}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+  try {
+    const response = await fetch(
+      `${API_CONFIG.BASE_URL}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        signal: controller.signal,
+        mode: "cors",
       },
-    },
-  );
+    );
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch recent products");
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch recent products");
+    }
+
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error("API request timed out (30s). Server may be slow or unreachable.");
+    }
+    if (error instanceof TypeError) {
+      throw new Error(`Cannot connect to API at ${API_CONFIG.BASE_URL}. The server may be down, unreachable, or have CORS issues.`);
+    }
+    throw error;
   }
-
-  return response.json();
 }
 
 export async function getProductById(id: number): Promise<Product> {
