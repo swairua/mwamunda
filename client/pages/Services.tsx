@@ -117,10 +117,12 @@ export default function Services() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-left">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F854295e8b1354678a9547323638bb78b?format=webp&width=800"
                 alt="Customers receiving financial services"
                 className="w-full h-80 object-cover"
+                containerClassName="w-full h-80"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">
@@ -133,10 +135,12 @@ export default function Services() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91865f6160c740a48553a6bf365816a0?format=webp&width=800"
                 alt="Team engagement with customers"
                 className="w-full h-80 object-cover"
+                containerClassName="w-full h-80"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">
@@ -150,10 +154,12 @@ export default function Services() {
           </div>
 
           <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
-            <img
+            <OptimizedImage
               src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fea9ae454497b46a5bcfe898a56afcb89?format=webp&width=800"
               alt="Success stories from our customers"
               className="w-full h-80 object-cover"
+              containerClassName="w-full h-80"
+              placeholderColor="bg-gray-300"
             />
             <div className="p-6 bg-white">
               <h3 className="font-semibold text-foreground mb-1">
@@ -172,11 +178,15 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
-                alt="Mwamunda Investment Limited"
-                className="h-32 w-auto mb-4"
-              />
+              <div className="mb-4">
+                <OptimizedImage
+                  src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
+                  alt="Mwamunda Investment Limited"
+                  className="h-32 w-auto"
+                  containerClassName="h-32 w-auto"
+                  placeholderColor="bg-gray-700"
+                />
+              </div>
               <p className="text-white/70 text-sm">
                 Financial solutions for the underserved since 2019
               </p>
