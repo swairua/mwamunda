@@ -51,42 +51,39 @@ export async function initProductsTable(): Promise<{
 }
 
 export async function getProducts(): Promise<Product[]> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
+
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      signal: controller.signal,
+    });
 
-    try {
-      const response = await fetch(`${API_CONFIG.BASE_URL}?table=products`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        signal: controller.signal,
-      });
+    clearTimeout(timeoutId);
 
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch products: ${response.status} ${response.statusText}`,
-        );
-      }
-
-      const data = await response.json();
-      return Array.isArray(data) ? data : [];
-    } catch (error) {
-      clearTimeout(timeoutId);
-      throw error;
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch products: ${response.status} ${response.statusText}`,
+      );
     }
+
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
   } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error(
+        "API request timed out (30s). Please check if the server is running and the products table has been initialized.",
+      );
+    }
     if (error instanceof TypeError && error.message === "Failed to fetch") {
       throw new Error(
         "Unable to connect to the API server. Please ensure the API is running.",
-      );
-    }
-    if (error instanceof DOMException && error.name === "AbortError") {
-      throw new Error(
-        "API request timed out. The server may be slow or unreachable.",
       );
     }
     throw error;
