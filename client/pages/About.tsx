@@ -281,10 +281,12 @@ export default function About() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-left">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91aa7cdd88b84007a4edf2c0c6affb53?format=webp&width=800"
                 alt="Team member"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">Our Team</h3>
@@ -295,10 +297,12 @@ export default function About() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91f7b8b2ff354f5fab960f5d381f1aea?format=webp&width=800"
                 alt="Team collaboration"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">
@@ -311,10 +315,12 @@ export default function About() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fad24e5fed2864f1b996e081902f22f7b?format=webp&width=800"
                 alt="Team in office"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">
