@@ -177,22 +177,37 @@ export async function createProduct(
   id?: number;
   error?: string;
 }> {
-  const response = await fetch(API_CONFIG.BASE_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      table: "products",
-      data,
-    }),
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-  if (!response.ok) {
-    throw new Error("Failed to create product");
+  try {
+    const response = await fetch(API_CONFIG.BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        table: "products",
+        data,
+      }),
+      signal: controller.signal,
+      mode: "cors",
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error("Failed to create product");
+    }
+
+    return response.json();
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error("API request timed out (30s)");
+    }
+    throw error;
   }
-
-  return response.json();
 }
 
 export async function updateProduct(
@@ -202,42 +217,72 @@ export async function updateProduct(
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(API_CONFIG.BASE_URL, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      table: "products",
-      id,
-      data,
-    }),
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-  if (!response.ok) {
-    throw new Error("Failed to update product");
+  try {
+    const response = await fetch(API_CONFIG.BASE_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        table: "products",
+        id,
+        data,
+      }),
+      signal: controller.signal,
+      mode: "cors",
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error("Failed to update product");
+    }
+
+    return response.json();
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error("API request timed out (30s)");
+    }
+    throw error;
   }
-
-  return response.json();
 }
 
 export async function deleteProduct(id: number): Promise<{
   success: boolean;
   error?: string;
 }> {
-  const response = await fetch(
-    `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+  try {
+    const response = await fetch(
+      `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        signal: controller.signal,
+        mode: "cors",
       },
-    },
-  );
+    );
 
-  if (!response.ok) {
-    throw new Error("Failed to delete product");
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error("Failed to delete product");
+    }
+
+    return response.json();
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error("API request timed out (30s)");
+    }
+    throw error;
   }
-
-  return response.json();
 }
