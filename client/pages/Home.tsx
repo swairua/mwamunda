@@ -507,41 +507,44 @@ export default function Home() {
 
             <div className="animate-slide-in-right">
               <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-primary/30 transition-all duration-300">
-                  <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">
-                    47+
+                {[
+                  {
+                    value: "47+",
+                    label: "Counties Reached",
+                    colorClass: "text-primary",
+                    borderColor: "hover:border-primary/30",
+                  },
+                  {
+                    value: "1000s",
+                    label: "Families Empowered",
+                    colorClass: "text-secondary",
+                    borderColor: "hover:border-secondary/30",
+                  },
+                  {
+                    value: "2019",
+                    label: "Year Founded",
+                    colorClass: "text-accent",
+                    borderColor: "hover:border-accent/30",
+                  },
+                  {
+                    value: "Rural",
+                    label: "Community Focus",
+                    colorClass: "text-blue-600",
+                    borderColor: "hover:border-blue-500/30",
+                  },
+                ].map((metric, idx) => (
+                  <div
+                    key={idx}
+                    className={`rounded-2xl p-6 sm:p-8 bg-white border border-border ${metric.borderColor} transition-all duration-300`}
+                  >
+                    <div className={`text-3xl sm:text-4xl font-bold ${metric.colorClass} mb-2`}>
+                      {metric.value}
+                    </div>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      {metric.label}
+                    </p>
                   </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Counties Reached
-                  </p>
-                </div>
-
-                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-secondary/30 transition-all duration-300">
-                  <div className="text-3xl sm:text-4xl font-bold text-secondary mb-2">
-                    1000s
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Families Empowered
-                  </p>
-                </div>
-
-                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-accent/30 transition-all duration-300">
-                  <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">
-                    2019
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Year Founded
-                  </p>
-                </div>
-
-                <div className="rounded-2xl p-6 sm:p-8 bg-white border border-border hover:border-blue-500/30 transition-all duration-300">
-                  <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
-                    Rural
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Community Focus
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
           </div>
