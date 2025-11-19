@@ -19,9 +19,10 @@ export default defineConfig({
     },
     proxy: {
       "/api.php": {
-        target: "http://localhost:8000",
+        target: "https://mwamunda.ziratech.com",
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path,
       },
     },
   },
