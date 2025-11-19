@@ -11,6 +11,7 @@ import {
   Target,
   LifeBuoy,
   BookOpen,
+  Wallet,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import HeroSlider from "@/components/HeroSlider";
