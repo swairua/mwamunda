@@ -742,10 +742,12 @@ export default function Home() {
               <div className="relative w-full h-96 md:h-full min-h-96">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F502cbced94e140d6805e025fba6f1bde?format=webp&width=800"
                     alt="Expert team member providing financial guidance"
                     className="w-full h-full object-cover"
+                    containerClassName="w-full h-full"
+                    placeholderColor="bg-gray-200"
                   />
                 </div>
               </div>
