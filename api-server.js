@@ -1,8 +1,12 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import crypto from "crypto";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = 8000;
@@ -44,12 +48,10 @@ function initTable(tableName) {
 
 // Utility functions
 function hashPassword(password) {
-  const crypto = require("crypto");
   return crypto.createHash("sha256").update(password).digest("hex");
 }
 
 function verifyPassword(password, hash) {
-  const crypto = require("crypto");
   return crypto.createHash("sha256").update(password).digest("hex") === hash;
 }
 
@@ -58,7 +60,7 @@ function verifyPassword(password, hash) {
 // Handle OPTIONS requests
 app.options("*", cors());
 
-// Handle initialization
+// Handle initialization and POST requests
 app.post("/api.php", (req, res) => {
   const { action, table, data, email, password, name } = req.body;
 
@@ -129,29 +131,28 @@ app.post("/api.php", (req, res) => {
     return;
   }
 
-  if (table && data && (req.method === "POST" || req.method === "PUT")) {
+  if (table && data) {
     if (!database[table]) {
       return res.status(400).json({ error: `Table ${table} not found` });
     }
 
-    if (req.method === "POST") {
-      const newItem = {
-        id: Math.max(0, ...database[table].map((item) => item.id || 0)) + 1,
-        ...data,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      };
+    const newItem = {
+      id:
+        Math.max(0, ...database[table].map((item) => item.id || 0)) + 1,
+      ...data,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
 
-      database[table].push(newItem);
-      saveDatabase();
+    database[table].push(newItem);
+    saveDatabase();
 
-      res.json({
-        success: true,
-        id: newItem.id,
-        data: newItem,
-      });
-      return;
-    }
+    res.json({
+      success: true,
+      id: newItem.id,
+      data: newItem,
+    });
+    return;
   }
 
   res.status(400).json({ error: "Invalid request" });
@@ -231,7 +232,9 @@ app.delete("/api.php", (req, res) => {
     return res.status(400).json({ error: "Invalid table or ID" });
   }
 
-  const itemIndex = database[table].findIndex((item) => item.id === parseInt(id));
+  const itemIndex = database[table].findIndex(
+    (item) => item.id === parseInt(id)
+  );
   if (itemIndex === -1) {
     return res.status(404).json({ error: "Item not found" });
   }
