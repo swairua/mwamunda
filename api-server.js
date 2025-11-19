@@ -59,10 +59,13 @@ function verifyPassword(password, hash) {
 
 // Handle OPTIONS requests for CORS
 app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS",
+    );
+    res.header("Access-Control-Allow-Headers", "Content-Type");
     return res.sendStatus(200);
   }
   next();
@@ -145,8 +148,7 @@ app.post("/api.php", (req, res) => {
     }
 
     const newItem = {
-      id:
-        Math.max(0, ...database[table].map((item) => item.id || 0)) + 1,
+      id: Math.max(0, ...database[table].map((item) => item.id || 0)) + 1,
       ...data,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
@@ -241,7 +243,7 @@ app.delete("/api.php", (req, res) => {
   }
 
   const itemIndex = database[table].findIndex(
-    (item) => item.id === parseInt(id)
+    (item) => item.id === parseInt(id),
   );
   if (itemIndex === -1) {
     return res.status(404).json({ error: "Item not found" });

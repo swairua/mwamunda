@@ -60,13 +60,17 @@ export async function getProducts(): Promise<Product[]> {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch products: ${response.status} ${response.statusText}`,
+      );
     }
 
     return response.json();
   } catch (error) {
     if (error instanceof TypeError && error.message === "Failed to fetch") {
-      throw new Error("Unable to connect to the API server. Please ensure the API is running.");
+      throw new Error(
+        "Unable to connect to the API server. Please ensure the API is running.",
+      );
     }
     throw error;
   }

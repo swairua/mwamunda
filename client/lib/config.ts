@@ -6,7 +6,7 @@
  * In production, uses the absolute API URL
  */
 
-const isDevelopment = import.meta.env.MODE === 'development';
+const isDevelopment = import.meta.env.MODE === "development";
 const defaultApiUrl = isDevelopment ? "/api.php" : "/api.php";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || defaultApiUrl;
 
