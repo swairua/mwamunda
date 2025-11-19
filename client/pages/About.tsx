@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Target, Eye, Heart, Users } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import OptimizedImage from "@/components/OptimizedImage";
 
 export default function About() {
   return (
@@ -280,10 +281,12 @@ export default function About() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-left">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91aa7cdd88b84007a4edf2c0c6affb53?format=webp&width=800"
                 alt="Team member"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">Our Team</h3>
@@ -294,10 +297,12 @@ export default function About() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91f7b8b2ff354f5fab960f5d381f1aea?format=webp&width=800"
                 alt="Team collaboration"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">
@@ -310,10 +315,12 @@ export default function About() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fad24e5fed2864f1b996e081902f22f7b?format=webp&width=800"
                 alt="Team in office"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">
@@ -359,11 +366,15 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
-                alt="Mwamunda Investment Limited"
-                className="h-32 w-auto mb-4"
-              />
+              <div className="mb-4">
+                <OptimizedImage
+                  src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
+                  alt="Mwamunda Investment Limited"
+                  className="h-32 w-auto"
+                  containerClassName="h-32 w-auto"
+                  placeholderColor="bg-gray-700"
+                />
+              </div>
               <p className="text-white/70 text-sm">
                 Financial solutions for the underserved since 2019
               </p>

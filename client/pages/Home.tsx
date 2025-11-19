@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import HeroSlider from "@/components/HeroSlider";
+import OptimizedImage from "@/components/OptimizedImage";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -741,10 +742,12 @@ export default function Home() {
               <div className="relative w-full h-96 md:h-full min-h-96">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F502cbced94e140d6805e025fba6f1bde?format=webp&width=800"
                     alt="Expert team member providing financial guidance"
                     className="w-full h-full object-cover"
+                    containerClassName="w-full h-full"
+                    placeholderColor="bg-gray-200"
                   />
                 </div>
               </div>
@@ -768,10 +771,12 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-left">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fd97c126d37b6465db10ea02f935cf545?format=webp&width=800"
                 alt="Happy customers"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <div className="flex gap-1 mb-3">
@@ -792,10 +797,12 @@ export default function Home() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fb1889c4d9f5545cc9ffaf6474b456ef1?format=webp&width=800"
                 alt="Celebration of success"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <div className="flex gap-1 mb-3">
@@ -814,10 +821,12 @@ export default function Home() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
-              <img
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fe02d9fa55b634777b9da5ef97090d668?format=webp&width=800"
                 alt="Team success"
                 className="w-full h-64 object-cover"
+                containerClassName="w-full h-64"
+                placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <div className="flex gap-1 mb-3">
@@ -885,11 +894,15 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
-                alt="Mwamunda Investment Limited"
-                className="h-32 w-auto mb-4"
-              />
+              <div className="mb-4">
+                <OptimizedImage
+                  src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
+                  alt="Mwamunda Investment Limited"
+                  className="h-32 w-auto"
+                  containerClassName="h-32 w-auto"
+                  placeholderColor="bg-gray-700"
+                />
+              </div>
               <p className="text-white/70 text-sm">
                 Financial solutions for the underserved since 2019
               </p>
