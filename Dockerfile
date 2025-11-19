@@ -35,7 +35,10 @@ COPY api.php connection.php /var/www/html/
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
-# Create Apache configuration for SPA routing
+# Enable Apache proxy modules
+RUN a2enmod proxy proxy_http ssl
+
+# Create Apache configuration for API proxy and SPA routing
 RUN echo '<Directory /var/www/html>\n\
     RewriteEngine On\n\
     RewriteBase /\n\
@@ -43,7 +46,13 @@ RUN echo '<Directory /var/www/html>\n\
     RewriteCond %{REQUEST_FILENAME} !-f\n\
     RewriteCond %{REQUEST_FILENAME} !-d\n\
     RewriteRule ^ /index.html [QSA,L]\n\
-</Directory>' > /etc/apache2/conf-available/spa-routing.conf
+</Directory>\n\
+\n\
+ProxyPreserveHost On\n\
+ProxyPass /api.php https://mwamunda.ziratech.com/api.php\n\
+ProxyPassReverse /api.php https://mwamunda.ziratech.com/api.php\n\
+RequestHeader set X-Forwarded-Proto https\n\
+RequestHeader set X-Forwarded-Host %{HTTP_HOST}s' > /etc/apache2/conf-available/spa-routing.conf
 
 RUN a2enconf spa-routing
 
