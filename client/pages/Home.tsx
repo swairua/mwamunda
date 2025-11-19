@@ -59,9 +59,9 @@ export default function Home() {
         </div>
 
         {/* Content overlay */}
-        <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 sm:py-24 md:py-28">
-            <div className="max-w-3xl animate-slide-in-left bg-white/15 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 border border-white/20">
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <div className="w-full px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mx-auto animate-slide-in-left bg-white/15 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 border border-white/20">
               <div className="inline-block mb-6 px-4 py-2 bg-white/30 backdrop-blur border border-white/40 rounded-full">
                 <span className="text-sm font-semibold text-white flex items-center gap-2">
                   <Wallet className="w-4 h-4" />
