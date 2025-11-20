@@ -32,7 +32,7 @@ export default function Navigation() {
           : "bg-gradient-to-b from-black/20 to-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16 md:h-20">
           {/* Logo */}
           <Link

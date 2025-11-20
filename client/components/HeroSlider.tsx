@@ -11,12 +11,14 @@ export default function HeroSlider({
 }: HeroSliderProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Mwamunda brand images: real clients and community
+  // Finance-related images from Unsplash representing wealth and investment
   const slides = [
-    // Street vendors/mechanics - real community Mwamunda serves
-    "https://cdn.builder.io/api/v1/image/assets%2F2edf8b9f099644bda003dd7b63a9e04f%2F0e3b98b6d92440d8b34eea498d449a84?format=webp&width=800",
+    // Wealth and prosperity - dollar bills
+    "https://images.pexels.com/photos/34746298/pexels-photo-34746298.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Financial growth and investment analysis
+    "https://images.pexels.com/photos/6801647/pexels-photo-6801647.jpeg?auto=compress&cs=tinysrgb&w=800",
     // Mwamunda Investment Limited Head Office
-    "https://cdn.builder.io/api/v1/image/assets%2F2edf8b9f099644bda003dd7b63a9e04f%2F92c79749ff094e0da72a7efa9104ce7e?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2Fecd881b9839d489c99097337eb57ad39%2Fed1dd4bfe0934e3cb49357607be364be?format=webp&width=800",
   ];
 
   useEffect(() => {
@@ -42,9 +44,9 @@ export default function HeroSlider({
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden bg-white p-4 sm:p-6 rounded-3xl">
+    <div className="relative w-full h-full overflow-hidden bg-white">
       {/* Slides */}
-      <div className="relative w-full h-full rounded-2xl overflow-hidden">
+      <div className="relative w-full h-full overflow-hidden">
         {slides.map((slide, index) => (
           <div
             key={index}
