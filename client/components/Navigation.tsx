@@ -52,7 +52,7 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 to={link.href}
-                className="px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 relative group hover:bg-primary/10 text-foreground"
+                className="px-3 py-2 text-base lg:text-lg font-medium rounded-lg transition-all duration-300 relative group hover:bg-primary/10 text-foreground"
               >
                 {link.label}
                 <span className="absolute bottom-1 left-3 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:right-3 group-hover:left-auto transition-all duration-300"></span>
