@@ -35,8 +35,7 @@ export default function Home() {
 
       {/* Hero Section - Client Focused */}
       <section
-        className="relative w-full h-96 md:h-screen my-8 md:my-12 mx-4 md:mx-6 lg:mx-auto rounded-3xl overflow-hidden bg-white max-w-6xl"
-        style={{ marginLeft: "auto", marginRight: "auto" }}
+        className="relative w-full h-96 md:h-screen overflow-hidden bg-white"
       >
         {/* Full width slider background - behind everything */}
         <div className="absolute inset-0 w-full h-full">
