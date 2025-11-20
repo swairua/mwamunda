@@ -91,7 +91,7 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 to={link.href}
-                className="block px-4 sm:px-6 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/5 transition-all duration-200 transform hover:translate-x-1"
+                className="block px-4 sm:px-6 py-3 rounded-lg text-base font-medium text-foreground hover:bg-primary/5 transition-all duration-200 transform hover:translate-x-1"
                 onClick={() => setIsOpen(false)}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
