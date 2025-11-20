@@ -12,6 +12,9 @@ import {
   LifeBuoy,
   BookOpen,
   Wallet,
+  DollarSign,
+  Briefcase,
+  Heart,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import HeroSlider from "@/components/HeroSlider";
@@ -30,7 +33,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white">
       <Navigation />
 
-      {/* Hero Section */}
+      {/* Hero Section - Client Focused */}
       <section
         className="relative w-full h-96 md:h-screen my-8 md:my-12 mx-4 md:mx-6 lg:mx-auto rounded-3xl overflow-hidden bg-white max-w-6xl"
         style={{ marginLeft: "auto", marginRight: "auto" }}
@@ -156,10 +159,10 @@ export default function Home() {
                   style={{ animationDelay: "0.2s" }}
                 >
                   <div className="text-3xl sm:text-4xl font-bold text-blue-200">
-                    47+
+                    Rural
                   </div>
                   <p className="text-xs sm:text-sm text-white/70">
-                    Counties Served
+                    Community Focus
                   </p>
                 </div>
                 <div
@@ -167,10 +170,10 @@ export default function Home() {
                   style={{ animationDelay: "0.3s" }}
                 >
                   <div className="text-3xl sm:text-4xl font-bold text-green-200">
-                    1000s
+                    100s
                   </div>
                   <p className="text-xs sm:text-sm text-white/70">
-                    Families Empowered
+                    Business Empowered
                   </p>
                 </div>
               </div>
@@ -179,7 +182,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Why Choose Mwamunda - Client Benefits */}
       <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 animate-fade-in">
@@ -251,7 +254,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Products Section */}
+      {/* Products Section - Client Solutions */}
       <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-blue-50/50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 animate-fade-in">
@@ -423,194 +426,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Partnership Opportunities Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-blue-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 animate-fade-in">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
-              Partner With Us to Create Impact
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join a growing network of impact investors and funders
-              transforming rural financial inclusion
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 md:mb-16">
-            <div className="animate-slide-in-left">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">
-                Why Fund Mwamunda?
-              </h3>
-              <div className="space-y-4 sm:space-y-6">
-                <div className="flex gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 pt-1">
-                    <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Proven Track Record
-                    </h4>
-                    <p className="text-xs sm:text-sm text-muted-foreground">
-                      Operating since 2019 with expanding reach across 47+
-                      counties and thousands of families empowered
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 pt-1">
-                    <Target className="w-5 sm:w-6 h-5 sm:h-6 text-secondary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Underserved Market
-                    </h4>
-                    <p className="text-xs sm:text-sm text-muted-foreground">
-                      Access billions in untapped potential by serving
-                      communities excluded by mainstream finance
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 pt-1">
-                    <Users className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Community Deep Roots
-                    </h4>
-                    <p className="text-xs sm:text-sm text-muted-foreground">
-                      On-the-ground presence and trusted relationships that
-                      drive repayment and sustainable growth
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 pt-1">
-                    <Award className="w-5 sm:w-6 h-5 sm:h-6 text-secondary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Experienced Leadership
-                    </h4>
-                    <p className="text-xs sm:text-sm text-muted-foreground">
-                      Expert team with deep expertise in microfinance,
-                      investment, and community development
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <Link
-                to="/contact?type=partner"
-                className="inline-flex items-center gap-2 mt-8 px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1 group"
-              >
-                Explore Partnership Opportunities
-                <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            <div className="animate-slide-in-right">
-              <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                {[
-                  {
-                    value: "1000s",
-                    label: "Families Empowered",
-                    colorClass: "text-secondary",
-                    borderColor: "hover:border-secondary/30",
-                  },
-                  {
-                    value: "2019",
-                    label: "Year Founded",
-                    colorClass: "text-accent",
-                    borderColor: "hover:border-accent/30",
-                  },
-                  {
-                    value: "Rural",
-                    label: "Community Focus",
-                    colorClass: "text-blue-600",
-                    borderColor: "hover:border-blue-500/30",
-                  },
-                ].map((metric, idx) => (
-                  <div
-                    key={idx}
-                    className={`rounded-2xl p-6 sm:p-8 bg-white border border-border ${metric.borderColor} transition-all duration-300`}
-                  >
-                    <div
-                      className={`text-3xl sm:text-4xl font-bold ${metric.colorClass} mb-2`}
-                    >
-                      {metric.value}
-                    </div>
-                    <p className="text-xs sm:text-sm text-muted-foreground">
-                      {metric.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {[
-              {
-                icon: <CheckCircle className="w-6 sm:w-8 h-6 sm:h-8" />,
-                title: "Funding Partnerships",
-                description:
-                  "Flexible funding structures aligned with your investment thesis and social impact goals",
-              },
-              {
-                icon: <Users className="w-6 sm:w-8 h-6 sm:h-8" />,
-                title: "Grant Opportunities",
-                description:
-                  "Access grant funding for expansion, training programs, and community development initiatives",
-              },
-              {
-                icon: <Zap className="w-6 sm:w-8 h-6 sm:h-8" />,
-                title: "Corporate Partnerships",
-                description:
-                  "Collaborate with corporate sponsors to enhance social responsibility and market reach",
-              },
-              {
-                icon: <Shield className="w-6 sm:w-8 h-6 sm:h-8" />,
-                title: "Impact Reporting",
-                description:
-                  "Transparent metrics and regular reporting on social and financial outcomes",
-              },
-              {
-                icon: <TrendingUp className="w-6 sm:w-8 h-6 sm:h-8" />,
-                title: "Growth Potential",
-                description:
-                  "Scale your impact by supporting expansion into new markets and product lines",
-              },
-              {
-                icon: <Award className="w-6 sm:w-8 h-6 sm:h-8" />,
-                title: "Strategic Advisory",
-                description:
-                  "Partner with experienced leaders in microfinance and community development",
-              },
-            ].map((opportunity, idx) => (
-              <div
-                key={idx}
-                className="group p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 animate-slide-in-up"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                  {opportunity.icon}
-                </div>
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-foreground mb-2 sm:mb-3">
-                  {opportunity.title}
-                </h3>
-                <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
-                  {opportunity.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Values Section */}
       <section className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -665,7 +480,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How We Work Section */}
+      {/* How We Work Section - Client Journey */}
       <section className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -752,6 +567,70 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Impact & Success Statistics Section */}
+      <section className="py-16 md:py-20 bg-gradient-to-b from-blue-50/50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Real Impact for Real People
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Measurable outcomes that show how our clients are transforming
+              their lives
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6 mb-12">
+            {[
+              {
+                icon: <Users className="w-10 h-10" />,
+                stat: "100s",
+                label: "Businesses Empowered",
+                color: "text-primary",
+                bgColor: "bg-primary/10",
+              },
+              {
+                icon: <DollarSign className="w-10 h-10" />,
+                stat: "Millions",
+                label: "in Loans Disbursed",
+                color: "text-secondary",
+                bgColor: "bg-secondary/10",
+              },
+              {
+                icon: <TrendingUp className="w-10 h-10" />,
+                stat: "95%+",
+                label: "Repayment Rate",
+                color: "text-green-600",
+                bgColor: "bg-green-500/10",
+              },
+              {
+                icon: <Heart className="w-10 h-10" />,
+                stat: "2019",
+                label: "Years of Service",
+                color: "text-amber-600",
+                bgColor: "bg-amber-500/10",
+              },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="text-center p-6 rounded-2xl border border-border hover:border-primary/30 hover:shadow-lg transition-all animate-slide-in-up"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                <div
+                  className={`w-14 h-14 rounded-lg ${item.bgColor} ${item.color} flex items-center justify-center mx-auto mb-4`}
+                >
+                  {item.icon}
+                </div>
+                <div className={`text-3xl font-bold ${item.color} mb-2`}>
+                  {item.stat}
+                </div>
+                <p className="text-muted-foreground">{item.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -843,6 +722,200 @@ export default function Home() {
                 <p className="font-semibold text-foreground">Group Lender</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership Opportunities Section - Moved After Success Stories */}
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-blue-50/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 animate-fade-in">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
+              Partner With Us to Create Impact
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Join a growing network of impact investors and funders
+              transforming rural financial inclusion
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 md:mb-16">
+            <div className="animate-slide-in-left">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">
+                Why Fund Mwamunda?
+              </h3>
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Proven Track Record
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Operating since 2019 with expanding reach and 100s of
+                      businesses empowered across rural communities
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <Target className="w-5 sm:w-6 h-5 sm:h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Underserved Market
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Access billions in untapped potential by serving
+                      communities excluded by mainstream finance
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <Users className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Community Deep Roots
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      On-the-ground presence and trusted relationships that
+                      drive repayment and sustainable growth
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 pt-1">
+                    <Award className="w-5 sm:w-6 h-5 sm:h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Experienced Leadership
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Expert team with deep expertise in microfinance,
+                      investment, and community development
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                to="/contact?type=partner"
+                className="inline-flex items-center gap-2 mt-8 px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm sm:text-base hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1 group"
+              >
+                Explore Partnership Opportunities
+                <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            <div className="animate-slide-in-right">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                {[
+                  {
+                    value: "100s",
+                    label: "Businesses Empowered",
+                    colorClass: "text-secondary",
+                    borderColor: "hover:border-secondary/30",
+                  },
+                  {
+                    value: "2019",
+                    label: "Year Founded",
+                    colorClass: "text-accent",
+                    borderColor: "hover:border-accent/30",
+                  },
+                  {
+                    value: "Rural",
+                    label: "Community Focus",
+                    colorClass: "text-blue-600",
+                    borderColor: "hover:border-blue-500/30",
+                  },
+                  {
+                    value: "95%+",
+                    label: "Repayment Rate",
+                    colorClass: "text-green-600",
+                    borderColor: "hover:border-green-500/30",
+                  },
+                ].map((metric, idx) => (
+                  <div
+                    key={idx}
+                    className={`rounded-2xl p-6 sm:p-8 bg-white border border-border ${metric.borderColor} transition-all duration-300`}
+                  >
+                    <div
+                      className={`text-3xl sm:text-4xl font-bold ${metric.colorClass} mb-2`}
+                    >
+                      {metric.value}
+                    </div>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      {metric.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            {[
+              {
+                icon: <CheckCircle className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Funding Partnerships",
+                description:
+                  "Flexible funding structures aligned with your investment thesis and social impact goals",
+              },
+              {
+                icon: <Briefcase className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Grant Opportunities",
+                description:
+                  "Access grant funding for expansion, training programs, and community development initiatives",
+              },
+              {
+                icon: <Zap className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Corporate Partnerships",
+                description:
+                  "Collaborate with corporate sponsors to enhance social responsibility and market reach",
+              },
+              {
+                icon: <Shield className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Impact Reporting",
+                description:
+                  "Transparent metrics and regular reporting on social and financial outcomes",
+              },
+              {
+                icon: <TrendingUp className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Growth Potential",
+                description:
+                  "Scale your impact by supporting expansion into new markets and product lines",
+              },
+              {
+                icon: <Award className="w-6 sm:w-8 h-6 sm:h-8" />,
+                title: "Strategic Advisory",
+                description:
+                  "Partner with experienced leaders in microfinance and community development",
+              },
+            ].map((opportunity, idx) => (
+              <div
+                key={idx}
+                className="group p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 animate-slide-in-up"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  {opportunity.icon}
+                </div>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-foreground mb-2 sm:mb-3">
+                  {opportunity.title}
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
+                  {opportunity.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -1001,10 +1074,19 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-8 flex items-center justify-between">
+          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-white/60 text-sm">
               &copy; 2024 Mwamunda Investment Limited. All rights reserved.
             </p>
+            <div className="w-32 h-32 flex-shrink-0">
+              <OptimizedImage
+                src="https://cdn.builder.io/api/v1/image/assets%2Fecd881b9839d489c99097337eb57ad39%2F1da28dee14084b3eafccf531eeb65e9a?format=webp&width=800"
+                alt="24/7 Customer Service"
+                className="w-full h-full object-contain"
+                containerClassName="w-full h-full"
+                placeholderColor="bg-gray-700"
+              />
+            </div>
             <Link
               to="/admin/login"
               className="px-4 py-2 rounded-lg bg-white/20 text-white text-sm font-semibold hover:bg-white/30 transition-colors"
