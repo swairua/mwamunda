@@ -203,9 +203,9 @@ export default function Services() {
                 Chama Loans
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Specialized financing solutions for business groups, cooperatives,
-                and community-based organizations. Scale your collective impact
-                with structured support and training.
+                Specialized financing solutions for business groups,
+                cooperatives, and community-based organizations. Scale your
+                collective impact with structured support and training.
               </p>
 
               <div className="space-y-4 mb-8">
@@ -281,9 +281,10 @@ export default function Services() {
                 Debt Advice Services
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Professional counseling and financial guidance to help you manage
-                debt challenges and build a stronger financial foundation. Our
-                advisors work with you to create personalized solutions.
+                Professional counseling and financial guidance to help you
+                manage debt challenges and build a stronger financial
+                foundation. Our advisors work with you to create personalized
+                solutions.
               </p>
 
               <div className="space-y-4 mb-8">
@@ -390,8 +391,8 @@ export default function Services() {
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Comprehensive training programs designed to build financial
-                literacy and empower individuals and groups with essential
-                money management skills for sustainable success.
+                literacy and empower individuals and groups with essential money
+                management skills for sustainable success.
               </p>
 
               <div className="space-y-4 mb-8">
