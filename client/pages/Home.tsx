@@ -892,6 +892,15 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-foreground/95 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center mb-12">
+            <OptimizedImage
+              src="https://cdn.builder.io/api/v1/image/assets%2Fecd881b9839d489c99097337eb57ad39%2F1da28dee14084b3eafccf531eeb65e9a?format=webp&width=800"
+              alt="24/7 Customer Service"
+              className="w-48 h-48 object-contain"
+              containerClassName="w-48 h-48"
+              placeholderColor="bg-gray-700"
+            />
+          </div>
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
               <div className="mb-4">
