@@ -1,6 +1,7 @@
 # Production Deployment Guide
 
 ## Overview
+
 This application uses **PHP-only backend** for production on shared Apache hosting. NO Node.js is required.
 
 ## Build for Production
@@ -10,6 +11,7 @@ npm run build:full
 ```
 
 This command:
+
 1. Builds the React frontend → `dist/` folder
 2. Copies PHP backend files to `dist/`:
    - `api.php` - API handler
@@ -33,6 +35,7 @@ dist/
 ## Apache Configuration Required
 
 1. **Ensure Apache modules are enabled:**
+
    ```
    mod_rewrite
    mod_headers
@@ -77,6 +80,7 @@ After deployment, test:
 ## Security Notes
 
 ⚠️ Remember to:
+
 - Remove `db.json` (dev-only file) before deploying
 - Keep `api-server.js` on local machine only
 - Update `DB_PASSWORD` in production
