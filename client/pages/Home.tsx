@@ -156,10 +156,10 @@ export default function Home() {
                   style={{ animationDelay: "0.2s" }}
                 >
                   <div className="text-3xl sm:text-4xl font-bold text-blue-200">
-                    47+
+                    Rural
                   </div>
                   <p className="text-xs sm:text-sm text-white/70">
-                    Counties Served
+                    Community Focus
                   </p>
                 </div>
                 <div
@@ -167,10 +167,10 @@ export default function Home() {
                   style={{ animationDelay: "0.3s" }}
                 >
                   <div className="text-3xl sm:text-4xl font-bold text-green-200">
-                    1000s
+                    100s
                   </div>
                   <p className="text-xs sm:text-sm text-white/70">
-                    Families Empowered
+                    Business Empowered
                   </p>
                 </div>
               </div>
