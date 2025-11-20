@@ -11,12 +11,12 @@ export default function HeroSlider({
 }: HeroSliderProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Mwamunda brand images: real clients and community
+  // Finance-related images from Unsplash representing wealth and investment
   const slides = [
-    // Street vendors/mechanics - real community Mwamunda serves
-    "https://cdn.builder.io/api/v1/image/assets%2F2edf8b9f099644bda003dd7b63a9e04f%2F0e3b98b6d92440d8b34eea498d449a84?format=webp&width=800",
-    // Mwamunda Investment Limited Head Office
-    "https://cdn.builder.io/api/v1/image/assets%2F2edf8b9f099644bda003dd7b63a9e04f%2F92c79749ff094e0da72a7efa9104ce7e?format=webp&width=800",
+    // Wealth and prosperity - dollar bills
+    "https://images.pexels.com/photos/34746298/pexels-photo-34746298.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Financial growth and investment analysis
+    "https://images.pexels.com/photos/6801647/pexels-photo-6801647.jpeg?auto=compress&cs=tinysrgb&w=800",
   ];
 
   useEffect(() => {
