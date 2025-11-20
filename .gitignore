@@ -4,10 +4,13 @@ dist/
 .env.local
 .DS_Store
 *.log
-api-server.js
 db.json
-.htaccess.bak
 pnpm-lock.yaml
 package-lock.json
 .vscode/
 .idea/
+
+# Keep production files (do NOT ignore)
+!api.php
+!connection.php
+!.htaccess
