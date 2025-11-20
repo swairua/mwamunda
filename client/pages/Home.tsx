@@ -34,9 +34,7 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section - Client Focused */}
-      <section
-        className="relative w-full h-96 md:h-screen overflow-hidden bg-white"
-      >
+      <section className="relative w-full h-96 md:h-screen overflow-hidden bg-white">
         {/* Full width slider background - behind everything */}
         <div className="absolute inset-0 w-full h-full">
           <HeroSlider />
