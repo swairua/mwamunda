@@ -17,6 +17,8 @@ export default function HeroSlider({
     "https://images.pexels.com/photos/34746298/pexels-photo-34746298.jpeg?auto=compress&cs=tinysrgb&w=800",
     // Financial growth and investment analysis
     "https://images.pexels.com/photos/6801647/pexels-photo-6801647.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Mwamunda Investment Limited Head Office
+    "https://cdn.builder.io/api/v1/image/assets%2Fecd881b9839d489c99097337eb57ad39%2Fed1dd4bfe0934e3cb49357607be364be?format=webp&width=800",
   ];
 
   useEffect(() => {
