@@ -29,7 +29,7 @@ export default function Navigation() {
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-100"
-          : "bg-gradient-to-b from-black/20 to-transparent"
+          : "bg-gradient-to-b from-white/40 to-transparent"
       }`}
     >
       <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
@@ -52,7 +52,7 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 to={link.href}
-                className="px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 relative group hover:bg-primary/10 text-foreground"
+                className="px-3 py-2 text-base lg:text-lg font-medium rounded-lg transition-all duration-300 relative group hover:bg-primary/10 text-foreground"
               >
                 {link.label}
                 <span className="absolute bottom-1 left-3 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:right-3 group-hover:left-auto transition-all duration-300"></span>
@@ -91,7 +91,7 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 to={link.href}
-                className="block px-4 sm:px-6 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/5 transition-all duration-200 transform hover:translate-x-1"
+                className="block px-4 sm:px-6 py-3 rounded-lg text-base font-medium text-foreground hover:bg-primary/5 transition-all duration-200 transform hover:translate-x-1"
                 onClick={() => setIsOpen(false)}
                 style={{ animationDelay: `${index * 50}ms` }}
               >

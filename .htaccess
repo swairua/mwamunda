@@ -1,39 +1,19 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
 
-  # Pass through existing files and directories
+  # Allow direct access to PHP files
+  RewriteCond %{REQUEST_FILENAME} \.php$ [OR]
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Route API requests to api.php
-  RewriteRule ^api\.php$ - [L]
-  RewriteRule ^connection\.php$ - [L]
-
-  # Everything else goes to index.html for React Router
-  RewriteRule ^ /index.html [QSA,L]
+  # Route all other requests to index.html for React Router
+  RewriteRule ^ index.html [L]
 </IfModule>
 
-# Set proper headers for caching
-<IfModule mod_headers.c>
-  # Cache busting for JS/CSS files with hashes
-  <FilesMatch "\.(js|css)$">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </FilesMatch>
-
-  # Don't cache HTML files
-  <FilesMatch "\.html$">
-    Header set Cache-Control "public, max-age=0, must-revalidate"
-  </FilesMatch>
-
-  # Enable CORS for API if needed
+# PHP headers for API responses
+<FilesMatch "\.php$">
   Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
   Header set Access-Control-Allow-Headers "Content-Type"
-</IfModule>
-
-# Enable gzip compression
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
-</IfModule>
+</FilesMatch>
