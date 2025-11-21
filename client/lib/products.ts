@@ -69,16 +69,15 @@ export async function getProducts(): Promise<Product[]> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const url = `${API_CONFIG.BASE_URL}?table=products`;
+    const url = `${getApiUrl()}?table=products`;
     console.log(`[getProducts] Fetching from: ${url}`);
 
-    const response = await fetch(url, {
+    const response = await apiFetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
       signal: controller.signal,
-      mode: "cors",
     });
 
     clearTimeout(timeoutId);
@@ -112,7 +111,7 @@ export async function getProducts(): Promise<Product[]> {
     if (error instanceof TypeError) {
       console.error("[getProducts] Network error:", error.message);
       throw new Error(
-        `Cannot connect to API at ${API_CONFIG.BASE_URL}. The server may be down, unreachable, or have CORS issues.`,
+        `Cannot connect to API. The server may be down, unreachable, or have CORS issues.`,
       );
     }
     console.error("[getProducts] Unexpected error:", error);
@@ -125,15 +124,14 @@ export async function getRecentProducts(limit: number = 5): Promise<Product[]> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=products&orderBy=created_at&order=DESC&limit=${limit}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         signal: controller.signal,
-        mode: "cors",
       },
     );
 
@@ -167,15 +165,14 @@ export async function getProductById(id: number): Promise<Product> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=products&id=${id}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         signal: controller.signal,
-        mode: "cors",
       },
     );
 
@@ -196,7 +193,7 @@ export async function getProductById(id: number): Promise<Product> {
       );
     }
     if (error instanceof TypeError) {
-      throw new Error(`Cannot connect to API at ${API_CONFIG.BASE_URL}`);
+      throw new Error(`Cannot connect to API`);
     }
     throw error;
   }
@@ -289,15 +286,14 @@ export async function deleteProduct(id: number): Promise<{
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=products&id=${id}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=products&id=${id}`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
         signal: controller.signal,
-        mode: "cors",
       },
     );
 
