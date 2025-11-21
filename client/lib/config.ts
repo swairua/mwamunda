@@ -31,6 +31,7 @@ if (typeof window !== "undefined") {
 /**
  * Fetch wrapper for API calls
  * Makes requests to the remote API endpoint with CORS enabled
+ * In production, automatically falls back to relative /api.php if primary URL fails
  */
 export async function apiFetch(
   url: string,
@@ -50,6 +51,34 @@ export async function apiFetch(
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     console.error(`[API] Error with API call to ${url}:`, errorMsg);
+
+    // In production, try fallback URL if primary production URL fails
+    if (
+      import.meta.env.PROD &&
+      url.includes("mwamunda.ziratech.com") &&
+      error instanceof TypeError
+    ) {
+      console.log(
+        "[API] Primary production URL failed, attempting fallback to /api.php",
+      );
+      try {
+        const fallbackUrl = url.replace(
+          "https://mwamunda.ziratech.com/api.php",
+          "/api.php",
+        );
+        const fallbackResponse = await fetch(fallbackUrl, {
+          ...options,
+          mode: "cors",
+        });
+
+        if (fallbackResponse.ok) {
+          console.log("[API] Fallback URL succeeded");
+          return fallbackResponse;
+        }
+      } catch (fallbackError) {
+        console.error("[API] Fallback URL also failed:", fallbackError);
+      }
+    }
 
     if (error instanceof TypeError && errorMsg.includes("fetch")) {
       console.error(
