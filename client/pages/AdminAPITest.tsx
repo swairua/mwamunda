@@ -48,13 +48,13 @@ export default function AdminAPITest() {
     setResponse(null);
 
     try {
-      console.log("API Base URL:", API_CONFIG.BASE_URL);
+      console.log("API Base URL:", getApiUrl());
       console.log(
         "Request body:",
         JSON.stringify({ action: "init_applications_table" }),
       );
 
-      const response = await fetch(API_CONFIG.BASE_URL, {
+      const response = await apiFetch(getApiUrl(), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
