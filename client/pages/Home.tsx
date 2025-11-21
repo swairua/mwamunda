@@ -34,17 +34,17 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section - Client Focused */}
-      <section className="relative w-full h-96 md:h-screen overflow-hidden bg-white">
+      <section className="relative w-full min-h-screen overflow-hidden bg-white mt-14 sm:mt-16 md:mt-20">
         {/* Full width slider background - behind everything */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full top-0">
           <HeroSlider />
         </div>
 
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-black/20 top-0"></div>
 
         {/* Decorative blobs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none top-0">
           <div className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl -top-20 -left-20 animate-float"></div>
           <div
             className="absolute w-96 h-96 bg-secondary/10 rounded-full blur-3xl -bottom-20 -right-20 animate-float"
@@ -53,7 +53,7 @@ export default function Home() {
         </div>
 
         {/* Hero Image - Right Side */}
-        <div className="flex absolute right-0 top-1/2 -translate-y-1/2 z-5 h-full items-center pr-2 sm:pr-4 md:pr-6 lg:pr-8">
+        <div className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-5 h-full items-center pr-2 sm:pr-4 md:pr-6 lg:pr-8">
           <div className="relative w-40 sm:w-48 md:w-80 lg:w-[400px] h-40 sm:h-48 md:h-80 lg:h-[400px] rounded-3xl overflow-hidden shadow-2xl animate-slide-in-right">
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F52e00125125046a69d6527573cdca733%2F04c3168de51f43519439fc0ffe5d3e92?format=webp&width=800"
@@ -64,9 +64,9 @@ export default function Home() {
         </div>
 
         {/* Content overlay */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <div className="w-full px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl animate-slide-in-left bg-white/15 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 border border-white/20">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-12 sm:py-16 md:py-20">
+          <div className="w-full max-w-2xl">
+            <div className="animate-slide-in-left bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 border border-white/20">
               <div className="inline-block mb-6 px-4 py-2 bg-white/30 backdrop-blur border border-white/40 rounded-full">
                 <span className="text-sm font-semibold text-white flex items-center gap-2">
                   <Wallet className="w-4 h-4" />
