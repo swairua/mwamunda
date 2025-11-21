@@ -213,7 +213,7 @@ export async function createProduct(
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -223,7 +223,6 @@ export async function createProduct(
         data,
       }),
       signal: controller.signal,
-      mode: "cors",
     });
 
     clearTimeout(timeoutId);
@@ -253,7 +252,7 @@ export async function updateProduct(
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -264,7 +263,6 @@ export async function updateProduct(
         data,
       }),
       signal: controller.signal,
-      mode: "cors",
     });
 
     clearTimeout(timeoutId);
