@@ -1,108 +1,48 @@
 /**
- * Centralized API configuration with fallback support
- * Primary: https://mwamunda.ziratech.com/api.php (external API)
- * Fallback: /api.php (local development API)
+ * Centralized API configuration
+ * Uses local API proxy: /api.php (works in both dev and production)
+ * The local API can be configured to forward to external APIs via server-side proxy
  */
 
-const primaryApiUrl = "https://mwamunda.ziratech.com/api.php";
-const fallbackApiUrl = "/api.php";
-
-// Track which API is currently active
-let activeApiUrl = primaryApiUrl;
-let apiHealthStatus: { primary: boolean; fallback: boolean } = {
-  primary: true,
-  fallback: true,
-};
+const apiUrl = "/api.php";
 
 // Log the configured API URL for debugging
 if (typeof window !== "undefined") {
-  console.log(
-    `[API Config] Primary endpoint: ${primaryApiUrl}, Fallback: ${fallbackApiUrl}`,
-  );
+  console.log(`[API Config] Using API endpoint: ${apiUrl}`);
 }
 
 /**
- * Attempt a fetch request with automatic fallback
- * Tries primary API first, falls back to local API if CORS or other issues occur
+ * Fetch wrapper for API calls
+ * Uses the local API proxy which works in both dev and production environments
  */
 export async function apiFetch(
   url: string,
   options: RequestInit = {},
 ): Promise<Response> {
-  const isExternalUrl = url.startsWith("http");
-
-  // If it's already an external URL (primary API), try it first
-  if (isExternalUrl) {
-    try {
-      const response = await fetch(url, {
-        ...options,
-        mode: "cors",
-      });
-
-      if (response.ok) {
-        activeApiUrl = url;
-        apiHealthStatus.primary = true;
-        return response;
-      }
-
-      // If primary fails with 4xx/5xx and we have a fallback, try fallback
-      if (url === primaryApiUrl && apiHealthStatus.fallback) {
-        console.warn(
-          `[API] Primary API returned status ${response.status}, attempting fallback...`,
-        );
-        apiHealthStatus.primary = false;
-        return apiFetch(fallbackApiUrl, options);
-      }
-
-      return response;
-    } catch (error) {
-      console.error(`[API] Error connecting to primary API:`, error);
-
-      // If primary fails with network error and fallback is available, try fallback
-      if (url === primaryApiUrl && apiHealthStatus.fallback) {
-        console.warn(
-          `[API] Primary API failed (${error instanceof Error ? error.message : "network error"}), attempting fallback...`,
-        );
-        apiHealthStatus.primary = false;
-        return apiFetch(fallbackApiUrl, options);
-      }
-
-      throw error;
-    }
-  }
-
-  // For relative URLs, use the local API
   try {
     const response = await fetch(url, {
       ...options,
-      mode: "cors",
     });
-
-    if (response.ok) {
-      activeApiUrl = fallbackApiUrl;
-      apiHealthStatus.fallback = true;
-    }
 
     return response;
   } catch (error) {
-    console.error(`[API] Error with local API:`, error);
+    console.error(`[API] Error with API call:`, error);
     throw error;
   }
 }
 
 /**
- * Get the full API URL with automatic fallback selection
+ * Get the full API URL
  */
 export function getApiUrl(path: string = ""): string {
-  const baseUrl = apiHealthStatus.primary ? primaryApiUrl : fallbackApiUrl;
-  return path ? `${baseUrl}${path}` : baseUrl;
+  return path ? `${apiUrl}${path}` : apiUrl;
 }
 
 /**
  * Get the currently active API URL
  */
 export function getActiveApiUrl(): string {
-  return activeApiUrl;
+  return apiUrl;
 }
 
 export const API_CONFIG = {
