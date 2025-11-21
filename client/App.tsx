@@ -65,6 +65,7 @@ export const App = () => (
             path="/admin/init-applications"
             element={<AdminInitApplications />}
           />
+          <Route path="/admin/init-careers" element={<AdminInitCareers />} />
           <Route path="/admin/api-test" element={<AdminAPITest />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegister />} />
