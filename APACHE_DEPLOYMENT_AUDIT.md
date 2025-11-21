@@ -37,6 +37,7 @@ npm run build:full
 ```
 
 This command will:
+
 1. Build the React frontend to `dist/` directory
 2. Copy PHP backend files to `dist/`:
    - `api.php` - REST API handler
@@ -49,6 +50,7 @@ This command will:
 1. **Upload `dist/` folder contents** to your Apache web root (usually `public_html/`)
 
 2. **Required Apache Modules**
+
    ```
    mod_rewrite  (for URL rewriting)
    mod_deflate  (for compression)
@@ -57,6 +59,7 @@ This command will:
    ```
 
    To enable on most Apache servers:
+
    ```bash
    a2enmod rewrite
    a2enmod deflate
@@ -99,7 +102,7 @@ Or configure in `connection.php` directly if environment variables not supported
    - Should return JSON response from database
    - If error, check database configuration in `connection.php`
 
-4. **Test SPA Routing**: 
+4. **Test SPA Routing**:
    - Try accessing `/admin/products` directly
    - Should load correctly (not show 404)
    - `.htaccess` should rewrite to `index.html`
@@ -109,6 +112,7 @@ Or configure in `connection.php` directly if environment variables not supported
 ## Application Structure
 
 ### Frontend (React SPA)
+
 - **Framework**: React 18 + React Router 6
 - **Language**: TypeScript
 - **Styling**: TailwindCSS 3 + Radix UI
@@ -116,6 +120,7 @@ Or configure in `connection.php` directly if environment variables not supported
 - **Entry Point**: `dist/index.html`
 
 ### Backend (PHP API)
+
 - **Language**: PHP 7.2+
 - **Location**: `dist/api.php`
 - **Database**: MySQL (configured in `connection.php`)
@@ -123,6 +128,7 @@ Or configure in `connection.php` directly if environment variables not supported
 - **CORS**: Enabled for all origins
 
 ### Routing Configuration
+
 - **`.htaccess`**: Routes all non-file requests to `index.html`
 - **React Router**: Handles client-side routing in the browser
 - **Fallback**: Unmatched routes show 404 page
@@ -132,6 +138,7 @@ Or configure in `connection.php` directly if environment variables not supported
 ## Key Features Configured
 
 ### Admin Features
+
 - ✅ Admin Login (`/admin/login`)
 - ✅ Admin Dashboard (`/admin/dashboard`)
 - ✅ Products Management (`/admin/products`)
@@ -142,6 +149,7 @@ Or configure in `connection.php` directly if environment variables not supported
 - ✅ Database initialization endpoints
 
 ### Public Features
+
 - ✅ Home Page (`/`)
 - ✅ About Page (`/about`)
 - ✅ Services Page (`/services`)
@@ -174,6 +182,7 @@ Or configure in `connection.php` directly if environment variables not supported
 ### Issue: Blank page or 404 errors
 
 **Solution**: `.htaccess` may not be working
+
 - Verify `mod_rewrite` is enabled: `apache2ctl -M | grep rewrite`
 - Check `.htaccess` permissions: `ls -la .htaccess` should show `-rw-r--r--`
 - Check `.htaccess` is in web root, not subdirectory
@@ -181,6 +190,7 @@ Or configure in `connection.php` directly if environment variables not supported
 ### Issue: "Table name is required" error
 
 **Solution**: Database connection or API configuration issue
+
 - Verify `connection.php` settings
 - Check database exists and is accessible
 - Verify environment variables are set correctly
@@ -189,6 +199,7 @@ Or configure in `connection.php` directly if environment variables not supported
 ### Issue: Admin login not working
 
 **Solution**: Authentication or database issue
+
 - Verify users table exists (check in database)
 - Test API endpoint: `curl https://yourdomain.com/api.php?table=users`
 - Check database user has SELECT/INSERT/UPDATE permissions
@@ -197,6 +208,7 @@ Or configure in `connection.php` directly if environment variables not supported
 ### Issue: Static assets (CSS/JS) not loading
 
 **Solution**: Asset path or caching issue
+
 - Clear browser cache
 - Verify asset files exist in `dist/assets/`
 - Check MIME types in Apache configuration
@@ -207,6 +219,7 @@ Or configure in `connection.php` directly if environment variables not supported
 ## Development to Production Workflow
 
 1. **Local Development**
+
    ```bash
    npm install           # Install dependencies
    npm run dev          # Start dev server
@@ -216,6 +229,7 @@ Or configure in `connection.php` directly if environment variables not supported
    ```
 
 2. **Pre-Deployment**
+
    ```bash
    npm run typecheck    # Ensure no TypeScript errors
    npm test             # Run test suite

@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Users,
-  Plus,
-  Trash2,
-  Eye,
-} from "lucide-react";
+import { Users, Plus, Trash2, Eye } from "lucide-react";
 import { getStoredUser, clearUser, getAllUsers, User } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
@@ -146,7 +141,6 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
-
 
           {/* Users Section */}
           <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
