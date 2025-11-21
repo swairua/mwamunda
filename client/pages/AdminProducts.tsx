@@ -80,7 +80,7 @@ export default function AdminProducts() {
     if (isAuthenticated()) {
       fetchProducts();
     }
-  }, [toast]);
+  }, []);
 
   // Apply search and filter
   useEffect(() => {
