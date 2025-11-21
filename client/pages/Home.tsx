@@ -31,7 +31,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white">
-      <div style={{position: 'fixed', top: 0, right: 0, zIndex: 999, backgroundColor: 'red', color: 'white', padding: '10px', fontSize: '12px'}}>Home rendering</div>
       <Navigation />
 
       {/* Hero Section - Client Focused */}
