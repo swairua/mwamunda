@@ -46,7 +46,7 @@ export function getActiveApiUrl(): string {
 }
 
 export const API_CONFIG = {
-  BASE_URL: primaryApiUrl,
-  FALLBACK_URL: fallbackApiUrl,
-  PRIMARY_URL: primaryApiUrl,
+  BASE_URL: apiUrl,
+  FALLBACK_URL: apiUrl,
+  PRIMARY_URL: apiUrl,
 } as const;
