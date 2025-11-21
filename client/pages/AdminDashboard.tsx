@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, Plus, Trash2, Eye, Package, FileText } from "lucide-react";
+import { Users, Plus, Trash2, Eye, Package, FileText, Briefcase } from "lucide-react";
 import { getStoredUser, clearUser, getAllUsers, User } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
