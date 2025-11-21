@@ -9,7 +9,7 @@ import {
   Award,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import ApplicationForm from "@/components/ApplicationForm";
+import ProductContactForm from "@/components/ProductContactForm";
 import OptimizedImage from "@/components/OptimizedImage";
 
 export default function FinancialCapabilityTraining() {
@@ -292,10 +292,7 @@ export default function FinancialCapabilityTraining() {
             </p>
           </div>
 
-          <ApplicationForm
-            productType="financial-capability-training"
-            productName="Financial Capability Training"
-          />
+          <ProductContactForm productName="Financial Capability Training" />
         </div>
       </section>
 
@@ -434,9 +431,7 @@ export default function FinancialCapabilityTraining() {
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0106673939 / 0784222284
-                <br />
-                0708192783
+                0784222284
               </p>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
 import { submitApplication, ProductType } from "@/lib/applications";
+import { submitContact } from "@/lib/contacts";
 import { useToast } from "@/hooks/use-toast";
 
 interface ApplicationFormProps {
@@ -95,6 +96,15 @@ export default function ApplicationForm({
         bank_account: formData.bank_account,
         bank_name: formData.bank_name,
         additional_info: formData.additional_info,
+      });
+
+      // Also save to contacts for centralized contact management
+      await submitContact({
+        name: formData.full_name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: `${productName} Application`,
+        message: `Application for ${productName}\n\nBusiness Type: ${formData.business_type || "N/A"}\nRequested Amount: ${formData.requested_amount || "N/A"}\nEmployment Status: ${formData.employment_status}\n\nAdditional Info: ${formData.additional_info || "None"}`,
       });
 
       setSubmitted(true);

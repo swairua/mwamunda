@@ -134,22 +134,10 @@ export default function Contact() {
               </h3>
               <div className="space-y-2">
                 <a
-                  href="tel:+254106673939"
-                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
-                >
-                  0106673939
-                </a>
-                <a
                   href="tel:+254784222284"
                   className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
                 >
                   0784222284
-                </a>
-                <a
-                  href="tel:+254708192783"
-                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
-                >
-                  0708192783
                 </a>
               </div>
               <p className="text-muted-foreground text-xs sm:text-sm mt-3 sm:mt-4">
@@ -169,9 +157,10 @@ export default function Contact() {
                 Head Office
               </h3>
               <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                Hussein Mayai Road
+                Edrine's Plaza Mombasa Building
                 <br />
-                Opposite Kadzomba Plaza, Room 8<br />
+                Ground Floor
+                <br />
                 Kilifi, Kenya
                 <br />
                 <br />
@@ -190,8 +179,7 @@ export default function Contact() {
               Plaza Building, Ground Floor, Po.box 964 Kilifi
             </p>
             <p className="text-muted-foreground">
-              <strong className="text-foreground">Phone:</strong> 0708192783 /
-              0784222284
+              <strong className="text-foreground">Phone:</strong> 0784222284
             </p>
           </div>
         </div>
@@ -335,32 +323,6 @@ export default function Contact() {
 
           <p className="text-sm text-muted-foreground text-center mt-8">
             * Required fields
-          </p>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
-            Find Us
-          </h2>
-
-          <div className="rounded-2xl overflow-hidden border border-border h-96 md:h-96 animate-fade-in">
-            <iframe
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen
-              title="Mwamunda Investment Limited Location in Kilifi, Kenya"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.2134567890123!2d39.84993!3d-3.63584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18418c08c8c8c8c9%3A0x1234567890abcdef!2sKilifi%2C%20Kenya!5e0!3m2!1sen!2ske!4v1700000000000"
-            ></iframe>
-          </div>
-
-          <p className="text-center text-muted-foreground text-sm mt-8">
-            Located in Kilifi, Kenya. We serve all 47 counties with field
-            agents.
           </p>
         </div>
       </section>
@@ -519,9 +481,7 @@ export default function Contact() {
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0106673939 / 0784222284
-                <br />
-                0708192783
+                0784222284
               </p>
             </div>
           </div>

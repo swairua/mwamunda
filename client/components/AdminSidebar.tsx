@@ -2,14 +2,11 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
-  Users,
   LogOut,
   Menu,
   X,
   Home,
   Mail,
-  FileText,
-  Package,
   Briefcase,
 } from "lucide-react";
 
@@ -31,24 +28,6 @@ export default function AdminSidebar({
       icon: <LayoutDashboard className="w-5 h-5" />,
       label: "Dashboard",
       path: "/admin/dashboard",
-    },
-    {
-      id: "users",
-      icon: <Users className="w-5 h-5" />,
-      label: "Users",
-      path: "/admin/dashboard",
-    },
-    {
-      id: "products",
-      icon: <Package className="w-5 h-5" />,
-      label: "Products",
-      path: "/admin/products",
-    },
-    {
-      id: "applications",
-      icon: <FileText className="w-5 h-5" />,
-      label: "Applications",
-      path: "/admin/applications",
     },
     {
       id: "contacts",
