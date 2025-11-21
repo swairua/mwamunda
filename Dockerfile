@@ -36,21 +36,19 @@ RUN chown -R www-data:www-data /var/www/html && \
 # Enable Apache proxy modules
 RUN a2enmod proxy proxy_http ssl
 
-# Create Apache configuration for API proxy and SPA routing
-RUN echo '<Directory /var/www/html>\n\
-    RewriteEngine On\n\
-    RewriteBase /\n\
-    RewriteRule ^api\.php$ - [L]\n\
-    RewriteCond %{REQUEST_FILENAME} !-f\n\
-    RewriteCond %{REQUEST_FILENAME} !-d\n\
-    RewriteRule ^ /index.html [QSA,L]\n\
-</Directory>\n\
-\n\
-ProxyPreserveHost On\n\
-ProxyPass /api.php https://mwamunda.ziratech.com/api.php\n\
-ProxyPassReverse /api.php https://mwamunda.ziratech.com/api.php\n\
-RequestHeader set X-Forwarded-Proto https\n\
-RequestHeader set X-Forwarded-Host %{HTTP_HOST}s' > /etc/apache2/conf-available/spa-routing.conf
+# Create Apache configuration for SPA routing
+RUN echo '<Directory /var/www/html>
+    RewriteEngine On
+    RewriteBase /
+
+    # Don'\''t rewrite api.php requests or actual files/directories
+    RewriteRule ^api\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Rewrite all other requests to index.html for SPA routing
+    RewriteRule ^ index.html [QSA,L]
+</Directory>' > /etc/apache2/conf-available/spa-routing.conf
 
 RUN a2enconf spa-routing
 
