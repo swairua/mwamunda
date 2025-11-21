@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Mail, Phone, Briefcase, MapPin } from "lucide-react";
+import Navigation from "@/components/Navigation";
 import { apiFetch, getApiUrl } from "@/lib/config";
 
 interface Career {
