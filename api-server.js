@@ -36,7 +36,13 @@ if (fs.existsSync(dbPath)) {
 }
 
 // Ensure all required tables exist
-const requiredTables = ["users", "products", "applications", "contacts", "careers"];
+const requiredTables = [
+  "users",
+  "products",
+  "applications",
+  "contacts",
+  "careers",
+];
 requiredTables.forEach((table) => {
   if (!database[table]) {
     database[table] = [];

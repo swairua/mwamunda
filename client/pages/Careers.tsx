@@ -75,7 +75,8 @@ export default function Careers() {
               We're Hiring
             </h1>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join our team and be part of our mission to provide financial solutions for the underserved.
+              Join our team and be part of our mission to provide financial
+              solutions for the underserved.
             </p>
           </div>
         </div>
