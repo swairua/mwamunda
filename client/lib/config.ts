@@ -1,10 +1,9 @@
 /**
  * Centralized API configuration
- * Uses local API proxy: /api.php (works in both dev and production)
- * The local API can be configured to forward to external APIs via server-side proxy
+ * Uses remote API endpoint: https://mwamunda.ziratech.com/api.php
  */
 
-const apiUrl = "/api.php";
+const apiUrl = "https://mwamunda.ziratech.com/api.php";
 
 // Log the configured API URL for debugging
 if (typeof window !== "undefined") {
