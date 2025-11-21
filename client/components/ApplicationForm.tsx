@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
 import { submitApplication, ProductType } from "@/lib/applications";
+import { submitContact } from "@/lib/contacts";
 import { useToast } from "@/hooks/use-toast";
 
 interface ApplicationFormProps {
