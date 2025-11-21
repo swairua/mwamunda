@@ -10,6 +10,7 @@ import {
   Mail,
   FileText,
   Package,
+  Briefcase,
 } from "lucide-react";
 
 interface AdminSidebarProps {
