@@ -1,10 +1,9 @@
 /**
  * Centralized API configuration
- * Uses local API proxy: /api.php (works in both dev and production)
- * The local API can be configured to forward to external APIs via server-side proxy
+ * Uses remote API endpoint: https://mwamunda.ziratech.com/api.php
  */
 
-const apiUrl = "/api.php";
+const apiUrl = "https://mwamunda.ziratech.com/api.php";
 
 // Log the configured API URL for debugging
 if (typeof window !== "undefined") {
@@ -13,7 +12,7 @@ if (typeof window !== "undefined") {
 
 /**
  * Fetch wrapper for API calls
- * Uses the local API proxy which works in both dev and production environments
+ * Makes requests to the remote API endpoint with CORS enabled
  */
 export async function apiFetch(
   url: string,
@@ -22,11 +21,24 @@ export async function apiFetch(
   try {
     const response = await fetch(url, {
       ...options,
+      mode: "cors",
     });
+
+    if (!response.ok) {
+      console.warn(`[API] Response status ${response.status} from ${url}`);
+    }
 
     return response;
   } catch (error) {
-    console.error(`[API] Error with API call:`, error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error(`[API] Error with API call to ${url}:`, errorMsg);
+
+    if (error instanceof TypeError && errorMsg.includes("fetch")) {
+      console.error(
+        "[API] CORS or network error. Verify the remote endpoint is accessible and has proper CORS headers.",
+      );
+    }
+
     throw error;
   }
 }

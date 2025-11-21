@@ -246,6 +246,38 @@ if ($action === "init_products_table" && $method === "POST") {
     exit;
 }
 
+if ($action === "init_careers_table" && $method === "POST") {
+    $sql = "CREATE TABLE IF NOT EXISTS careers (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        position_title VARCHAR(255) NOT NULL,
+        department VARCHAR(100),
+        description TEXT NOT NULL,
+        qualifications TEXT NOT NULL,
+        responsibilities TEXT,
+        job_type VARCHAR(50),
+        experience_level VARCHAR(50),
+        application_email VARCHAR(255),
+        application_phone VARCHAR(50),
+        image_url VARCHAR(500),
+        validity_start_date DATE,
+        validity_end_date DATE,
+        status VARCHAR(50) DEFAULT 'active',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql)) {
+        echo json_encode(["success" => true, "message" => "Careers table created successfully"]);
+    } else {
+        if (strpos($conn->error, "already exists") !== false) {
+            echo json_encode(["success" => true, "message" => "Careers table already exists"]);
+        } else {
+            echo json_encode(["error" => $conn->error]);
+        }
+    }
+    exit;
+}
+
 if (!$table) {
     echo json_encode(["error" => "Table name is required"]);
     exit;

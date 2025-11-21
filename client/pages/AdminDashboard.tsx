@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, Plus, Trash2, Eye, Package, FileText } from "lucide-react";
+import {
+  Users,
+  Plus,
+  Trash2,
+  Eye,
+  Package,
+  FileText,
+  Briefcase,
+} from "lucide-react";
 import { getStoredUser, clearUser, getAllUsers, User } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
@@ -197,6 +205,25 @@ export default function AdminDashboard() {
                 </div>
                 <div className="w-12 h-12 rounded-lg bg-purple-200 text-purple-600 flex items-center justify-center flex-shrink-0">
                   <FileText className="w-6 h-6" />
+                </div>
+              </div>
+            </button>
+
+            <button
+              onClick={() => navigate("/admin/init-careers")}
+              className="bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-200 rounded-2xl p-6 hover:shadow-lg transition-all text-left hover:border-orange-300"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-orange-900 mb-2">
+                    Initialize Careers
+                  </h3>
+                  <p className="text-sm text-orange-700">
+                    Set up the careers database table
+                  </p>
+                </div>
+                <div className="w-12 h-12 rounded-lg bg-orange-200 text-orange-600 flex items-center justify-center flex-shrink-0">
+                  <Briefcase className="w-6 h-6" />
                 </div>
               </div>
             </button>

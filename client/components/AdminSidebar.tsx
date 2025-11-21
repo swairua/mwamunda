@@ -10,6 +10,7 @@ import {
   Mail,
   FileText,
   Package,
+  Briefcase,
 } from "lucide-react";
 
 interface AdminSidebarProps {
@@ -54,6 +55,12 @@ export default function AdminSidebar({
       icon: <Mail className="w-5 h-5" />,
       label: "Contacts",
       path: "/admin/contacts",
+    },
+    {
+      id: "careers",
+      icon: <Briefcase className="w-5 h-5" />,
+      label: "Careers",
+      path: "/admin/careers",
     },
   ];
 

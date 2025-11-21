@@ -18,13 +18,16 @@ import AdminSetup from "./pages/AdminSetup";
 import AdminInit from "./pages/AdminInit";
 import AdminInitProducts from "./pages/AdminInitProducts";
 import AdminInitApplications from "./pages/AdminInitApplications";
+import AdminInitCareers from "./pages/AdminInitCareers";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminContacts from "./pages/AdminContacts";
 import AdminApplications from "./pages/AdminApplications";
 import AdminProducts from "./pages/AdminProducts";
+import AdminCareers from "./pages/AdminCareers";
 import AdminAPITest from "./pages/AdminAPITest";
+import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +44,7 @@ export const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/careers" element={<Careers />} />
           <Route
             path="/products/fair-personal-loans"
             element={<FairPersonalLoans />}
@@ -61,6 +65,7 @@ export const App = () => (
             path="/admin/init-applications"
             element={<AdminInitApplications />}
           />
+          <Route path="/admin/init-careers" element={<AdminInitCareers />} />
           <Route path="/admin/api-test" element={<AdminAPITest />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegister />} />
@@ -68,6 +73,7 @@ export const App = () => (
           <Route path="/admin/contacts" element={<AdminContacts />} />
           <Route path="/admin/applications" element={<AdminApplications />} />
           <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/careers" element={<AdminCareers />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
