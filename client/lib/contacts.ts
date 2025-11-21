@@ -1,4 +1,4 @@
-import { API_CONFIG } from "./config";
+import { apiFetch, getApiUrl } from "./config";
 
 export interface Contact {
   id?: number;
@@ -26,7 +26,7 @@ export async function submitContact(
   contact: Contact,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function getAllContacts(): Promise<Contact[]> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(`${API_CONFIG.BASE_URL}?table=contacts`, {
+    const response = await apiFetch(`${getApiUrl()}?table=contacts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export async function updateContactStatus(
   status: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -153,7 +153,7 @@ export async function addInternalNote(
   notes: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -189,7 +189,7 @@ export async function sendResponseEmail(
   responseEmail: string,
 ): Promise<ContactResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -226,8 +226,8 @@ export async function sendResponseEmail(
 
 export async function deleteContact(id: number): Promise<ContactResponse> {
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=contacts&id=${id}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=contacts&id=${id}`,
       {
         method: "DELETE",
         headers: {
