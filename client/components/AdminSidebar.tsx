@@ -56,6 +56,12 @@ export default function AdminSidebar({
       label: "Contacts",
       path: "/admin/contacts",
     },
+    {
+      id: "careers",
+      icon: <Briefcase className="w-5 h-5" />,
+      label: "Careers",
+      path: "/admin/careers",
+    },
   ];
 
   const isActive = (path: string) => location.pathname === path;
