@@ -134,6 +134,12 @@ export default function Contact() {
               </h3>
               <div className="space-y-2">
                 <a
+                  href="tel:+254708192783"
+                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
+                >
+                  0708192783
+                </a>
+                <a
                   href="tel:+254784222284"
                   className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
                 >
