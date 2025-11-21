@@ -24,6 +24,7 @@ export default defineConfig({
         rewrite: (path) => path,
       },
     },
+    middlewareMode: false,
   },
   build: {
     outDir: "dist",
