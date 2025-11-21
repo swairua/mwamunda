@@ -31,32 +31,16 @@ export default function AdminLogin() {
           }),
         });
 
-        const activeUrl = getActiveApiUrl();
-        const isPrimaryAPI = activeUrl.includes("mwamunda.ziratech.com");
-
         if (response.ok || response.status === 400 || response.status === 500) {
-          if (isPrimaryAPI) {
-            setConnectionStatus("connected");
-            setConnectionMessage("✓ Connected to Mwamunda API");
-          } else {
-            setConnectionStatus("fallback");
-            setConnectionMessage("⚠ Using local API (fallback mode)");
-          }
+          setConnectionStatus("connected");
+          setConnectionMessage("✓ API is ready");
         } else {
           setConnectionStatus("disconnected");
           setConnectionMessage("✗ API connection unavailable");
         }
       } catch (err) {
-        const activeUrl = getActiveApiUrl();
-        const isPrimaryAPI = activeUrl.includes("mwamunda.ziratech.com");
-
-        if (isPrimaryAPI) {
-          setConnectionStatus("fallback");
-          setConnectionMessage("⚠ Using local API (fallback mode)");
-        } else {
-          setConnectionStatus("disconnected");
-          setConnectionMessage("✗ Unable to connect to any API");
-        }
+        setConnectionStatus("disconnected");
+        setConnectionMessage("✗ Unable to connect to API server");
       }
     };
 
