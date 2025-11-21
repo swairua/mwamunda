@@ -77,6 +77,7 @@ export function getActiveApiUrl(): string {
 
 export const API_CONFIG = {
   BASE_URL: apiUrl,
-  FALLBACK_URL: "/api.php", // Production fallback
+  PRODUCTION_URL: "https://mwamunda.ziratech.com/api.php",
+  FALLBACK_URL: "/api.php", // Production fallback (same domain)
   PRIMARY_URL: apiUrl,
 } as const;
