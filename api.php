@@ -41,6 +41,12 @@ function verifyPassword($password, $hash) {
     return hash('sha256', $password) === $hash;
 }
 
+// Handle connection check
+if ($action === "check_connection" && $method === "POST") {
+    echo json_encode(["success" => true, "message" => "API is ready"]);
+    exit;
+}
+
 // Handle authentication actions
 if ($action === "register" && $method === "POST") {
     $email = $input['email'] ?? null;
