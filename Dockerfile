@@ -33,24 +33,38 @@ COPY api.php connection.php /var/www/html/
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
-# Enable Apache proxy modules
-RUN a2enmod proxy proxy_http ssl
+# Remove default Apache configuration
+RUN rm -f /etc/apache2/sites-enabled/*
 
-# Create Apache configuration for SPA routing
-RUN echo '<Directory /var/www/html>
-    RewriteEngine On
-    RewriteBase /
+# Create Apache VirtualHost configuration for SPA routing
+RUN echo '<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
 
-    # Don'\''t rewrite api.php requests or actual files/directories
-    RewriteRule ^api\.php$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
+    <Directory /var/www/html>
+        Options -MultiViews
+        AllowOverride All
 
-    # Rewrite all other requests to index.html for SPA routing
-    RewriteRule ^ index.html [QSA,L]
-</Directory>' > /etc/apache2/conf-available/spa-routing.conf
+        <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteBase /
 
-RUN a2enconf spa-routing
+            # Allow direct access to existing files and directories
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+
+            # Rewrite all other requests to index.html for React Router
+            RewriteRule ^ index.html [QSA,L]
+        </IfModule>
+
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+
+RUN a2ensite 000-default
 
 # Expose port
 EXPOSE 80
