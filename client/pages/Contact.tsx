@@ -134,6 +134,12 @@ export default function Contact() {
               </h3>
               <div className="space-y-2">
                 <a
+                  href="tel:+254708192783"
+                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
+                >
+                  0708192783
+                </a>
+                <a
                   href="tel:+254784222284"
                   className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
                 >
@@ -154,33 +160,14 @@ export default function Contact() {
                 <MapPin className="w-5 sm:w-6 h-5 sm:h-6" />
               </div>
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">
-                Head Office
+                Head Office Mombasa
               </h3>
               <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                Edrine's Plaza Mombasa Building
+                Edrines Plaza, Ground Floor
                 <br />
-                Ground Floor
-                <br />
-                Kilifi, Kenya
-                <br />
-                <br />
-                <strong className="text-foreground">P.O. Box 964</strong>
+                <strong className="text-foreground">PO BOX 964</strong>
               </p>
             </div>
-          </div>
-
-          {/* Alternative Location */}
-          <div className="mb-12 p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-teal-50 border border-primary/20 animate-fade-in">
-            <h3 className="text-2xl font-bold text-foreground mb-4">
-              Kilifi Branch Office
-            </h3>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              <strong className="text-foreground">Address:</strong> Edrine's
-              Plaza Building, Ground Floor, Po.box 964 Kilifi
-            </p>
-            <p className="text-muted-foreground">
-              <strong className="text-foreground">Phone:</strong> 0784222284
-            </p>
           </div>
         </div>
       </section>
@@ -481,7 +468,7 @@ export default function Contact() {
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0784222284
+                0708192783 / 0784222284
               </p>
             </div>
           </div>

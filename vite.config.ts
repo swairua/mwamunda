@@ -17,6 +17,14 @@ export default defineConfig({
         path.join(__dirname, "shared"),
       ],
     },
+    proxy: {
+      "/api.php": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+        rewrite: (path) => path,
+      },
+    },
+    middlewareMode: false,
   },
   build: {
     outDir: "dist",

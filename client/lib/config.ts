@@ -1,7 +1,7 @@
 /**
  * Centralized API configuration
- * In production: uses /api.php (same domain as frontend)
- * In development: uses environment variable or remote endpoint
+ * In production: uses https://mwamunda.ziratech.com/api.php with /api.php fallback
+ * In development: uses environment variable or local endpoint
  */
 
 function getConfiguredApiUrl(): string {
@@ -10,12 +10,12 @@ function getConfiguredApiUrl(): string {
     return import.meta.env.VITE_API_BASE_URL;
   }
 
-  // In production: use relative path to same domain
+  // In production: use primary production URL, with fallback to relative path
   if (import.meta.env.PROD) {
-    return "/api.php";
+    return "https://mwamunda.ziratech.com/api.php";
   }
 
-  // In development: use relative path (PHP dev server on port 8000)
+  // In development: use relative path (local API server on port 8000)
   return "/api.php";
 }
 
@@ -31,6 +31,7 @@ if (typeof window !== "undefined") {
 /**
  * Fetch wrapper for API calls
  * Makes requests to the remote API endpoint with CORS enabled
+ * In production, automatically falls back to relative /api.php if primary URL fails
  */
 export async function apiFetch(
   url: string,
@@ -50,6 +51,34 @@ export async function apiFetch(
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     console.error(`[API] Error with API call to ${url}:`, errorMsg);
+
+    // In production, try fallback URL if primary production URL fails
+    if (
+      import.meta.env.PROD &&
+      url.includes("mwamunda.ziratech.com") &&
+      error instanceof TypeError
+    ) {
+      console.log(
+        "[API] Primary production URL failed, attempting fallback to /api.php",
+      );
+      try {
+        const fallbackUrl = url.replace(
+          "https://mwamunda.ziratech.com/api.php",
+          "/api.php",
+        );
+        const fallbackResponse = await fetch(fallbackUrl, {
+          ...options,
+          mode: "cors",
+        });
+
+        if (fallbackResponse.ok) {
+          console.log("[API] Fallback URL succeeded");
+          return fallbackResponse;
+        }
+      } catch (fallbackError) {
+        console.error("[API] Fallback URL also failed:", fallbackError);
+      }
+    }
 
     if (error instanceof TypeError && errorMsg.includes("fetch")) {
       console.error(
@@ -77,6 +106,7 @@ export function getActiveApiUrl(): string {
 
 export const API_CONFIG = {
   BASE_URL: apiUrl,
-  FALLBACK_URL: "/api.php", // Production fallback
+  PRODUCTION_URL: "https://mwamunda.ziratech.com/api.php",
+  FALLBACK_URL: "/api.php", // Production fallback (same domain)
   PRIMARY_URL: apiUrl,
 } as const;

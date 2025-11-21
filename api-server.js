@@ -22,6 +22,8 @@ let database = {
   users: [],
   products: [],
   applications: [],
+  contacts: [],
+  careers: [],
 };
 
 // Load database from file if it exists
@@ -32,6 +34,20 @@ if (fs.existsSync(dbPath)) {
     console.log("Could not load db.json, starting fresh");
   }
 }
+
+// Ensure all required tables exist
+const requiredTables = [
+  "users",
+  "products",
+  "applications",
+  "contacts",
+  "careers",
+];
+requiredTables.forEach((table) => {
+  if (!database[table]) {
+    database[table] = [];
+  }
+});
 
 // Save database to file
 function saveDatabase() {
@@ -147,8 +163,9 @@ app.post("/api.php", (req, res) => {
   }
 
   if (table && data) {
+    // Auto-create table if it doesn't exist
     if (!database[table]) {
-      return res.status(400).json({ error: `Table ${table} not found` });
+      database[table] = [];
     }
 
     const newItem = {
@@ -176,8 +193,13 @@ app.post("/api.php", (req, res) => {
 app.get("/api.php", (req, res) => {
   const { table, id, orderBy, order, limit } = req.query;
 
-  if (!table || !database[table]) {
-    return res.status(400).json({ error: "Invalid table" });
+  if (!table) {
+    return res.status(400).json({ error: "Table name is required" });
+  }
+
+  // Auto-create table if it doesn't exist
+  if (!database[table]) {
+    database[table] = [];
   }
 
   let results = [...database[table]];
@@ -215,8 +237,13 @@ app.get("/api.php", (req, res) => {
 app.put("/api.php", (req, res) => {
   const { table, id, data } = req.body;
 
-  if (!table || !database[table] || !id) {
-    return res.status(400).json({ error: "Invalid table or ID" });
+  if (!table || !id) {
+    return res.status(400).json({ error: "Table and ID are required" });
+  }
+
+  // Auto-create table if it doesn't exist
+  if (!database[table]) {
+    database[table] = [];
   }
 
   const itemIndex = database[table].findIndex((item) => item.id === id);
@@ -242,8 +269,13 @@ app.put("/api.php", (req, res) => {
 app.delete("/api.php", (req, res) => {
   const { table, id } = req.query;
 
-  if (!table || !database[table] || !id) {
-    return res.status(400).json({ error: "Invalid table or ID" });
+  if (!table || !id) {
+    return res.status(400).json({ error: "Table and ID are required" });
+  }
+
+  // Auto-create table if it doesn't exist
+  if (!database[table]) {
+    database[table] = [];
   }
 
   const itemIndex = database[table].findIndex(
