@@ -178,8 +178,13 @@ app.post("/api.php", (req, res) => {
 app.get("/api.php", (req, res) => {
   const { table, id, orderBy, order, limit } = req.query;
 
-  if (!table || !database[table]) {
-    return res.status(400).json({ error: "Invalid table" });
+  if (!table) {
+    return res.status(400).json({ error: "Table name is required" });
+  }
+
+  // Auto-create table if it doesn't exist
+  if (!database[table]) {
+    database[table] = [];
   }
 
   let results = [...database[table]];
