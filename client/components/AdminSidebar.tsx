@@ -2,14 +2,11 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
-  Users,
   LogOut,
   Menu,
   X,
   Home,
   Mail,
-  FileText,
-  Package,
   Briefcase,
 } from "lucide-react";
 
