@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Plus, Edit2, Trash2, AlertCircle, CheckCircle } from "lucide-react";
 import { apiFetch, getApiUrl } from "@/lib/config";
 import { useToast } from "@/hooks/use-toast";
+import { getStoredUser, clearUser } from "@/lib/auth";
+import AdminSidebar from "@/components/AdminSidebar";
 
 interface Career {
   id?: number;
