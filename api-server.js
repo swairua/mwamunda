@@ -22,6 +22,8 @@ let database = {
   users: [],
   products: [],
   applications: [],
+  contacts: [],
+  careers: [],
 };
 
 // Load database from file if it exists
