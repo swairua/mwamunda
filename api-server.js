@@ -75,6 +75,10 @@ app.use((req, res, next) => {
 app.post("/api.php", (req, res) => {
   const { action, table, data, email, password, name } = req.body;
 
+  if (action === "check_connection") {
+    return res.json({ success: true, message: "API is ready" });
+  }
+
   if (action === "init_users_table") {
     const result = initTable("users");
     return res.json(result);

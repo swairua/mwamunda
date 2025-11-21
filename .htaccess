@@ -1,19 +1,11 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
-
-  # Allow direct access to PHP files
-  RewriteCond %{REQUEST_FILENAME} \.php$ [OR]
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
-
-  # Route all other requests to index.html for React Router
-  RewriteRule ^ index.html [L]
+  RewriteBase /
+  
+  # Don't rewrite actual files
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # Rewrite all other requests to index.html
+  RewriteRule ^ index.html [QSA,L]
 </IfModule>
-
-# PHP headers for API responses
-<FilesMatch "\.php$">
-  Header set Access-Control-Allow-Origin "*"
-  Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-  Header set Access-Control-Allow-Headers "Content-Type"
-</FilesMatch>
