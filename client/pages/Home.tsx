@@ -64,7 +64,7 @@ export default function Home() {
         </div>
 
         {/* Content overlay */}
-        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-12 sm:py-16 md:py-20">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 flex flex-col items-start justify-center py-12 sm:py-16 md:py-20">
           <div className="w-full max-w-2xl">
             <div className="animate-slide-in-left bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 border border-white/20">
               <div className="inline-block mb-6 px-4 py-2 bg-white/30 backdrop-blur border border-white/40 rounded-full">
