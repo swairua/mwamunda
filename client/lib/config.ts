@@ -1,17 +1,52 @@
 /**
  * Centralized API configuration
- * Default: /api.php (relative path - works with proxies in both dev and production)
- * This ensures Apache proxy on fly.dev can intercept and forward to the actual API
+ * Uses local API proxy: /api.php (works in both dev and production)
+ * The local API can be configured to forward to external APIs via server-side proxy
  */
 
-const defaultApiUrl = "/api.php";
-const apiBaseUrl = defaultApiUrl;
+const apiUrl = "/api.php";
 
 // Log the configured API URL for debugging
 if (typeof window !== "undefined") {
-  console.log(`[API Config] Using API endpoint: ${apiBaseUrl}`);
+  console.log(`[API Config] Using API endpoint: ${apiUrl}`);
+}
+
+/**
+ * Fetch wrapper for API calls
+ * Uses the local API proxy which works in both dev and production environments
+ */
+export async function apiFetch(
+  url: string,
+  options: RequestInit = {},
+): Promise<Response> {
+  try {
+    const response = await fetch(url, {
+      ...options,
+    });
+
+    return response;
+  } catch (error) {
+    console.error(`[API] Error with API call:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Get the full API URL
+ */
+export function getApiUrl(path: string = ""): string {
+  return path ? `${apiUrl}${path}` : apiUrl;
+}
+
+/**
+ * Get the currently active API URL
+ */
+export function getActiveApiUrl(): string {
+  return apiUrl;
 }
 
 export const API_CONFIG = {
-  BASE_URL: apiBaseUrl,
+  BASE_URL: primaryApiUrl,
+  FALLBACK_URL: fallbackApiUrl,
+  PRIMARY_URL: primaryApiUrl,
 } as const;

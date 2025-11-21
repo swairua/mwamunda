@@ -1,4 +1,4 @@
-import { API_CONFIG } from "./config";
+import { apiFetch, getApiUrl } from "./config";
 
 export async function initApplicationsTable(): Promise<{
   success?: boolean;
@@ -6,7 +6,7 @@ export async function initApplicationsTable(): Promise<{
   error?: string;
 }> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export async function submitApplication(
   application: Application,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +138,7 @@ export async function getAllApplications(): Promise<Application[]> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(`${API_CONFIG.BASE_URL}?table=applications`, {
+    const response = await apiFetch(`${getApiUrl()}?table=applications`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -184,8 +184,8 @@ export async function getApplicationById(
   id: number,
 ): Promise<Application | null> {
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=applications&id=${id}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=applications&id=${id}`,
       {
         method: "GET",
         headers: {
@@ -229,7 +229,7 @@ export async function updateApplicationStatus(
       updateData.approved_amount = approvedAmount;
     }
 
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -267,7 +267,7 @@ export async function addAdminNotes(
   notes: string,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -303,7 +303,7 @@ export async function rejectApplication(
   reason: string,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -341,8 +341,8 @@ export async function deleteApplication(
   id: number,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=applications&id=${id}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=applications&id=${id}`,
       {
         method: "DELETE",
         headers: {

@@ -19,7 +19,7 @@ export default defineConfig({
     },
     proxy: {
       "/api.php": {
-        target: "http://localhost",
+        target: "http://localhost:8000",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path,

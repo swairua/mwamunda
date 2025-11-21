@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, AlertCircle, CheckCircle, Loader } from "lucide-react";
 import { loginUser, saveUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
+import { apiFetch, getApiUrl, getActiveApiUrl } from "@/lib/config";
+
+type ConnectionStatus = "checking" | "connected" | "fallback" | "disconnected";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -12,6 +15,38 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [connectionStatus, setConnectionStatus] =
+    useState<ConnectionStatus>("checking");
+  const [connectionMessage, setConnectionMessage] = useState("");
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      try {
+        const response = await apiFetch(getApiUrl(), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "check_connection",
+          }),
+        });
+
+        if (response.ok || response.status === 400 || response.status === 500) {
+          setConnectionStatus("connected");
+          setConnectionMessage("✓ API is ready");
+        } else {
+          setConnectionStatus("disconnected");
+          setConnectionMessage("✗ API connection unavailable");
+        }
+      } catch (err) {
+        setConnectionStatus("disconnected");
+        setConnectionMessage("✗ Unable to connect to API server");
+      }
+    };
+
+    checkConnection();
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,6 +99,37 @@ export default function AdminLogin() {
 
           {/* Form */}
           <div className="p-8">
+            {/* Connection Status Banner */}
+            {connectionStatus === "checking" && (
+              <div className="mb-6 p-4 rounded-lg bg-blue-50 border border-blue-200 flex gap-3 animate-slide-in-down">
+                <Loader className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5 animate-spin" />
+                <p className="text-sm text-blue-700">
+                  Checking API connection...
+                </p>
+              </div>
+            )}
+
+            {connectionStatus === "connected" && (
+              <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 flex gap-3 animate-slide-in-down">
+                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-green-700">{connectionMessage}</p>
+              </div>
+            )}
+
+            {connectionStatus === "fallback" && (
+              <div className="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 flex gap-3 animate-slide-in-down">
+                <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-amber-700">{connectionMessage}</p>
+              </div>
+            )}
+
+            {connectionStatus === "disconnected" && (
+              <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 flex gap-3 animate-slide-in-down">
+                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-red-700">{connectionMessage}</p>
+              </div>
+            )}
+
             {error && (
               <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 flex gap-3 animate-slide-in-down">
                 <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
