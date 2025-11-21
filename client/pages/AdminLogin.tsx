@@ -15,7 +15,8 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>("checking");
+  const [connectionStatus, setConnectionStatus] =
+    useState<ConnectionStatus>("checking");
   const [connectionMessage, setConnectionMessage] = useState("");
 
   useEffect(() => {
@@ -102,7 +103,9 @@ export default function AdminLogin() {
             {connectionStatus === "checking" && (
               <div className="mb-6 p-4 rounded-lg bg-blue-50 border border-blue-200 flex gap-3 animate-slide-in-down">
                 <Loader className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5 animate-spin" />
-                <p className="text-sm text-blue-700">Checking API connection...</p>
+                <p className="text-sm text-blue-700">
+                  Checking API connection...
+                </p>
               </div>
             )}
 

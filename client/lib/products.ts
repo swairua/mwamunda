@@ -165,16 +165,13 @@ export async function getProductById(id: number): Promise<Product> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await apiFetch(
-      `${getApiUrl()}?table=products&id=${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        signal: controller.signal,
+    const response = await apiFetch(`${getApiUrl()}?table=products&id=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      signal: controller.signal,
+    });
 
     clearTimeout(timeoutId);
 
@@ -286,16 +283,13 @@ export async function deleteProduct(id: number): Promise<{
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await apiFetch(
-      `${getApiUrl()}?table=products&id=${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        signal: controller.signal,
+    const response = await apiFetch(`${getApiUrl()}?table=products&id=${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      signal: controller.signal,
+    });
 
     clearTimeout(timeoutId);
 
