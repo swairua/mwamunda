@@ -33,24 +33,6 @@ export default function AdminSidebar({
       path: "/admin/dashboard",
     },
     {
-      id: "users",
-      icon: <Users className="w-5 h-5" />,
-      label: "Users",
-      path: "/admin/dashboard",
-    },
-    {
-      id: "products",
-      icon: <Package className="w-5 h-5" />,
-      label: "Products",
-      path: "/admin/products",
-    },
-    {
-      id: "applications",
-      icon: <FileText className="w-5 h-5" />,
-      label: "Applications",
-      path: "/admin/applications",
-    },
-    {
       id: "contacts",
       icon: <Mail className="w-5 h-5" />,
       label: "Contacts",
