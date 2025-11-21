@@ -18,6 +18,7 @@ import AdminSetup from "./pages/AdminSetup";
 import AdminInit from "./pages/AdminInit";
 import AdminInitProducts from "./pages/AdminInitProducts";
 import AdminInitApplications from "./pages/AdminInitApplications";
+import AdminInitCareers from "./pages/AdminInitCareers";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
 import AdminDashboard from "./pages/AdminDashboard";
