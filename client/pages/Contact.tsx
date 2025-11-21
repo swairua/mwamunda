@@ -134,22 +134,10 @@ export default function Contact() {
               </h3>
               <div className="space-y-2">
                 <a
-                  href="tel:+254106673939"
-                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
-                >
-                  0106673939
-                </a>
-                <a
                   href="tel:+254784222284"
                   className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
                 >
                   0784222284
-                </a>
-                <a
-                  href="tel:+254708192783"
-                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
-                >
-                  0708192783
                 </a>
               </div>
               <p className="text-muted-foreground text-xs sm:text-sm mt-3 sm:mt-4">
@@ -190,8 +178,7 @@ export default function Contact() {
               Plaza Building, Ground Floor, Po.box 964 Kilifi
             </p>
             <p className="text-muted-foreground">
-              <strong className="text-foreground">Phone:</strong> 0708192783 /
-              0784222284
+              <strong className="text-foreground">Phone:</strong> 0784222284
             </p>
           </div>
         </div>
@@ -493,9 +480,7 @@ export default function Contact() {
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0106673939 / 0784222284
-                <br />
-                0708192783
+                0784222284
               </p>
             </div>
           </div>
