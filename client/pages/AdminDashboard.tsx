@@ -5,9 +5,6 @@ import {
   Plus,
   Trash2,
   Eye,
-  Package,
-  FileText,
-  Briefcase,
 } from "lucide-react";
 import { getStoredUser, clearUser, getAllUsers, User } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
