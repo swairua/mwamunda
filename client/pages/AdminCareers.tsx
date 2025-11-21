@@ -24,11 +24,29 @@ interface Career {
 }
 
 export default function AdminCareers() {
+  const navigate = useNavigate();
   const { toast } = useToast();
+  const currentUser = getStoredUser();
   const [careers, setCareers] = useState<Career[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [showForm, setShowForm] = useState(false);
+
+  // Redirect if not logged in
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/admin/login");
+    }
+  }, [currentUser, navigate]);
+
+  const handleLogout = () => {
+    clearUser();
+    toast({
+      title: "Success",
+      description: "Logged out successfully",
+    });
+    navigate("/admin/login");
+  };
   const [formData, setFormData] = useState<Career>({
     position_title: "",
     department: "",
