@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 
 /**
  * Fetch wrapper for API calls
- * Uses the local API proxy which works in both dev and production environments
+ * Makes requests to the remote API endpoint with CORS enabled
  */
 export async function apiFetch(
   url: string,
@@ -21,11 +21,23 @@ export async function apiFetch(
   try {
     const response = await fetch(url, {
       ...options,
+      mode: "cors",
+      credentials: "include",
     });
 
     return response;
   } catch (error) {
-    console.error(`[API] Error with API call:`, error);
+    console.error(
+      `[API] Error with API call to ${url}:`,
+      error instanceof Error ? error.message : String(error),
+    );
+
+    if (error instanceof TypeError) {
+      console.error(
+        "[API] This is typically a CORS issue. Ensure the remote endpoint has proper CORS headers configured.",
+      );
+    }
+
     throw error;
   }
 }
