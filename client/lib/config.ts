@@ -1,7 +1,7 @@
 /**
  * Centralized API configuration
- * In production: uses /api.php (same domain as frontend)
- * In development: uses environment variable or remote endpoint
+ * In production: uses https://mwamunda.ziratech.com/api.php with /api.php fallback
+ * In development: uses environment variable or local endpoint
  */
 
 function getConfiguredApiUrl(): string {
@@ -10,12 +10,12 @@ function getConfiguredApiUrl(): string {
     return import.meta.env.VITE_API_BASE_URL;
   }
 
-  // In production: use relative path to same domain
+  // In production: use primary production URL, with fallback to relative path
   if (import.meta.env.PROD) {
-    return "/api.php";
+    return "https://mwamunda.ziratech.com/api.php";
   }
 
-  // In development: use relative path (PHP dev server on port 8000)
+  // In development: use relative path (local API server on port 8000)
   return "/api.php";
 }
 
