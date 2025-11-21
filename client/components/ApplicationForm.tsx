@@ -98,6 +98,15 @@ export default function ApplicationForm({
         additional_info: formData.additional_info,
       });
 
+      // Also save to contacts for centralized contact management
+      await submitContact({
+        name: formData.full_name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: `${productName} Application`,
+        message: `Application for ${productName}\n\nBusiness Type: ${formData.business_type || "N/A"}\nRequested Amount: ${formData.requested_amount || "N/A"}\nEmployment Status: ${formData.employment_status}\n\nAdditional Info: ${formData.additional_info || "None"}`,
+      });
+
       setSubmitted(true);
       toast({
         title: "Success",
