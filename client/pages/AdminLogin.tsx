@@ -114,6 +114,35 @@ export default function AdminLogin() {
 
           {/* Form */}
           <div className="p-8">
+            {/* Connection Status Banner */}
+            {connectionStatus === "checking" && (
+              <div className="mb-6 p-4 rounded-lg bg-blue-50 border border-blue-200 flex gap-3 animate-slide-in-down">
+                <Loader className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5 animate-spin" />
+                <p className="text-sm text-blue-700">Checking API connection...</p>
+              </div>
+            )}
+
+            {connectionStatus === "connected" && (
+              <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 flex gap-3 animate-slide-in-down">
+                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-green-700">{connectionMessage}</p>
+              </div>
+            )}
+
+            {connectionStatus === "fallback" && (
+              <div className="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 flex gap-3 animate-slide-in-down">
+                <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-amber-700">{connectionMessage}</p>
+              </div>
+            )}
+
+            {connectionStatus === "disconnected" && (
+              <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 flex gap-3 animate-slide-in-down">
+                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-red-700">{connectionMessage}</p>
+              </div>
+            )}
+
             {error && (
               <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 flex gap-3 animate-slide-in-down">
                 <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
