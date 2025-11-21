@@ -89,7 +89,9 @@ export default function Careers() {
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p className="mt-4 text-muted-foreground">Loading career positions...</p>
+            <p className="mt-4 text-muted-foreground">
+              Loading career positions...
+            </p>
           </div>
         ) : error ? (
           <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-700">
@@ -156,17 +158,20 @@ export default function Careers() {
                       Qualifications
                     </h4>
                     <ul className="space-y-2">
-                      {career.qualifications.split("\n").map((qual, index) => (
-                        qual.trim() && (
-                          <li
-                            key={index}
-                            className="flex items-start gap-3 text-muted-foreground"
-                          >
-                            <span className="text-primary font-bold mt-1">•</span>
-                            <span>{qual.trim()}</span>
-                          </li>
-                        )
-                      ))}
+                      {career.qualifications.split("\n").map(
+                        (qual, index) =>
+                          qual.trim() && (
+                            <li
+                              key={index}
+                              className="flex items-start gap-3 text-muted-foreground"
+                            >
+                              <span className="text-primary font-bold mt-1">
+                                •
+                              </span>
+                              <span>{qual.trim()}</span>
+                            </li>
+                          ),
+                      )}
                     </ul>
                   </div>
 
@@ -177,9 +182,8 @@ export default function Careers() {
                         Responsibilities
                       </h4>
                       <ul className="space-y-2">
-                        {career.responsibilities
-                          .split("\n")
-                          .map((resp, index) => (
+                        {career.responsibilities.split("\n").map(
+                          (resp, index) =>
                             resp.trim() && (
                               <li
                                 key={index}
@@ -190,8 +194,8 @@ export default function Careers() {
                                 </span>
                                 <span>{resp.trim()}</span>
                               </li>
-                            )
-                          ))}
+                            ),
+                        )}
                       </ul>
                     </div>
                   )}

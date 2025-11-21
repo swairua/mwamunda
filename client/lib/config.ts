@@ -25,18 +25,13 @@ export async function apiFetch(
     });
 
     if (!response.ok) {
-      console.warn(
-        `[API] Response status ${response.status} from ${url}`,
-      );
+      console.warn(`[API] Response status ${response.status} from ${url}`);
     }
 
     return response;
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
-    console.error(
-      `[API] Error with API call to ${url}:`,
-      errorMsg,
-    );
+    console.error(`[API] Error with API call to ${url}:`, errorMsg);
 
     if (error instanceof TypeError && errorMsg.includes("fetch")) {
       console.error(

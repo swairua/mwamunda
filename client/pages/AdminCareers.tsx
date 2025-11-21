@@ -250,7 +250,9 @@ export default function AdminCareers() {
             <h1 className="text-3xl md:text-4xl font-bold mb-2">
               Career Positions
             </h1>
-            <p className="text-white/90">Manage and post career opportunities</p>
+            <p className="text-white/90">
+              Manage and post career opportunities
+            </p>
           </div>
         </div>
 
@@ -279,7 +281,9 @@ export default function AdminCareers() {
           {showForm && (
             <div className="bg-white rounded-lg border border-border p-8 space-y-6">
               <h2 className="text-2xl font-bold">
-                {editingId ? "Edit Career Position" : "Post New Career Position"}
+                {editingId
+                  ? "Edit Career Position"
+                  : "Post New Career Position"}
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -533,7 +537,9 @@ export default function AdminCareers() {
               {loading ? (
                 <div className="text-center py-12">
                   <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                  <p className="mt-4 text-muted-foreground">Loading positions...</p>
+                  <p className="mt-4 text-muted-foreground">
+                    Loading positions...
+                  </p>
                 </div>
               ) : careers.length === 0 ? (
                 <div className="bg-muted rounded-lg p-8 text-center">
@@ -607,7 +613,8 @@ export default function AdminCareers() {
 
                           <div className="mt-3 text-sm text-muted-foreground">
                             <span className="font-medium">Apply: </span>
-                            {career.application_email} | {career.application_phone}
+                            {career.application_email} |{" "}
+                            {career.application_phone}
                           </div>
 
                           {career.validity_end_date && (

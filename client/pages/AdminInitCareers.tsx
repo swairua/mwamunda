@@ -27,9 +27,7 @@ export default function AdminInitCareers() {
 
       if (data.success || data.message?.includes("already exists")) {
         setStatus("success");
-        setMessage(
-          data.message || "Careers table initialized successfully!"
-        );
+        setMessage(data.message || "Careers table initialized successfully!");
       } else {
         setStatus("error");
         setMessage(data.error || "Failed to initialize careers table");
@@ -39,7 +37,7 @@ export default function AdminInitCareers() {
       setMessage(
         error instanceof Error
           ? error.message
-          : "An error occurred while initializing the table"
+          : "An error occurred while initializing the table",
       );
     } finally {
       setLoading(false);
@@ -52,7 +50,9 @@ export default function AdminInitCareers() {
         <div className="bg-white rounded-2xl shadow-xl border border-border overflow-hidden">
           <div className="bg-gradient-to-r from-primary to-secondary p-8 text-white">
             <h1 className="text-3xl font-bold mb-2">Initialize Careers</h1>
-            <p className="text-white/90">Set up the careers management system</p>
+            <p className="text-white/90">
+              Set up the careers management system
+            </p>
           </div>
 
           <div className="p-8 space-y-6">
