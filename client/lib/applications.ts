@@ -138,7 +138,7 @@ export async function getAllApplications(): Promise<Application[]> {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(`${API_CONFIG.BASE_URL}?table=applications`, {
+    const response = await apiFetch(`${getApiUrl()}?table=applications`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -184,8 +184,8 @@ export async function getApplicationById(
   id: number,
 ): Promise<Application | null> {
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=applications&id=${id}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=applications&id=${id}`,
       {
         method: "GET",
         headers: {
@@ -341,8 +341,8 @@ export async function deleteApplication(
   id: number,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(
-      `${API_CONFIG.BASE_URL}?table=applications&id=${id}`,
+    const response = await apiFetch(
+      `${getApiUrl()}?table=applications&id=${id}`,
       {
         method: "DELETE",
         headers: {
