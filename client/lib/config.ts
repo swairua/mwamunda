@@ -22,19 +22,25 @@ export async function apiFetch(
     const response = await fetch(url, {
       ...options,
       mode: "cors",
-      credentials: "include",
     });
+
+    if (!response.ok) {
+      console.warn(
+        `[API] Response status ${response.status} from ${url}`,
+      );
+    }
 
     return response;
   } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
     console.error(
       `[API] Error with API call to ${url}:`,
-      error instanceof Error ? error.message : String(error),
+      errorMsg,
     );
 
-    if (error instanceof TypeError) {
+    if (error instanceof TypeError && errorMsg.includes("fetch")) {
       console.error(
-        "[API] This is typically a CORS issue. Ensure the remote endpoint has proper CORS headers configured.",
+        "[API] CORS or network error. Verify the remote endpoint is accessible and has proper CORS headers.",
       );
     }
 
