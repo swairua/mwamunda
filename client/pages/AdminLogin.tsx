@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, AlertCircle, CheckCircle, Loader } from "lucide-react";
 import { loginUser, saveUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
+import { apiFetch, getApiUrl, getActiveApiUrl } from "@/lib/config";
+
+type ConnectionStatus = "checking" | "connected" | "fallback" | "disconnected";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -12,6 +15,53 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>("checking");
+  const [connectionMessage, setConnectionMessage] = useState("");
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      try {
+        const response = await apiFetch(getApiUrl(), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "check_connection",
+          }),
+        });
+
+        const activeUrl = getActiveApiUrl();
+        const isPrimaryAPI = activeUrl.includes("mwamunda.ziratech.com");
+
+        if (response.ok || response.status === 400 || response.status === 500) {
+          if (isPrimaryAPI) {
+            setConnectionStatus("connected");
+            setConnectionMessage("✓ Connected to Mwamunda API");
+          } else {
+            setConnectionStatus("fallback");
+            setConnectionMessage("⚠ Using local API (fallback mode)");
+          }
+        } else {
+          setConnectionStatus("disconnected");
+          setConnectionMessage("✗ API connection unavailable");
+        }
+      } catch (err) {
+        const activeUrl = getActiveApiUrl();
+        const isPrimaryAPI = activeUrl.includes("mwamunda.ziratech.com");
+
+        if (isPrimaryAPI) {
+          setConnectionStatus("fallback");
+          setConnectionMessage("⚠ Using local API (fallback mode)");
+        } else {
+          setConnectionStatus("disconnected");
+          setConnectionMessage("✗ Unable to connect to any API");
+        }
+      }
+    };
+
+    checkConnection();
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
