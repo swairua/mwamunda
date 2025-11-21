@@ -1,13 +1,31 @@
 /**
  * Centralized API configuration
- * Uses remote API endpoint: https://mwamunda.ziratech.com/api.php
+ * In production: uses /api.php (same domain as frontend)
+ * In development: uses environment variable or remote endpoint
  */
 
-const apiUrl = "https://mwamunda.ziratech.com/api.php";
+function getConfiguredApiUrl(): string {
+  // Check environment variable first (for development/staging with custom URL)
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+
+  // In production: use relative path to same domain
+  if (import.meta.env.PROD) {
+    return "/api.php";
+  }
+
+  // In development: use relative path (PHP dev server on port 8000)
+  return "/api.php";
+}
+
+const apiUrl = getConfiguredApiUrl();
 
 // Log the configured API URL for debugging
 if (typeof window !== "undefined") {
-  console.log(`[API Config] Using API endpoint: ${apiUrl}`);
+  console.log(
+    `[API Config] Using API endpoint: ${apiUrl} (PROD: ${import.meta.env.PROD})`,
+  );
 }
 
 /**
@@ -59,6 +77,6 @@ export function getActiveApiUrl(): string {
 
 export const API_CONFIG = {
   BASE_URL: apiUrl,
-  FALLBACK_URL: apiUrl,
+  FALLBACK_URL: "/api.php", // Production fallback
   PRIMARY_URL: apiUrl,
 } as const;

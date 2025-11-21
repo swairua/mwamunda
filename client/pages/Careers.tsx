@@ -16,6 +16,7 @@ interface Career {
   image_url?: string;
   validity_start_date?: string;
   validity_end_date?: string;
+  status?: string;
   created_at?: string;
 }
 
