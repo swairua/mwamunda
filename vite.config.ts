@@ -24,6 +24,12 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path,
       },
+      "/external-api": {
+        target: "https://mwamunda.ziratech.com",
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/external-api/, ""),
+      },
     },
   },
   build: {
