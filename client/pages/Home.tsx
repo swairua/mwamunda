@@ -54,7 +54,7 @@ export default function Home() {
 
         {/* Hero Image - Right Side */}
         <div className="flex absolute right-0 top-1/2 -translate-y-1/2 z-5 h-full items-center pr-2 sm:pr-4 md:pr-6 lg:pr-8">
-          <div className="relative w-48 sm:w-56 md:w-72 lg:w-[300px] h-48 sm:h-56 md:h-72 lg:h-[300px] rounded-3xl overflow-hidden shadow-2xl animate-slide-in-right">
+          <div className="relative w-40 sm:w-48 md:w-80 lg:w-[400px] h-40 sm:h-48 md:h-80 lg:h-[400px] rounded-3xl overflow-hidden shadow-2xl animate-slide-in-right">
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F52e00125125046a69d6527573cdca733%2F04c3168de51f43519439fc0ffe5d3e92?format=webp&width=800"
               alt="Mwamunda Investment Limited Head Office"
