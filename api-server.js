@@ -255,8 +255,13 @@ app.put("/api.php", (req, res) => {
 app.delete("/api.php", (req, res) => {
   const { table, id } = req.query;
 
-  if (!table || !database[table] || !id) {
-    return res.status(400).json({ error: "Invalid table or ID" });
+  if (!table || !id) {
+    return res.status(400).json({ error: "Table and ID are required" });
+  }
+
+  // Auto-create table if it doesn't exist
+  if (!database[table]) {
+    database[table] = [];
   }
 
   const itemIndex = database[table].findIndex(
