@@ -31,7 +31,7 @@ export async function apiFetch(
 ): Promise<Response> {
   const isExternalUrl = url.startsWith("http");
 
-  // If it's already an external URL, try it directly
+  // If it's already an external URL (primary API), try it first
   if (isExternalUrl) {
     try {
       const response = await fetch(url, {
@@ -45,10 +45,10 @@ export async function apiFetch(
         return response;
       }
 
-      // If primary fails and we haven't tried fallback yet, try fallback
+      // If primary fails with 4xx/5xx and we have a fallback, try fallback
       if (url === primaryApiUrl && apiHealthStatus.fallback) {
         console.warn(
-          `[API] Primary API failed with status ${response.status}, attempting fallback...`,
+          `[API] Primary API returned status ${response.status}, attempting fallback...`,
         );
         apiHealthStatus.primary = false;
         return apiFetch(fallbackApiUrl, options);
@@ -56,7 +56,7 @@ export async function apiFetch(
 
       return response;
     } catch (error) {
-      console.error(`[API] Error with ${url}:`, error);
+      console.error(`[API] Error connecting to primary API:`, error);
 
       // If primary fails with network error and fallback is available, try fallback
       if (url === primaryApiUrl && apiHealthStatus.fallback) {
@@ -71,7 +71,7 @@ export async function apiFetch(
     }
   }
 
-  // For relative URLs, use the fallback (local API)
+  // For relative URLs, use the local API
   try {
     const response = await fetch(url, {
       ...options,
@@ -85,7 +85,7 @@ export async function apiFetch(
 
     return response;
   } catch (error) {
-    console.error(`[API] Error with fallback ${url}:`, error);
+    console.error(`[API] Error with local API:`, error);
     throw error;
   }
 }
