@@ -9,7 +9,7 @@ import {
   Shield,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import ApplicationForm from "@/components/ApplicationForm";
+import ProductContactForm from "@/components/ProductContactForm";
 import OptimizedImage from "@/components/OptimizedImage";
 
 export default function FairPersonalLoans() {
@@ -229,10 +229,7 @@ export default function FairPersonalLoans() {
             </p>
           </div>
 
-          <ApplicationForm
-            productType="fair-personal-loans"
-            productName="Fair Personal Loans"
-          />
+          <ProductContactForm productName="Fair Personal Loans" />
         </div>
       </section>
 

@@ -9,7 +9,7 @@ import {
   Award,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import ApplicationForm from "@/components/ApplicationForm";
+import ProductContactForm from "@/components/ProductContactForm";
 import OptimizedImage from "@/components/OptimizedImage";
 
 export default function ChamaLoans() {
@@ -230,10 +230,7 @@ export default function ChamaLoans() {
             </p>
           </div>
 
-          <ApplicationForm
-            productType="chama-loans"
-            productName="Chama Loans"
-          />
+          <ProductContactForm productName="Chama Loans" />
         </div>
       </section>
 

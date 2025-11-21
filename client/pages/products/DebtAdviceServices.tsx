@@ -9,7 +9,7 @@ import {
   Heart,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import ApplicationForm from "@/components/ApplicationForm";
+import ProductContactForm from "@/components/ProductContactForm";
 import OptimizedImage from "@/components/OptimizedImage";
 
 export default function DebtAdviceServices() {
@@ -230,10 +230,7 @@ export default function DebtAdviceServices() {
             </p>
           </div>
 
-          <ApplicationForm
-            productType="debt-advice-services"
-            productName="Debt Advice Services"
-          />
+          <ProductContactForm productName="Debt Advice Services" />
         </div>
       </section>
 
