@@ -160,17 +160,12 @@ export default function Contact() {
                 <MapPin className="w-5 sm:w-6 h-5 sm:h-6" />
               </div>
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">
-                Head Office
+                Head Office Mombasa
               </h3>
               <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                Edrine's Plaza Mombasa Building
+                Edrines Plaza, Ground Floor
                 <br />
-                Ground Floor
-                <br />
-                Kilifi, Kenya
-                <br />
-                <br />
-                <strong className="text-foreground">P.O. Box 964</strong>
+                <strong className="text-foreground">PO BOX 964</strong>
               </p>
             </div>
           </div>
