@@ -35,6 +35,14 @@ if (fs.existsSync(dbPath)) {
   }
 }
 
+// Ensure all required tables exist
+const requiredTables = ["users", "products", "applications", "contacts", "careers"];
+requiredTables.forEach((table) => {
+  if (!database[table]) {
+    database[table] = [];
+  }
+});
+
 // Save database to file
 function saveDatabase() {
   fs.writeFileSync(dbPath, JSON.stringify(database, null, 2));
