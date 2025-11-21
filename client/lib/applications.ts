@@ -1,4 +1,4 @@
-import { API_CONFIG } from "./config";
+import { apiFetch, getApiUrl } from "./config";
 
 export async function initApplicationsTable(): Promise<{
   success?: boolean;
@@ -6,7 +6,7 @@ export async function initApplicationsTable(): Promise<{
   error?: string;
 }> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
