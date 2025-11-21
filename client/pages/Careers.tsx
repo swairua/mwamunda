@@ -76,8 +76,8 @@ export default function Careers() {
           </div>
           <div className="hidden md:block">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets%2Fd1da1ee6192a4b8bb7ef824cbbfde284%2F91d04515c5c64b4c81a62076df57a6a6?format=webp&width=800"
-              alt="Hiring"
+              src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
+              alt="Mwamunda Investment Limited"
               className="w-full h-auto rounded-lg"
             />
           </div>
