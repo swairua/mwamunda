@@ -149,8 +149,9 @@ app.post("/api.php", (req, res) => {
   }
 
   if (table && data) {
+    // Auto-create table if it doesn't exist
     if (!database[table]) {
-      return res.status(400).json({ error: `Table ${table} not found` });
+      database[table] = [];
     }
 
     const newItem = {
