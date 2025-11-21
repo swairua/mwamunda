@@ -1,4 +1,4 @@
-import { apiFetch, getApiUrl } from "./config";
+import { apiFetch, getApiUrl, API_CONFIG } from "./config";
 
 export interface Product {
   id: number;
