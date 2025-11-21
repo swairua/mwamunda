@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Plus,
@@ -16,7 +16,7 @@ import {
   deleteProduct,
   Product,
 } from "@/lib/products";
-import { getStoredUser, clearUser } from "@/lib/auth";
+import { getStoredUser, clearUser, isAuthenticated } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
 
@@ -25,7 +25,7 @@ const ITEMS_PER_PAGE = 10;
 export default function AdminProducts() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const currentUser = getStoredUser();
+  const currentUser = useMemo(() => getStoredUser(), []);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -55,7 +55,7 @@ export default function AdminProducts() {
     }
   }, [currentUser, navigate]);
 
-  // Fetch products
+  // Fetch products on mount only
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -77,11 +77,10 @@ export default function AdminProducts() {
       }
     };
 
-    if (currentUser) {
+    if (isAuthenticated()) {
       fetchProducts();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }, [toast]);
 
   // Apply search and filter
   useEffect(() => {
