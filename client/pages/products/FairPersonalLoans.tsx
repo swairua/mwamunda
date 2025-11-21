@@ -371,9 +371,7 @@ export default function FairPersonalLoans() {
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0106673939 / 0784222284
-                <br />
-                0708192783
+                0784222284
               </p>
             </div>
           </div>
