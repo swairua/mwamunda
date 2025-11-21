@@ -1,4 +1,4 @@
-import { API_CONFIG } from "./config";
+import { apiFetch, getApiUrl } from "./config";
 
 export interface Product {
   id: number;
@@ -22,7 +22,7 @@ export async function initProductsTable(): Promise<{
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,6 @@ export async function initProductsTable(): Promise<{
         action: "init_products_table",
       }),
       signal: controller.signal,
-      mode: "cors",
     });
 
     clearTimeout(timeoutId);
