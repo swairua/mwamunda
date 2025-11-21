@@ -83,7 +83,7 @@ export async function submitApplication(
   application: Application,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -229,7 +229,7 @@ export async function updateApplicationStatus(
       updateData.approved_amount = approvedAmount;
     }
 
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -267,7 +267,7 @@ export async function addAdminNotes(
   notes: string,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -303,7 +303,7 @@ export async function rejectApplication(
   reason: string,
 ): Promise<ApplicationResponse> {
   try {
-    const response = await fetch(API_CONFIG.BASE_URL, {
+    const response = await apiFetch(getApiUrl(), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
