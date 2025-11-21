@@ -157,9 +157,10 @@ export default function Contact() {
                 Head Office
               </h3>
               <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                Hussein Mayai Road
+                Edrine's Plaza Mombasa Building
                 <br />
-                Opposite Kadzomba Plaza, Room 8<br />
+                Ground Floor
+                <br />
                 Kilifi, Kenya
                 <br />
                 <br />
