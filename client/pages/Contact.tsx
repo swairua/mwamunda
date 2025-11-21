@@ -474,7 +474,7 @@ export default function Contact() {
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0784222284
+                0708192783 / 0784222284
               </p>
             </div>
           </div>
