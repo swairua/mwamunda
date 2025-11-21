@@ -36,21 +36,38 @@ RUN chown -R www-data:www-data /var/www/html && \
 # Enable Apache proxy modules
 RUN a2enmod proxy proxy_http ssl
 
-# Create Apache configuration for SPA routing
-RUN echo '<Directory /var/www/html>
-    RewriteEngine On
-    RewriteBase /
+# Create Apache VirtualHost configuration for SPA routing
+RUN echo '<VirtualHost *:80>
+    DocumentRoot /var/www/html
 
-    # Don'\''t rewrite api.php requests or actual files/directories
-    RewriteRule ^api\.php$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
+    <Directory /var/www/html>
+        RewriteEngine On
+        RewriteBase /
 
-    # Rewrite all other requests to index.html for SPA routing
-    RewriteRule ^ index.html [QSA,L]
-</Directory>' > /etc/apache2/conf-available/spa-routing.conf
+        # Allow direct access to files and directories that exist
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
 
-RUN a2enconf spa-routing
+        # Don'\''t rewrite api.php or api calls
+        RewriteCond %{REQUEST_URI} !^/api\.php
+        RewriteCond %{REQUEST_URI} !^/api/
+
+        # Rewrite all other requests to index.html for SPA routing
+        RewriteRule ^(.*)$ index.html [QSA,L]
+
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    <FilesMatch "\.(php)$">
+        SetHandler application/x-httpd-php
+    </FilesMatch>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+
+RUN a2dissite 000-default 2>/dev/null; a2ensite 000-default
 
 # Expose port
 EXPOSE 80
