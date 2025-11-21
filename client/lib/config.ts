@@ -77,6 +77,6 @@ export function getActiveApiUrl(): string {
 
 export const API_CONFIG = {
   BASE_URL: apiUrl,
-  FALLBACK_URL: apiUrl,
+  FALLBACK_URL: "/api.php", // Production fallback
   PRIMARY_URL: apiUrl,
 } as const;
