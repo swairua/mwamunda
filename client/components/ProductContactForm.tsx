@@ -101,8 +101,8 @@ export default function ProductContactForm({
         {productName} Inquiry
       </h2>
       <p className="text-muted-foreground mb-8">
-        Fill out the form below with your inquiry about {productName}. We'll
-        get back to you within 24-48 hours.
+        Fill out the form below with your inquiry about {productName}. We'll get
+        back to you within 24-48 hours.
       </p>
 
       {error && (
