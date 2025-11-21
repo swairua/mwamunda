@@ -65,26 +65,21 @@ export default function Careers() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header Section */}
-      <div className="bg-gradient-to-br from-gray-100 to-white pt-8 pb-12">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
-              WE'RE HIRING
+      <Navigation />
+
+      {/* Hero Section */}
+      <section className="relative pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center animate-slide-in-down">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
+              We're Hiring
             </h1>
-            <div className="bg-gray-400 text-white py-3 px-6 inline-block text-lg font-semibold mb-8">
-              JOIN OUR TEAM!
-            </div>
-          </div>
-          <div className="hidden md:block">
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
-              alt="Mwamunda Investment Limited"
-              className="w-full h-auto rounded-lg"
-            />
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Join our team and be part of our mission to provide financial solutions for the underserved.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
