@@ -12,12 +12,8 @@ export default function HeroSlider({
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    "https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2Fefd1420552484b6a9a2406a4e685d75a?format=webp&width=800&height=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2Ff77b7379aff34c41bad00c584a5a12d2?format=webp&width=800&height=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2F060dff18bacf407aac8af7d66fefce9d?format=webp&width=800&height=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2Fd0cade1647d142efbd9e642ff77edbbb?format=webp&width=800&height=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2F57bdf64481ac4745a5221164754528b8?format=webp&width=800&height=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2F7891a322c40649f99465c4ccac0c18e7?format=webp&width=800&height=1200",
+    "https://images.pexels.com/photos/34746298/pexels-photo-34746298.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/6801647/pexels-photo-6801647.jpeg?auto=compress&cs=tinysrgb&w=800",
   ];
 
   useEffect(() => {
