@@ -19,6 +19,7 @@ import {
 import Navigation from "@/components/Navigation";
 import HeroSlider from "@/components/HeroSlider";
 import OptimizedImage from "@/components/OptimizedImage";
+import PromotionalGallery from "@/components/PromotionalGallery";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -566,8 +567,8 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
                   <OptimizedImage
-                    src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F502cbced94e140d6805e025fba6f1bde?format=webp&width=800"
-                    alt="Expert team member providing financial guidance"
+                    src="https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2Fd0cade1647d142efbd9e642ff77edbbb?format=webp&width=800&height=1200"
+                    alt="Mwamunda team member providing financial guidance"
                     className="w-full h-full object-cover"
                     containerClassName="w-full h-full"
                     placeholderColor="bg-gray-200"
@@ -733,6 +734,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <PromotionalGallery />
 
       {/* Partnership Opportunities Section - Moved After Success Stories */}
       <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-blue-50/30">

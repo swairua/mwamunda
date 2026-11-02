@@ -282,8 +282,8 @@ export default function About() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-left">
               <OptimizedImage
-                src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91aa7cdd88b84007a4edf2c0c6affb53?format=webp&width=800"
-                alt="Team member"
+                src="https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2Ff77b7379aff34c41bad00c584a5a12d2?format=webp&width=800&height=1200"
+                alt="Mwamunda team member working at an office"
                 className="w-full h-64 object-cover"
                 containerClassName="w-full h-64"
                 placeholderColor="bg-gray-300"
