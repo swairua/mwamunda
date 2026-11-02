@@ -56,8 +56,8 @@ export default function Home() {
         <div className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-5 h-full items-center pr-2 sm:pr-4 md:pr-6 lg:pr-8">
           <div className="relative w-40 sm:w-48 md:w-80 lg:w-[400px] h-40 sm:h-48 md:h-80 lg:h-[400px] rounded-3xl overflow-hidden shadow-2xl animate-slide-in-right">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets%2F52e00125125046a69d6527573cdca733%2F04c3168de51f43519439fc0ffe5d3e92?format=webp&width=800"
-              alt="Mwamunda Investment Limited Head Office"
+              src="https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2Fc9b6a10fd47a47a0903b46bd1b39d65d?format=webp&width=800&height=1200"
+              alt="Mwamunda Investment Limited contact number"
               className="w-full h-full object-cover"
             />
           </div>
@@ -1070,12 +1070,16 @@ export default function Home() {
               <p className="text-white/70 text-sm mb-3">
                 <strong>Email:</strong>
                 <br />
-                info@mwamunda.com
+                <a href="mailto:info@mwamunda.co.ke" className="hover:text-white">info@mwamunda.co.ke</a>
+                <br />
+                <a href="mailto:customercare@mwamunda.co.ke" className="hover:text-white">customercare@mwamunda.co.ke</a>
               </p>
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0784222284
+                Safaricom: Corporate line pending
+                <br />
+                Airtel: <a href="tel:+254789698601" className="hover:text-white">0789698601</a>
               </p>
             </div>
           </div>

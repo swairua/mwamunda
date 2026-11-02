@@ -105,16 +105,16 @@ export default function Contact() {
                 Email
               </h3>
               <a
-                href="mailto:info@mwamunda.com"
+                href="mailto:info@mwamunda.co.ke"
                 className="text-primary hover:underline mb-2 block text-xs sm:text-sm break-all"
               >
-                info@mwamunda.com
+                info@mwamunda.co.ke
               </a>
               <a
-                href="mailto:mwamundainvestment@gmail.com"
+                href="mailto:customercare@mwamunda.co.ke"
                 className="text-primary hover:underline block text-xs sm:text-sm break-all"
               >
-                Mwamundainvestment@gmail.com
+                customercare@mwamunda.co.ke
               </a>
               <p className="text-muted-foreground text-xs sm:text-sm mt-3 sm:mt-4">
                 We'll respond within 24 hours
@@ -133,17 +133,14 @@ export default function Contact() {
                 Phone & WhatsApp
               </h3>
               <div className="space-y-2">
+                <p className="text-primary font-semibold text-xs sm:text-sm">
+                  Safaricom: Corporate line pending
+                </p>
                 <a
-                  href="tel:+254708192783"
+                  href="tel:+254789698601"
                   className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
                 >
-                  0708192783
-                </a>
-                <a
-                  href="tel:+254784222284"
-                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
-                >
-                  0784222284
+                  Airtel: 0789698601
                 </a>
               </div>
               <p className="text-muted-foreground text-xs sm:text-sm mt-3 sm:mt-4">
@@ -463,12 +460,16 @@ export default function Contact() {
               <p className="text-white/70 text-sm mb-3">
                 <strong>Email:</strong>
                 <br />
-                info@mwamunda.com
+                <a href="mailto:info@mwamunda.co.ke" className="hover:text-white">info@mwamunda.co.ke</a>
+                <br />
+                <a href="mailto:customercare@mwamunda.co.ke" className="hover:text-white">customercare@mwamunda.co.ke</a>
               </p>
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0708192783 / 0784222284
+                Safaricom: Corporate line pending
+                <br />
+                Airtel: <a href="tel:+254789698601" className="hover:text-white">0789698601</a>
               </p>
             </div>
           </div>

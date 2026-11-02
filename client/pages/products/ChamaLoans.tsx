@@ -364,12 +364,16 @@ export default function ChamaLoans() {
               <p className="text-white/70 text-sm mb-3">
                 <strong>Email:</strong>
                 <br />
-                info@mwamunda.com
+                <a href="mailto:info@mwamunda.co.ke" className="hover:text-white">info@mwamunda.co.ke</a>
+                <br />
+                <a href="mailto:customercare@mwamunda.co.ke" className="hover:text-white">customercare@mwamunda.co.ke</a>
               </p>
               <p className="text-white/70 text-sm">
                 <strong>Phone:</strong>
                 <br />
-                0784222284
+                Safaricom: Corporate line pending
+                <br />
+                Airtel: <a href="tel:+254789698601" className="hover:text-white">0789698601</a>
               </p>
             </div>
           </div>
