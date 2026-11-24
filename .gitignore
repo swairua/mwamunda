@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+*.log
+db.json
+pnpm-lock.yaml
+package-lock.json
+.vscode/
+.idea/
+
+# Keep production files (do NOT ignore)
+!api.php
+!connection.php
+!.htaccess
