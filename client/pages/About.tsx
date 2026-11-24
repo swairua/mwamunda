@@ -232,6 +232,55 @@ export default function About() {
         </div>
       </section>
 
+      {/* Founder Spotlight */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="animate-slide-in-left">
+              <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">
+                Founder &amp; CEO
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Meet Elias Karisa Baya PhD CBS
+              </h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                "Your Trusted Partner in Business &amp; Financial Growth"
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                As founder and CEO of Mwamunda Investment Limited, Dr. Baya leads
+                our mission to deliver microfinance services, savings and loans,
+                and practical financial solutions to businesses and
+                entrepreneurs across Kenya.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {["Integrity", "Transparency", "Trust"].map((value) => (
+                  <span
+                    key={value}
+                    className="rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary"
+                  >
+                    {value}
+                  </span>
+                ))}
+              </div>
+              <div className="text-sm text-muted-foreground space-y-1">
+                <p>0789 698 601</p>
+                <p>customercare@mwamunda.co.ke</p>
+                <p>P.O. Box 964, Mombasa</p>
+              </div>
+            </div>
+            <div className="animate-slide-in-right">
+              <OptimizedImage
+                src="/team/karisa-poster.jpg"
+                alt="Elias Karisa Baya PhD CBS, Founder and CEO of Mwamunda Investment Limited"
+                className="w-full h-auto rounded-2xl shadow-xl"
+                containerClassName="w-full"
+                placeholderColor="bg-gray-300"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section className="py-16 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -251,25 +300,42 @@ export default function About() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-left">
               <OptimizedImage
-                src="https://cdn.builder.io/api/v1/image/assets%2F6593f1eee34440309bf931b0a268d9b0%2Ff77b7379aff34c41bad00c584a5a12d2?format=webp&width=800&height=1200"
-                alt="Elias Karisa Baya PhD, Founder and CEO of Mwamunda"
-                className="w-full h-64 object-cover"
+                src="/team/elias-karisa-baya.jpg"
+                alt="Elias Karisa Baya PhD CBS, Founder and CEO of Mwamunda Investment Limited"
+                className="w-full h-64 object-cover object-top"
                 containerClassName="w-full h-64"
                 placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
                 <h3 className="font-semibold text-foreground mb-1">
-                  Elias Karisa Baya PhD
+                  Elias Karisa Baya PhD CBS
                 </h3>
                 <p className="text-sm font-medium text-primary mb-3">
-                  Founder &amp; CEO, Mwamunda
+                  Founder &amp; CEO, Mwamunda Investment Limited
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Dr. Baya founded Mwamunda in 2019 with a clear mission: to bring
-                  fair, accessible financial services to micro and small
-                  businesses, farmers and chamas that mainstream finance
-                  overlooks. His focus remains practical, inclusive lending that
-                  helps underserved entrepreneurs grow with dignity.
+                <p className="text-sm italic text-muted-foreground mb-4">
+                  "Your Trusted Partner in Business &amp; Financial Growth"
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {[
+                    "Microfinance Services",
+                    "Savings & Loans",
+                    "Financial Solutions",
+                  ].map((service) => (
+                    <span
+                      key={service}
+                      className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
+                    >
+                      {service}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+                  Integrity · Transparency · Trust
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  0789 698 601 · customercare@mwamunda.co.ke · P.O. Box 964,
+                  Mombasa
                 </p>
               </div>
             </div>
