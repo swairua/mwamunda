@@ -9,20 +9,12 @@ const teamGallery = [
     alt: "Mwamunda team on a community visit",
   },
   {
-    src: "/team/gallery-office-desk.jpg",
-    alt: "Mwamunda staff at work in the office",
-  },
-  {
     src: "/team/gallery-brand-banner.jpg",
     alt: "Mwamunda team in front of the company banner",
   },
   {
     src: "/team/gallery-field-visit.jpg",
     alt: "Mwamunda staff on a field visit",
-  },
-  {
-    src: "/team/gallery-desk-portrait.jpg",
-    alt: "Mwamunda team serving clients at the branch",
   },
 ];
 
@@ -422,24 +414,6 @@ export default function About() {
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
-              <OptimizedImage
-                src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91f7b8b2ff354f5fab960f5d381f1aea?format=webp&width=800"
-                alt="Team collaboration"
-                className="w-full h-80 object-contain object-center"
-                containerClassName="w-full h-80"
-                placeholderColor="bg-gray-300"
-              />
-              <div className="p-6 bg-white">
-                <h3 className="font-semibold text-foreground mb-1">
-                  Collaboration
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Working together for excellence
-                </p>
-              </div>
-            </div>
-
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
               <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fad24e5fed2864f1b996e081902f22f7b?format=webp&width=800"
@@ -458,23 +432,6 @@ export default function About() {
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
-              <OptimizedImage
-                src="/team/teamimage.jpeg"
-                alt="Mwamunda Team, Mwamunda Investment Limited"
-                className="w-full h-80 object-contain object-center"
-                containerClassName="w-full h-80"
-                placeholderColor="bg-gray-300"
-              />
-              <div className="p-6 bg-white">
-                <h3 className="font-semibold text-foreground mb-1">
-                  Mwamunda Team
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Our dedicated team serving you
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>

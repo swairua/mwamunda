@@ -659,6 +659,84 @@ export default function Services() {
         </div>
       </section>
 
+      {/* Call Centre Section */}
+      <section className="py-16 md:py-24 bg-primary/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div className="animate-slide-in-left">
+              <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
+                <span className="text-primary font-semibold text-sm">
+                  Call Centre Team
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Always Here to Serve You
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Our dedicated call centre team is ready to help you with
+                inquiries, loan applications, account support and customer care.
+                We are here to help, every step of the way.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                {[
+                  "Inquiries & Support",
+                  "Loan Applications",
+                  "Account Support",
+                  "Customer Care",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground font-medium">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-2 mb-8 text-muted-foreground">
+                <p>
+                  Call us on{" "}
+                  <a
+                    href="tel:+254789698601"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    0789 698 601
+                  </a>
+                </p>
+                <p>
+                  Email{" "}
+                  <a
+                    href="mailto:customercare@mwamunda.co.ke"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    customercare@mwamunda.co.ke
+                  </a>
+                </p>
+              </div>
+
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-white font-semibold hover:shadow-xl transition-all group"
+              >
+                Talk to Us Today
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            <div className="animate-slide-in-right">
+              <div className="rounded-3xl overflow-hidden shadow-xl bg-white p-3">
+                <OptimizedImage
+                  src="/call-centre-promo.jpg"
+                  alt="Mwamunda call centre team ready to serve customers"
+                  className="w-full h-full object-contain"
+                  containerClassName="w-full h-80 md:h-96"
+                  placeholderColor="bg-primary/10"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary/80 opacity-90"></div>
