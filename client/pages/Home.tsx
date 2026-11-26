@@ -934,31 +934,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sponsor Highlight */}
-      <section className="py-10 bg-white border-t border-border">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 rounded-2xl border border-primary/10 bg-primary/5 px-6 py-8 text-center md:text-left animate-fade-in">
-            <div className="w-40 md:w-48 flex-shrink-0">
-              <OptimizedImage
-                src="/sponsor/bulkit-solutions.png"
-                alt="BULKIT Solutions logo"
-                className="w-full h-full object-contain"
-                containerClassName="w-full h-16"
-                placeholderColor="bg-primary/10"
-              />
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-1">
-                Proudly supported by
-              </p>
-              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">
-                BULKIT Solutions
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                Our valued sponsor, partnering with Mwamunda to expand financial
-                inclusion in rural communities.
-              </p>
-            </div>
+      {/* Sponsors */}
+      <section className="py-12 bg-white border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 animate-fade-in">
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
+              Proudly supported by
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+              Our Sponsors &amp; Partners
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {[
+              {
+                src: "/sponsor/bulkit-solutions.png",
+                name: "BULKIT Solutions",
+              },
+              {
+                src: "/sponsor/zira-technologies.png",
+                name: "Zira Technologies",
+              },
+              {
+                src: "/sponsor/prady-microfinance.png",
+                name: "PRADY Microfinance Software",
+              },
+              {
+                src: "/sponsor/mwamunda-media.png",
+                name: "Mwamunda Media",
+              },
+            ].map((sponsor) => (
+              <div
+                key={sponsor.name}
+                className="flex flex-col items-center justify-center rounded-2xl border border-border bg-white px-4 py-6 text-center shadow-sm hover:shadow-lg hover:border-primary/40 transition-all animate-slide-in-up"
+              >
+                <OptimizedImage
+                  src={sponsor.src}
+                  alt={`${sponsor.name} logo`}
+                  className="w-full h-full object-contain"
+                  containerClassName="w-full h-16 md:h-20"
+                  placeholderColor="bg-primary/5"
+                />
+                <p className="mt-4 text-sm font-semibold text-foreground">
+                  {sponsor.name}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
