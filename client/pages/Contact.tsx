@@ -7,6 +7,7 @@ import {
   ArrowRight,
   CheckCircle,
   AlertCircle,
+  Clock,
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { submitContact } from "@/lib/contacts";
@@ -164,6 +165,30 @@ export default function Contact() {
                 <br />
                 <strong className="text-foreground">PO BOX 964</strong>
               </p>
+            </div>
+
+            {/* Working Hours */}
+            <div
+              className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 animate-slide-in-up"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-primary/20 text-primary flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Clock className="w-5 sm:w-6 h-5 sm:h-6" />
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">
+                Working Hours
+              </h3>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  <strong>Mon – Fri:</strong> 7.30am – 6.00pm
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <strong>Saturday:</strong> 8.30am – 6.00pm
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <strong>Sunday:</strong> Closed
+                </p>
+              </div>
             </div>
           </div>
         </div>

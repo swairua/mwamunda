@@ -3,6 +3,29 @@ import { ArrowRight, Target, Eye, Heart } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import OptimizedImage from "@/components/OptimizedImage";
 
+const teamGallery = [
+  {
+    src: "/team/gallery-team-bench.jpg",
+    alt: "Mwamunda team on a community visit",
+  },
+  {
+    src: "/team/gallery-office-desk.jpg",
+    alt: "Mwamunda staff at work in the office",
+  },
+  {
+    src: "/team/gallery-brand-banner.jpg",
+    alt: "Mwamunda team in front of the company banner",
+  },
+  {
+    src: "/team/gallery-field-visit.jpg",
+    alt: "Mwamunda staff on a field visit",
+  },
+  {
+    src: "/team/gallery-desk-portrait.jpg",
+    alt: "Mwamunda team serving clients at the branch",
+  },
+];
+
 export default function About() {
   return (
     <div className="min-h-screen bg-white">
@@ -302,8 +325,8 @@ export default function About() {
               <OptimizedImage
                 src="/team/elias-karisa-baya.jpg"
                 alt="Elias Karisa Baya PhD CBS, Founder and CEO of Mwamunda Investment Limited"
-                className="w-full h-64 object-cover object-top"
-                containerClassName="w-full h-64"
+                className="w-full h-80 object-contain object-center"
+                containerClassName="w-full h-80"
                 placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
@@ -342,10 +365,69 @@ export default function About() {
 
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
               <OptimizedImage
+                src="/team/neema.jpeg"
+                alt="Antonnina Neema, Human Resource Manager at Mwamunda Investment Limited"
+                className="w-full h-80 object-contain object-center"
+                containerClassName="w-full h-80"
+                placeholderColor="bg-gray-300"
+              />
+              <div className="p-6 bg-white">
+                <h3 className="font-semibold text-foreground mb-1">
+                  Antonnina Neema
+                </h3>
+                <p className="text-sm font-medium text-primary mb-3">
+                  Human Resource Manager, Mwamunda Investment Limited
+                </p>
+                <p className="text-sm italic text-muted-foreground mb-4">
+                  "People are our greatest asset"
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {[
+                    "Human Resources",
+                    "Recruitment",
+                    "Employee Relations",
+                  ].map((service) => (
+                    <span
+                      key={service}
+                      className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
+                    >
+                      {service}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+                  Dedication · Professionalism · Growth
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  0789 698 601 · customercare@mwamunda.co.ke
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
+              <OptimizedImage
+                src="/team/staffatwork.jpeg"
+                alt="Staff at work, Mwamunda Investment Limited"
+                className="w-full h-80 object-contain object-center"
+                containerClassName="w-full h-80"
+                placeholderColor="bg-gray-300"
+              />
+              <div className="p-6 bg-white">
+                <h3 className="font-semibold text-foreground mb-1">
+                  Team at Work
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Serving our clients with excellence
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
+              <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F91f7b8b2ff354f5fab960f5d381f1aea?format=webp&width=800"
                 alt="Team collaboration"
-                className="w-full h-64 object-cover"
-                containerClassName="w-full h-64"
+                className="w-full h-80 object-contain object-center"
+                containerClassName="w-full h-80"
                 placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
@@ -362,8 +444,8 @@ export default function About() {
               <OptimizedImage
                 src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fad24e5fed2864f1b996e081902f22f7b?format=webp&width=800"
                 alt="Team in office"
-                className="w-full h-64 object-cover"
-                containerClassName="w-full h-64"
+                className="w-full h-80 object-contain object-center"
+                containerClassName="w-full h-80"
                 placeholderColor="bg-gray-300"
               />
               <div className="p-6 bg-white">
@@ -375,6 +457,58 @@ export default function About() {
                 </p>
               </div>
             </div>
+
+            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-up">
+              <OptimizedImage
+                src="/team/teamimage.jpeg"
+                alt="Mwamunda Team, Mwamunda Investment Limited"
+                className="w-full h-80 object-contain object-center"
+                containerClassName="w-full h-80"
+                placeholderColor="bg-gray-300"
+              />
+              <div className="p-6 bg-white">
+                <h3 className="font-semibold text-foreground mb-1">
+                  Mwamunda Team
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Our dedicated team serving you
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Gallery */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
+              Life at Mwamunda
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Our team in the office, in the field, and with the communities we
+              serve
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {teamGallery.map((photo, index) => (
+              <div
+                key={photo.src}
+                className={`group relative h-56 overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl md:h-72 ${
+                  index === 0 ? "md:col-span-2" : ""
+                }`}
+              >
+                <OptimizedImage
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  containerClassName="h-full w-full"
+                  placeholderColor="bg-gray-300"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
