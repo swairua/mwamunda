@@ -15,6 +15,16 @@ const teamGallery = [
   {
     src: "/team/gallery-field-visit.jpg",
     alt: "Mwamunda staff on a field visit",
+    objectClass: "object-top",
+  },
+  {
+    src: "/team/gallery-desk-portrait.jpg",
+    alt: "Mwamunda team serving clients at the branch",
+    objectClass: "object-top",
+  },
+  {
+    src: "/team/staffatwork.jpeg",
+    alt: "Mwamunda staff serving clients in the community",
   },
 ];
 
@@ -460,7 +470,9 @@ export default function About() {
                 <OptimizedImage
                   src={photo.src}
                   alt={photo.alt}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                    photo.objectClass ?? ""
+                  }`}
                   containerClassName="h-full w-full"
                   placeholderColor="bg-gray-300"
                 />
