@@ -934,6 +934,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Sponsor Highlight */}
+      <section className="py-10 bg-white border-t border-border">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 rounded-2xl border border-primary/10 bg-primary/5 px-6 py-8 text-center md:text-left animate-fade-in">
+            <div className="w-40 md:w-48 flex-shrink-0">
+              <OptimizedImage
+                src="/sponsor/bulkit-solutions.png"
+                alt="BULKIT Solutions logo"
+                className="w-full h-full object-contain"
+                containerClassName="w-full h-16"
+                placeholderColor="bg-primary/10"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-1">
+                Proudly supported by
+              </p>
+              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">
+                BULKIT Solutions
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Our valued sponsor, partnering with Mwamunda to expand financial
+                inclusion in rural communities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary/80 opacity-90"></div>
