@@ -26,6 +26,10 @@ const teamGallery = [
     src: "/team/staffatwork.jpeg",
     alt: "Mwamunda staff serving clients in the community",
   },
+  {
+    src: "/additional/call-centre-team.jpeg",
+    alt: "Mwamunda call centre team serving customers",
+  },
 ];
 
 export default function About() {
