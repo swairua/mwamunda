@@ -16,7 +16,7 @@ import {
   deleteProduct,
   Product,
 } from "@/lib/products";
-import { getStoredUser, clearUser, isAuthenticated } from "@/lib/auth";
+import { getStoredUser, logoutUser, isAuthenticated } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
 
@@ -104,8 +104,8 @@ export default function AdminProducts() {
     setCurrentPage(1); // Reset to first page when filters change
   }, [products, searchTerm, statusFilter]);
 
-  const handleLogout = () => {
-    clearUser();
+  const handleLogout = async () => {
+    await logoutUser();
     toast({
       title: "Success",
       description: "Logged out successfully",

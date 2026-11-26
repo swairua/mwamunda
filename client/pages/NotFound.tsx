@@ -1,10 +1,10 @@
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { ArrowRight, Home } from "lucide-react";
-import Navigation from "@/components/Navigation";
+import { Link, useLocation } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { productLinks } from "@/lib/site";
 
-const NotFound = () => {
+export default function NotFound() {
   const location = useLocation();
 
   useEffect(() => {
@@ -15,190 +15,43 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
-
-      <section className="relative pt-32 md:pt-40 pb-20 flex items-center justify-center min-h-[calc(100vh-120px)]">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl top-20 left-10 animate-float"></div>
-          <div
-            className="absolute w-96 h-96 bg-secondary/10 rounded-full blur-3xl bottom-20 right-10 animate-float"
-            style={{ animationDelay: "1s" }}
-          ></div>
-        </div>
-
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="mb-8 animate-slide-in-down">
-            <div className="inline-block p-6 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl border border-primary/20 mb-8">
-              <h1 className="text-7xl md:text-8xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-                404
-              </h1>
-            </div>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 animate-slide-in-up">
-            Page Not Found
-          </h2>
-
-          <p
-            className="text-xl text-muted-foreground mb-12 animate-slide-in-up"
-            style={{ animationDelay: "0.1s" }}
-          >
-            We couldn't find the page you're looking for. It might have been
-            moved or deleted.
+    <section className="bg-surface">
+      <div className="container-site py-20 md:py-28">
+        <div className="max-w-2xl">
+          <p className="eyebrow mb-4">Error 404</p>
+          <h1 className="h-page">We can't find that page</h1>
+          <p className="lead mt-5">
+            The page may have moved or the link may be out of date. Here are
+            some places to go instead.
           </p>
 
-          <div
-            className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <Link
-              to="/"
-              className="px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 group"
-            >
-              <Home className="w-5 h-5" />
-              Go Back Home
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            <Link
-              to="/contact"
-              className="px-8 py-4 rounded-lg border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-all"
-            >
-              Contact Support
-            </Link>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="xl">
+              <Link to="/">
+                Back to home
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="xl">
+              <Link to="/contact">Contact us</Link>
+            </Button>
           </div>
 
-          <p className="mt-12 text-muted-foreground text-sm">
-            Need help?{" "}
-            <Link
-              to="/contact"
-              className="text-primary font-semibold hover:underline"
-            >
-              Contact our team
-            </Link>
-          </p>
+          <ul className="mt-12 divide-y divide-border border-y border-border">
+            {productLinks.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className="flex min-h-14 items-center justify-between gap-4 font-semibold text-foreground hover:text-primary"
+                >
+                  {link.label}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-      </section>
-
-      <footer className="bg-foreground/95 text-white py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
-                alt="Mwamunda Investment Limited"
-                className="h-32 w-auto mb-4"
-              />
-              <p className="text-white/70 text-sm">
-                Financial solutions for the underserved since 2019
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link
-                    to="/"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Products</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link
-                    to="/products/fair-personal-loans"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Fair Personal Loans
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products/chama-loans"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Chama Loans
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products/debt-advice-services"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Debt Advice Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products/financial-capability-training"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Financial Capability Training
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Contact</h4>
-              <p className="text-white/70 text-sm mb-3">
-                <strong>Email:</strong>
-                <br />
-                <a href="mailto:info@mwamunda.co.ke" className="hover:text-white">info@mwamunda.co.ke</a>
-                <br />
-                <a href="mailto:customercare@mwamunda.co.ke" className="hover:text-white">customercare@mwamunda.co.ke</a>
-              </p>
-              <p className="text-white/70 text-sm">
-                <strong>Phone:</strong>
-                <br />
-                Safaricom: Corporate line pending
-                <br />
-                Airtel: <a href="tel:+254789698601" className="hover:text-white">0789698601</a>
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-8 flex items-center justify-between">
-            <p className="text-white/60 text-sm">
-              &copy; 2024 Mwamunda Investment Limited. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </section>
   );
-};
-
-export default NotFound;
+}

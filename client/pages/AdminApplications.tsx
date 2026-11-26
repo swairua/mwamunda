@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FileText,
@@ -9,7 +9,7 @@ import {
   Clock,
   Eye,
 } from "lucide-react";
-import { getStoredUser, clearUser } from "@/lib/auth";
+import { getStoredUser, logoutUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
 import {
@@ -23,7 +23,9 @@ import {
 export default function AdminApplications() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const currentUser = getStoredUser();
+  // Read once: a fresh object on every render would re-run the effects
+  // below in a loop, re-fetching without end.
+  const currentUser = useMemo(() => getStoredUser(), []);
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedApplication, setSelectedApplication] =
@@ -74,8 +76,8 @@ export default function AdminApplications() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  const handleLogout = () => {
-    clearUser();
+  const handleLogout = async () => {
+    await logoutUser();
     toast({
       title: "Success",
       description: "Logged out successfully",

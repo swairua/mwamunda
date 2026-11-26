@@ -1,5 +1,10 @@
 # Admin System - Quick Start Guide
 
+> **Outdated.** This describes the first version of the admin area. The
+> `/admin/init`, `/admin/setup` and public `/admin/register` pages no longer
+> exist, sign-in uses server sessions, and admin accounts are created with
+> `scripts/admin.php`. See `PHP_API_README.md` and `PRODUCTION_DEPLOYMENT.md`.
+
 ## 🚀 Getting Started (3 Steps)
 
 ### Step 1: Initialize Database

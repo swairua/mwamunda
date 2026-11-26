@@ -1,5 +1,10 @@
 # Admin System Implementation Summary
 
+> **Outdated.** This describes the first version of the admin area. The
+> `/admin/init`, `/admin/setup` and public `/admin/register` pages no longer
+> exist, sign-in uses server sessions, and admin accounts are created with
+> `scripts/admin.php`. See `PHP_API_README.md` and `PRODUCTION_DEPLOYMENT.md`.
+
 ## ✅ What Has Been Built
 
 A complete admin system for the Mwamunda Investment Limited application with user management capabilities.

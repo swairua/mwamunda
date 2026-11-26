@@ -2,9 +2,11 @@
   command = "pnpm install && pnpm build:full"
   publish = "dist"
 
+# Public pages are prerendered (about.html, products/*.html) and unknown
+# URLs get 404.html. Only the admin area needs the client-rendered shell.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/admin/*"
+  to = "/app.html"
   status = 200
 
 # For PHP API - ensure it's served as PHP, not static
@@ -12,4 +14,3 @@
   for = "/api.php"
   [headers.values]
     Content-Type = "application/json"
-    Access-Control-Allow-Origin = "*"

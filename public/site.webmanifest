@@ -1,0 +1,13 @@
+{
+  "name": "Mwamunda Investment Limited",
+  "short_name": "Mwamunda",
+  "description": "Fast, fair loans, debt advice and financial training for chamas and small businesses in Kenya.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#17592F",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

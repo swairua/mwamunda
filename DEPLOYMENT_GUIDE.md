@@ -125,37 +125,23 @@ The `Dockerfile` is already configured to:
 # No environment variable needed - default
 ```
 
-### Production with External API
+### Production
 
-Create a `.env` file in the project root:
-
-```env
-VITE_API_BASE_URL=https://api.yourdomain.com/api.php
-```
-
-Then rebuild:
-
-```bash
-pnpm build
-```
+Keep the API on the same origin as the site (the default, `/api.php`). The
+admin session cookie is `SameSite=Strict`, so an API on a different site would
+never receive it. A different origin on the same site (for example `www.` and
+the bare domain) must be listed in the API's `ALLOWED_ORIGINS` setting.
 
 ## Database Setup
 
-After deploying, initialize the database:
+The API does not create tables or accounts over HTTP. After deploying:
 
-1. Call the initialization endpoints:
+1. Create the tables: `php scripts/admin.php init-schema`, or paste
+   `database/schema.sql` into phpMyAdmin.
+2. Create the first admin: `php scripts/admin.php create-admin you@example.com`.
 
-   ```bash
-   curl -X POST http://your-domain/api.php \
-     -H "Content-Type: application/json" \
-     -d '{"action": "init_users_table"}'
-
-   curl -X POST http://your-domain/api.php \
-     -H "Content-Type: application/json" \
-     -d '{"action": "init_contacts_table"}'
-   ```
-
-2. Or use the admin setup page: `http://your-domain/admin/setup`
+See `PRODUCTION_DEPLOYMENT.md` for the phpMyAdmin-only steps and for upgrading
+a site that ran the old API.
 
 ## Production Checklist
 
@@ -164,7 +150,8 @@ After deploying, initialize the database:
 - [ ] Update database credentials in `connection.php`
 - [ ] Test API endpoints are accessible
 - [ ] Configure API URL (default `/api.php` or environment variable)
-- [ ] Initialize database tables
+- [ ] Create database tables (`database/schema.sql`) and the first admin (`scripts/admin.php`)
+- [ ] Confirm `/api.php?table=users` answers 401 when signed out
 - [ ] Set proper file permissions on server
 - [ ] Enable HTTPS (important for production)
 - [ ] Configure firewall to allow database access
@@ -192,8 +179,8 @@ After deploying, initialize the database:
 
 ### CORS Errors
 
-- Edit `api.php` and update the CORS origin header if needed
-- For production: `header("Access-Control-Allow-Origin: https://yourdomain.com");`
+- The API only answers the site's own origins. Serve the site and `api.php` from the same origin, or add the other origin to `ALLOWED_ORIGINS`
+- Do not add `Access-Control-Allow-Origin` in `.htaccess`; it would override the API's own header
 
 ## Offline Build Process Summary
 
@@ -224,10 +211,9 @@ docker push myregistry/myapp
 # 6. Configure database credentials on server
 #    Update DB_HOST, DB_USER, DB_PASSWORD, DB_NAME environment variables
 
-# 7. Initialize database (call once)
-curl -X POST http://your-domain/api.php \
-  -H "Content-Type: application/json" \
-  -d '{"action": "init_users_table"}'
+# 7. Create tables and the first admin (once, on the server)
+php scripts/admin.php init-schema
+php scripts/admin.php create-admin you@example.com
 ```
 
 ## Development

@@ -75,7 +75,7 @@ export default function ProductContactForm({
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center animate-fade-in">
+      <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
         <div className="flex justify-center mb-4">
           <div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
             <CheckCircle className="w-8 h-8 text-green-600" />
@@ -96,15 +96,7 @@ export default function ProductContactForm({
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-white p-8">
-      <h2 className="text-3xl font-bold text-foreground mb-2">
-        {productName} Inquiry
-      </h2>
-      <p className="text-muted-foreground mb-8">
-        Fill out the form below with your inquiry about {productName}. We'll get
-        back to you within 24-48 hours.
-      </p>
-
+    <div className="rounded-2xl border border-border bg-white p-6 md:p-8">
       {error && (
         <div className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
@@ -118,11 +110,16 @@ export default function ProductContactForm({
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">
+            <label
+              htmlFor="enquiry-name"
+              className="block text-sm font-semibold text-foreground mb-2"
+            >
               Full Name *
             </label>
             <input
               type="text"
+              id="enquiry-name"
+              autoComplete="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
@@ -133,11 +130,16 @@ export default function ProductContactForm({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">
+            <label
+              htmlFor="enquiry-email"
+              className="block text-sm font-semibold text-foreground mb-2"
+            >
               Email Address *
             </label>
             <input
               type="email"
+              id="enquiry-email"
+              autoComplete="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
@@ -149,11 +151,16 @@ export default function ProductContactForm({
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-foreground mb-2">
+          <label
+            htmlFor="enquiry-phone"
+            className="block text-sm font-semibold text-foreground mb-2"
+          >
             Phone Number
           </label>
           <input
             type="tel"
+            id="enquiry-phone"
+            autoComplete="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -163,10 +170,14 @@ export default function ProductContactForm({
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-foreground mb-2">
+          <label
+            htmlFor="enquiry-message"
+            className="block text-sm font-semibold text-foreground mb-2"
+          >
             Message *
           </label>
           <textarea
+            id="enquiry-message"
             name="message"
             value={formData.message}
             onChange={handleChange}
@@ -180,7 +191,7 @@ export default function ProductContactForm({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:scale-100"
+          className="w-full px-6 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? "Sending..." : "Send Inquiry"}
           {!isLoading && (

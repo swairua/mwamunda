@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { Mail, Phone, Briefcase, MapPin } from "lucide-react";
-import Navigation from "@/components/Navigation";
+import WhatsAppIcon from "@/components/site/WhatsAppIcon";
+import { Button } from "@/components/ui/button";
+import { teamGallery } from "@/content/team";
 import { apiFetch, getApiUrl } from "@/lib/config";
+import { site } from "@/lib/site";
 
 interface Career {
   id: number;
@@ -64,17 +67,13 @@ export default function Careers() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
-
+    <>
       {/* Hero Section */}
-      <section className="relative pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+      <section className="relative pt-12 sm:pt-14 md:pt-20 pb-12 sm:pb-16 border-b border-border bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center animate-slide-in-down">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
-              We're Hiring
-            </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center">
+            <h1 className="h-page mb-5">Careers at Mwamunda</h1>
+            <p className="lead max-w-2xl mx-auto">
               Join our team and be part of our mission to provide financial
               solutions for the underserved.
             </p>
@@ -91,15 +90,61 @@ export default function Careers() {
               Loading career positions...
             </p>
           </div>
-        ) : error ? (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-700">
-            {error}
-          </div>
-        ) : careers.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-lg text-muted-foreground">
-              No open positions at the moment. Please check back soon!
+        ) : error || careers.length === 0 ? (
+          // No roles posted yet (or the list could not be loaded): keep the
+          // page useful instead of showing an empty or error message.
+          <div className="py-4">
+            <div className="rounded-3xl border border-border bg-surface p-8 md:p-12">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                <Briefcase className="h-6 w-6" aria-hidden="true" />
+              </div>
+              <h2 className="h-section">No open positions right now</h2>
+              <p className="lead mt-4 max-w-2xl">
+                New roles are posted on this page as they open. To introduce
+                yourself in the meantime, email us your CV and tell us the kind
+                of role you are looking for.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="xl">
+                  <a
+                    href={`mailto:${site.email}?subject=${encodeURIComponent("Career enquiry")}`}
+                  >
+                    <Mail aria-hidden="true" />
+                    Email your CV
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="xl">
+                  <a href={site.whatsapp.href} target="_blank" rel="noreferrer">
+                    <WhatsAppIcon />
+                    Ask on WhatsApp
+                  </a>
+                </Button>
+              </div>
+              <p className="mt-5 text-[0.9375rem] text-muted-foreground">
+                {site.email} · {site.phones[0].display}
+              </p>
+            </div>
+
+            <h2 className="h-card mt-14">Life at Mwamunda</h2>
+            <p className="mt-1 text-muted-foreground">
+              Our team in the office, in the field, and with the communities we
+              serve.
             </p>
+            <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+              {teamGallery.map((photo) => (
+                <li key={photo.src}>
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={640}
+                    height={480}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[4/3] w-full rounded-2xl bg-muted object-cover"
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         ) : (
           <div className="space-y-8">
@@ -235,6 +280,6 @@ export default function Careers() {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }

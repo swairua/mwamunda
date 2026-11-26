@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus, Edit2, Trash2, AlertCircle, CheckCircle } from "lucide-react";
 import { apiFetch, getApiUrl } from "@/lib/config";
 import { useToast } from "@/hooks/use-toast";
-import { getStoredUser, clearUser } from "@/lib/auth";
+import { getStoredUser, logoutUser } from "@/lib/auth";
 import AdminSidebar from "@/components/AdminSidebar";
 
 interface Career {
@@ -26,7 +26,9 @@ interface Career {
 export default function AdminCareers() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const currentUser = getStoredUser();
+  // Read once: a fresh object on every render would re-run the effects
+  // below in a loop, re-fetching without end.
+  const currentUser = useMemo(() => getStoredUser(), []);
   const [careers, setCareers] = useState<Career[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -59,8 +61,8 @@ export default function AdminCareers() {
     }
   }, [currentUser]);
 
-  const handleLogout = () => {
-    clearUser();
+  const handleLogout = async () => {
+    await logoutUser();
     toast({
       title: "Success",
       description: "Logged out successfully",

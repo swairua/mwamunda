@@ -99,7 +99,7 @@ export default function ContactModal({
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {submitted && (
-            <div className="p-4 rounded-lg bg-green-50 border border-green-200 flex items-center gap-3 animate-slide-in-down">
+            <div className="p-4 rounded-lg bg-green-50 border border-green-200 flex items-center gap-3">
               <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
               <div>
                 <h4 className="font-semibold text-green-900">Message Sent!</h4>
@@ -111,7 +111,7 @@ export default function ContactModal({
           )}
 
           {error && (
-            <div className="p-4 rounded-lg bg-red-50 border border-red-200 flex items-center gap-3 animate-slide-in-down">
+            <div className="p-4 rounded-lg bg-red-50 border border-red-200 flex items-center gap-3">
               <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
               <div>
                 <h4 className="font-semibold text-red-900">Error</h4>
@@ -122,11 +122,16 @@ export default function ContactModal({
 
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
+              <label
+                htmlFor="modal-name"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Full Name *
               </label>
               <input
                 type="text"
+                id="modal-name"
+                autoComplete="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -137,11 +142,16 @@ export default function ContactModal({
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
+              <label
+                htmlFor="modal-email"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Email Address *
               </label>
               <input
                 type="email"
+                id="modal-email"
+                autoComplete="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -154,11 +164,16 @@ export default function ContactModal({
 
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
+              <label
+                htmlFor="modal-phone"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Phone Number
               </label>
               <input
                 type="tel"
+                id="modal-phone"
+                autoComplete="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -168,10 +183,14 @@ export default function ContactModal({
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
+              <label
+                htmlFor="modal-subject"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Subject *
               </label>
               <select
+                id="modal-subject"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
@@ -189,10 +208,14 @@ export default function ContactModal({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">
+            <label
+              htmlFor="modal-message"
+              className="block text-sm font-semibold text-foreground mb-2"
+            >
               Message *
             </label>
             <textarea
+              id="modal-message"
               name="message"
               value={formData.message}
               onChange={handleChange}
@@ -206,7 +229,7 @@ export default function ContactModal({
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
+            className="w-full px-6 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
           >
             {isLoading ? "Sending..." : "Send Message"}
             {!isLoading && (

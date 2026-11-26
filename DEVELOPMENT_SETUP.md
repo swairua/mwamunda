@@ -86,25 +86,36 @@ If you want to test with a local database:
    > EXIT;
    ```
 
-2. **Configure connection** in `connection.php`:
-
-   ```php
-   $servername = "localhost";
-   $username = "root";
-   $password = ""; // Your MySQL password
-   $database = "mwamunda";
-   ```
-
-3. **Initialize tables** by visiting:
-   - http://localhost:8080/admin/setup
-
-   Or make a curl request:
+2. **Tell PHP how to connect**, with environment variables:
 
    ```bash
-   curl -X POST http://localhost:8000/api.php \
-     -H "Content-Type: application/json" \
-     -d '{"action": "init_users_table"}'
+   export DB_HOST=localhost DB_USER=root DB_PASSWORD= DB_NAME=mwamunda
    ```
+
+   With `APP_ENV=development` set (step 4), a missing `DB_USER` / `DB_NAME`
+   falls back to `root` / `mwamunda`. Anywhere else they are required.
+
+3. **Create the tables and a local admin**:
+
+   ```bash
+   php scripts/admin.php init-schema
+   php scripts/admin.php create-admin you@example.test
+   ```
+
+4. **Start PHP in development mode**, so the session cookie works over
+   plain http:
+
+   ```bash
+   APP_ENV=development pnpm dev:php
+   ```
+
+### Without PHP or MySQL
+
+`pnpm dev:full` runs the site against `api-server.js`, a local stand-in that
+follows the same access rules as `api.php` and stores data in `db.json`. On
+first start it creates a local admin and prints the password once in the
+terminal (or set `DEV_ADMIN_EMAIL` / `DEV_ADMIN_PASSWORD`). Sign in at
+http://localhost:8080/admin/login.
 
 ## Useful Commands
 
@@ -191,6 +202,6 @@ If you see HTML error pages from PHP:
 
 - **Backend**: Edit `api.php` to add new endpoints
 - **Frontend**: Create new pages in `client/pages/` and add routes in `client/App.tsx`
-- **Database**: Modify table structure by editing `init_*_table` actions in `api.php`
+- **Database**: Change tables in `database/schema.sql`, then list them in `api_schema()` in `api.php` (and `SCHEMA` in `api-server.js`)
 
 Happy coding! 🚀

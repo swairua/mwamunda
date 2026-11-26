@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, AlertCircle, CheckCircle, Loader } from "lucide-react";
 import { loginUser, saveUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
-import { apiFetch, getApiUrl, getActiveApiUrl } from "@/lib/config";
+import { apiFetch, getApiUrl } from "@/lib/config";
 
 type ConnectionStatus = "checking" | "connected" | "fallback" | "disconnected";
 
@@ -83,10 +83,6 @@ export default function AdminLogin() {
     }
   };
 
-  const handleRegister = () => {
-    navigate("/admin/register");
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-white to-secondary/5 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
@@ -148,6 +144,7 @@ export default function AdminLogin() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@example.com"
+                  autoComplete="username"
                   className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
                   required
                   disabled={loading}
@@ -165,6 +162,7 @@ export default function AdminLogin() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
+                    autoComplete="current-password"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
                     required
                     disabled={loading}
@@ -193,25 +191,6 @@ export default function AdminLogin() {
                 {loading ? "Logging in..." : "Login"}
               </button>
             </form>
-
-            {/* Divider */}
-            <div className="relative my-8">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-muted-foreground">or</span>
-              </div>
-            </div>
-
-            {/* Register Link */}
-            <button
-              type="button"
-              onClick={handleRegister}
-              className="w-full py-3 rounded-lg border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-all duration-300"
-            >
-              Create New Account
-            </button>
 
             {/* Back to Home */}
             <div className="text-center mt-6">

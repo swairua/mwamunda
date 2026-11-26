@@ -1,18 +1,39 @@
+Options -Indexes
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Skip rewriting for actual files and directories
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
+  # 1. Real files and directories are served as they are
+  #    (assets, images, api.php, sitemap.xml, the home page).
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
 
-  # Rewrite all requests to index.html (React Router SPA)
-  RewriteRule ^(.*)$ index.html [QSA,L]
+  # 2. Prerendered pages: /about -> about.html,
+  #    /products/chama-loans -> products/chama-loans.html
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+
+  # 3. The admin area is a client-rendered app with its own empty shell.
+  RewriteRule ^admin(/.*)?$ app.html [L]
 </IfModule>
+
+# Server-only files must never be downloadable: the local database
+# settings (config.local.php), dumps and data files.
+<FilesMatch "(^config\.local\.php$|\.sql$|^db\.json$)">
+  Require all denied
+</FilesMatch>
+
+# Anything that reaches this point does not exist: answer with a real 404.
+ErrorDocument 404 /404.html
+
+# Serve the web app manifest with its proper type
+AddType application/manifest+json .webmanifest
 
 # Enable compression
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
 </IfModule>
 
 # Cache static assets
@@ -21,6 +42,8 @@
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/gif "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
   ExpiresByType application/x-javascript "access plus 1 month"
@@ -35,13 +58,11 @@
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
 
-  # Never cache dynamic API responses
-  <FilesMatch "^api\.php$">
-    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  # Keep the admin area and the API out of search results.
+  <FilesMatch "^(app\.html|api\.php)$">
+    Header set X-Robots-Tag "noindex, nofollow"
   </FilesMatch>
 
-  # CORS headers for API
-  Header set Access-Control-Allow-Origin "*"
-  Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-  Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+  # No CORS headers here on purpose: api.php sends them itself, and only to
+  # the site's own origins. A "Header set" in this file would override that.
 </IfModule>

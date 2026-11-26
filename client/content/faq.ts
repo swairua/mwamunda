@@ -1,13 +1,5 @@
-export interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-/**
- * Shared FAQ content. Used by the /faq page and by the SEO component to
- * generate FAQPage structured data, so the two never drift apart.
- */
-export const faqs: FAQItem[] = [
+/** Frequently asked questions, taken from the live FAQ page. */
+export const faqs = [
   {
     question: "What is Mwamunda Investment Limited?",
     answer:
@@ -43,4 +35,4 @@ export const faqs: FAQItem[] = [
     answer:
       "Email info@mwamunda.co.ke or customercare@mwamunda.co.ke, or call/WhatsApp 0789 698 601. You can also send a message through our Contact page.",
   },
-];
+] as const;

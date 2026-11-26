@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
-import { registerUser, saveUser } from "@/lib/auth";
+import { createAdminUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AdminRegister() {
@@ -21,7 +21,7 @@ export default function AdminRegister() {
     if (!name.trim()) return "Name is required";
     if (!email.trim()) return "Email is required";
     if (!password) return "Password is required";
-    if (password.length < 6) return "Password must be at least 6 characters";
+    if (password.length < 10) return "Password must be at least 10 characters";
     if (password !== confirmPassword) return "Passwords do not match";
     return null;
   };
@@ -40,7 +40,7 @@ export default function AdminRegister() {
     setLoading(true);
 
     try {
-      const response = await registerUser(email, password, name);
+      const response = await createAdminUser(email, password, name);
 
       if (response.success) {
         setSuccess(true);
@@ -49,21 +49,21 @@ export default function AdminRegister() {
           description: "Account created successfully",
         });
         setTimeout(() => {
-          navigate("/admin/login");
+          navigate("/admin/dashboard");
         }, 2000);
       } else {
-        setError(response.error || "Registration failed");
+        setError(response.error || "Could not create the account");
         toast({
           title: "Error",
-          description: response.error || "Registration failed",
+          description: response.error || "Could not create the account",
           variant: "destructive",
         });
       }
     } catch (err) {
-      setError("An error occurred during registration");
+      setError("An error occurred while creating the account");
       toast({
         title: "Error",
-        description: "An error occurred during registration",
+        description: "An error occurred while creating the account",
         variant: "destructive",
       });
     } finally {
@@ -71,8 +71,8 @@ export default function AdminRegister() {
     }
   };
 
-  const handleLoginRedirect = () => {
-    navigate("/admin/login");
+  const handleBackToDashboard = () => {
+    navigate("/admin/dashboard");
   };
 
   return (
@@ -82,7 +82,7 @@ export default function AdminRegister() {
           {/* Header */}
           <div className="bg-gradient-to-r from-secondary to-primary p-8 text-white">
             <h1 className="text-3xl font-bold mb-2">Create Admin Account</h1>
-            <p className="text-white/90">Join as an administrator</p>
+            <p className="text-white/90">Add another administrator</p>
           </div>
 
           {/* Form */}
@@ -98,7 +98,7 @@ export default function AdminRegister() {
               <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 flex gap-3 animate-slide-in-down">
                 <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-green-700">
-                  Account created! Redirecting to login...
+                  Account created! Returning to the dashboard...
                 </p>
               </div>
             )}
@@ -147,7 +147,8 @@ export default function AdminRegister() {
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Min. 6 characters"
+                      placeholder="Min. 10 characters"
+                      autoComplete="new-password"
                       className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors text-sm"
                       required
                       disabled={loading}
@@ -178,6 +179,7 @@ export default function AdminRegister() {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="Re-enter password"
+                      autoComplete="new-password"
                       className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors text-sm"
                       required
                       disabled={loading}
@@ -210,28 +212,15 @@ export default function AdminRegister() {
               </form>
             )}
 
-            {/* Login Link */}
+            {/* Back to dashboard */}
             <div className="text-center mt-6">
-              <p className="text-sm text-muted-foreground mb-3">
-                Already have an account?
-              </p>
               <button
                 type="button"
-                onClick={handleLoginRedirect}
+                onClick={handleBackToDashboard}
                 className="text-sm text-primary font-semibold hover:underline transition-colors"
               >
-                Login here
+                Back to dashboard
               </button>
-            </div>
-
-            {/* Back to Home */}
-            <div className="text-center mt-4">
-              <a
-                href="/"
-                className="text-xs text-muted-foreground hover:text-primary transition-colors"
-              >
-                ← Back to Home
-              </a>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { API_CONFIG, apiFetch, getApiUrl } from "./config";
+import { ADMIN_USER_KEY, apiFetch, getApiUrl } from "./config";
 
 export interface User {
   id: number;
@@ -13,73 +13,118 @@ export interface AuthResponse {
   success: boolean;
   message: string;
   user?: User;
-  token?: string;
   userId?: number;
   error?: string;
 }
 
-export async function initializeUsersTable(): Promise<any> {
-  const response = await apiFetch(getApiUrl(), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      action: "init_users_table",
-    }),
-  });
-  return response.json();
+const JSON_HEADERS = { "Content-Type": "application/json" };
+
+/** Reads a JSON body without throwing on an empty or non-JSON response. */
+async function readJson(response: Response): Promise<any> {
+  try {
+    return await response.json();
+  } catch {
+    return {};
+  }
 }
 
-export async function registerUser(
+/**
+ * Signs in. On success the server sets an HttpOnly session cookie; nothing
+ * secret is handed to JavaScript.
+ */
+export async function loginUser(
+  email: string,
+  password: string,
+): Promise<AuthResponse> {
+  const response = await apiFetch(
+    getApiUrl(),
+    {
+      method: "POST",
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ action: "login", email, password }),
+    },
+    // A wrong password is a 401 too; the login page shows it itself.
+    { redirectOnUnauthorized: false },
+  );
+  const data = await readJson(response);
+
+  if (!response.ok || !data.success) {
+    return {
+      success: false,
+      message: "",
+      error: data.error || "Login failed",
+    };
+  }
+  return data;
+}
+
+/** Ends the session on the server and forgets the cached profile. */
+export async function logoutUser(): Promise<void> {
+  try {
+    await apiFetch(
+      getApiUrl(),
+      {
+        method: "POST",
+        headers: JSON_HEADERS,
+        body: JSON.stringify({ action: "logout" }),
+      },
+      { redirectOnUnauthorized: false },
+    );
+  } catch {
+    // Offline or server down: still sign out locally.
+  } finally {
+    clearUser();
+  }
+}
+
+/**
+ * Asks the server who is signed in. Returns null when nobody is; throws when
+ * the server cannot be reached, so callers can tell the two apart.
+ */
+export async function fetchSession(): Promise<User | null> {
+  const response = await apiFetch(
+    getApiUrl("?action=session"),
+    { method: "GET" },
+    { redirectOnUnauthorized: false },
+  );
+
+  if (response.status === 401 || response.status === 403) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(`API error: ${response.status} ${response.statusText}`);
+  }
+
+  const data = await readJson(response);
+  return data.user ?? null;
+}
+
+/** Creates another admin account. Only a signed-in admin can do this. */
+export async function createAdminUser(
   email: string,
   password: string,
   name?: string,
 ): Promise<AuthResponse> {
   const response = await apiFetch(getApiUrl(), {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ action: "register", email, password, name }),
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ action: "create_user", email, password, name }),
   });
-  return response.json();
-}
+  const data = await readJson(response);
 
-export async function loginUser(
-  email: string,
-  password: string,
-): Promise<AuthResponse> {
-  const response = await apiFetch(getApiUrl(), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ action: "login", email, password }),
-  });
-  return response.json();
-}
-
-export async function getUser(id: number): Promise<User> {
-  const response = await apiFetch(`${getApiUrl()}?table=users&id=${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  if (Array.isArray(data) && data.length > 0) {
-    return data[0];
+  if (!response.ok || !data.success) {
+    return {
+      success: false,
+      message: "",
+      error: data.error || "Could not create the account",
+    };
   }
-  throw new Error("User not found");
+  return data;
 }
 
 export async function getAllUsers(): Promise<User[]> {
   const response = await apiFetch(`${getApiUrl()}?table=users`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
 
   if (!response.ok) {
@@ -87,11 +132,6 @@ export async function getAllUsers(): Promise<User[]> {
   }
 
   const data = await response.json();
-
-  // Handle API error responses
-  if (data.error) {
-    throw new Error(data.error);
-  }
 
   // Ensure we return an array
   if (!Array.isArray(data)) {
@@ -102,18 +142,26 @@ export async function getAllUsers(): Promise<User[]> {
   return data;
 }
 
-// Local storage helpers
+/*
+ * The signed-in admin's profile is cached in localStorage so pages can show a
+ * name without waiting. It grants nothing: the server checks the session
+ * cookie on every request, and RequireAdmin refreshes this copy from it.
+ */
 export function saveUser(user: User): void {
-  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(user));
 }
 
 export function getStoredUser(): User | null {
-  const user = localStorage.getItem("user");
-  return user ? JSON.parse(user) : null;
+  try {
+    const user = localStorage.getItem(ADMIN_USER_KEY);
+    return user ? JSON.parse(user) : null;
+  } catch {
+    return null;
+  }
 }
 
 export function clearUser(): void {
-  localStorage.removeItem("user");
+  localStorage.removeItem(ADMIN_USER_KEY);
 }
 
 export function isAuthenticated(): boolean {

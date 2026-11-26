@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Users, Plus, Trash2, Eye } from "lucide-react";
-import { getStoredUser, clearUser, getAllUsers, User } from "@/lib/auth";
+import { getStoredUser, logoutUser, getAllUsers, User } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import AdminSidebar from "@/components/AdminSidebar";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const currentUser = getStoredUser();
+  // Read once: a fresh object on every render would re-run the effects
+  // below in a loop, re-fetching without end.
+  const currentUser = useMemo(() => getStoredUser(), []);
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -49,8 +51,8 @@ export default function AdminDashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  const handleLogout = () => {
-    clearUser();
+  const handleLogout = async () => {
+    await logoutUser();
     toast({
       title: "Success",
       description: "Logged out successfully",
