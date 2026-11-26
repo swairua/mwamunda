@@ -424,23 +424,6 @@ export default function About() {
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right">
-              <OptimizedImage
-                src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2Fad24e5fed2864f1b996e081902f22f7b?format=webp&width=800"
-                alt="Team in office"
-                className="w-full h-80 object-contain object-center"
-                containerClassName="w-full h-80"
-                placeholderColor="bg-gray-300"
-              />
-              <div className="p-6 bg-white">
-                <h3 className="font-semibold text-foreground mb-1">
-                  Professional Service
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Expert guidance every step
-                </p>
-              </div>
-            </div>
 
           </div>
         </div>
