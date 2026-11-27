@@ -32,7 +32,7 @@ export default function PartnersSection() {
           return (
             <li
               key={partner.name}
-              className="w-[calc(50%-0.5rem)] md:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]"
+              className="w-[calc(50%-0.5rem)] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
               {partner.href ? (
                 <a

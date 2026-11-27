@@ -29,11 +29,4 @@ export const partners: Partner[] = [
     width: 520,
     height: 219,
   },
-  {
-    name: "Zira Technologies",
-    logo: "/partners/zira-technologies.png",
-    width: 520,
-    height: 179,
-    href: "https://www.zira-tech.com",
-  },
 ];
