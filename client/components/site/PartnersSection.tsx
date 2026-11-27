@@ -6,8 +6,8 @@ export default function PartnersSection() {
   return (
     <Section tone="surface">
       <SectionHeading
-        eyebrow="Our partners"
-        title="Organisations we work with"
+        eyebrow="Proudly supported by"
+        title="Our sponsors & partners"
         align="center"
         className="mb-8 md:mb-10"
       />

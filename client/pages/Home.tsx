@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import PromotionalGallery from "@/components/PromotionalGallery";
 import PartnersSection from "@/components/site/PartnersSection";
-import SponsorHighlight from "@/components/site/SponsorHighlight";
 import { CtaBand, Section, SectionHeading } from "@/components/site/Section";
 import WhatsAppIcon from "@/components/site/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
@@ -320,8 +319,6 @@ export default function Home() {
       <PromotionalGallery />
 
       <PartnersSection />
-
-      <SponsorHighlight />
 
       {/* Partners and funders */}
       <Section>

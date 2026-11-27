@@ -18,10 +18,10 @@ export const partners: Partner[] = [
     height: 342,
   },
   {
-    name: "Bulk It",
-    logo: "/partners/bulk-it.png",
-    width: 368,
-    height: 78,
+    name: "BULKIT Solutions",
+    logo: "/sponsor/bulkit-solutions.png",
+    width: 383,
+    height: 93,
   },
   {
     name: "Prady Microfinance Software",
