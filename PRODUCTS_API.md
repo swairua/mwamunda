@@ -23,27 +23,17 @@ The products table stores information about financial products and services.
 
 ## API Endpoints
 
-### 1. Initialize Products Table
+### 1. Create the Products Table
 
-Create the products table in the database.
+The API no longer creates tables. The products table is part of
+`database/schema.sql`; run it once:
 
-```http
-POST /api.php
-Content-Type: application/json
-
-{
-  "action": "init_products_table"
-}
+```bash
+php scripts/admin.php init-schema
 ```
 
-**Response:**
-
-```json
-{
-  "success": true,
-  "message": "Products table created successfully"
-}
-```
+Reading products is public (active products only). Creating, updating and
+deleting them needs a signed-in admin; see `PHP_API_README.md`.
 
 ### 2. Get All Products
 
@@ -346,7 +336,7 @@ Here are some sample products to populate the database:
 
 ### "Failed to fetch products"
 
-- Verify the products table exists (run init_products_table action)
+- Verify the products table exists (run `database/schema.sql`)
 - Check database connection
 - Ensure PHP API is accessible
 

@@ -1,55 +1,62 @@
 /**
  * Centralized API configuration.
  *
- * The PHP API (api.php) is deployed next to index.html at the domain root,
- * so all calls use the same-origin relative URL /api.php. VITE_API_BASE_URL
- * is only needed when the API lives on a different origin (dev/staging).
+ * The API is served from the same origin as the site (/api.php), which is
+ * what lets the admin session cookie (HttpOnly, SameSite=Strict) work.
+ * VITE_API_BASE_URL can point somewhere else for development; a different
+ * origin must be on the API's allow-list (ALLOWED_ORIGINS).
  */
 
-function getConfiguredApiUrl(): string {
-  return import.meta.env.VITE_API_BASE_URL || "/api.php";
+const apiUrl: string = import.meta.env.VITE_API_BASE_URL || "/api.php";
+
+/** localStorage key for the signed-in admin's profile (display only). */
+export const ADMIN_USER_KEY = "user";
+
+const LOGIN_PATH = "/admin/login";
+
+/**
+ * The server said "not signed in": forget the cached profile and, inside the
+ * admin area, go back to the login page.
+ */
+function handleUnauthorized(): void {
+  if (typeof window === "undefined") return;
+
+  try {
+    window.localStorage.removeItem(ADMIN_USER_KEY);
+  } catch {
+    // Storage can be unavailable (private mode); nothing to clear then.
+  }
+
+  const { pathname } = window.location;
+  if (pathname.startsWith("/admin") && pathname !== LOGIN_PATH) {
+    window.location.assign(LOGIN_PATH);
+  }
 }
 
-const apiUrl = getConfiguredApiUrl();
-
-// Log the configured API URL for debugging
-if (typeof window !== "undefined") {
-  console.log(
-    `[API Config] Using API endpoint: ${apiUrl} (PROD: ${import.meta.env.PROD})`,
-  );
+interface ApiFetchBehaviour {
+  /** Set to false when the caller handles a 401 itself. */
+  redirectOnUnauthorized?: boolean;
 }
 
 /**
- * Fetch wrapper for API calls.
- * Logs response status and network errors, then lets the caller handle them.
+ * Fetch wrapper for API calls. Always sends the session cookie, and treats a
+ * 401 as "signed out" (see handleUnauthorized).
  */
 export async function apiFetch(
   url: string,
   options: RequestInit = {},
+  { redirectOnUnauthorized = true }: ApiFetchBehaviour = {},
 ): Promise<Response> {
-  try {
-    const response = await fetch(url, {
-      ...options,
-      mode: "cors",
-    });
+  const response = await fetch(url, {
+    ...options,
+    credentials: "include",
+  });
 
-    if (!response.ok) {
-      console.warn(`[API] Response status ${response.status} from ${url}`);
-    }
-
-    return response;
-  } catch (error) {
-    const errorMsg = error instanceof Error ? error.message : String(error);
-    console.error(`[API] Error with API call to ${url}:`, errorMsg);
-
-    if (error instanceof TypeError && errorMsg.includes("fetch")) {
-      console.error(
-        "[API] Network or CORS error. Verify api.php is deployed and reachable.",
-      );
-    }
-
-    throw error;
+  if (response.status === 401 && redirectOnUnauthorized) {
+    handleUnauthorized();
   }
+
+  return response;
 }
 
 /**
@@ -68,5 +75,4 @@ export function getActiveApiUrl(): string {
 
 export const API_CONFIG = {
   BASE_URL: apiUrl,
-  PRIMARY_URL: apiUrl,
 } as const;

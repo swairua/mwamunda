@@ -13,57 +13,6 @@ export interface Product {
   updated_at: string;
 }
 
-export async function initProductsTable(): Promise<{
-  success?: boolean;
-  message?: string;
-  error?: string;
-}> {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 30000);
-
-  try {
-    const response = await apiFetch(getApiUrl(), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        action: "init_products_table",
-      }),
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeoutId);
-
-    const data = await response.json();
-
-    if (data.error) {
-      throw new Error(data.error);
-    }
-
-    if (!response.ok) {
-      throw new Error("Failed to initialize products table");
-    }
-
-    return data;
-  } catch (error) {
-    clearTimeout(timeoutId);
-
-    if (error instanceof DOMException && error.name === "AbortError") {
-      throw new Error(
-        "API request timed out (30s). Server may be slow or unreachable.",
-      );
-    }
-
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to initialize products table";
-    console.error("Error initializing products table:", errorMessage);
-    throw new Error(errorMessage);
-  }
-}
-
 export async function getProducts(): Promise<Product[]> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 30000);

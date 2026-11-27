@@ -1,42 +1,5 @@
 import { apiFetch, getApiUrl } from "./config";
 
-export async function initApplicationsTable(): Promise<{
-  success?: boolean;
-  message?: string;
-  error?: string;
-}> {
-  try {
-    const response = await apiFetch(getApiUrl(), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        action: "init_applications_table",
-      }),
-    });
-
-    const data = await response.json();
-
-    if (data.error) {
-      throw new Error(data.error);
-    }
-
-    if (!response.ok) {
-      throw new Error("Failed to initialize applications table");
-    }
-
-    return data;
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Failed to initialize applications table";
-    console.error("Error initializing applications table:", errorMessage);
-    throw new Error(errorMessage);
-  }
-}
-
 export type ApplicationStatus = "pending" | "approved" | "rejected";
 export type ProductType =
   | "fair-personal-loans"
@@ -109,7 +72,6 @@ export async function submitApplication(
           bank_account: application.bank_account || null,
           bank_name: application.bank_name || null,
           additional_info: application.additional_info || null,
-          status: "pending",
         },
       }),
     });

@@ -20,8 +20,9 @@ export default defineConfig({
     proxy: {
       "/api.php": {
         target: "http://localhost:8000",
-        changeOrigin: true,
-        rewrite: (path) => path,
+        // Keep the browser's Host header so the API sees these requests as
+        // same-origin (it compares Origin with Host).
+        changeOrigin: false,
       },
     },
     middlewareMode: false,
@@ -30,6 +31,11 @@ export default defineConfig({
     outDir: "dist",
   },
   plugins: [react()],
+  // The server bundle is only used by the build-time prerender; bundling its
+  // dependencies avoids CommonJS/ESM import problems in Node.
+  ssr: {
+    noExternal: true,
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),

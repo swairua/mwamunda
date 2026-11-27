@@ -1,31 +1,85 @@
 <?php
-// Database configuration
-// Defaults target the production database on the same server as the app.
-// Host-level environment variables (if provided) take precedence.
-$servername = getenv('DB_HOST') ?: "localhost";
-$username = getenv('DB_USER') ?: "mwamunda_web";
-$password = getenv('DB_PASSWORD') ?: "Mwamunda@2026";
-$database = getenv('DB_NAME') ?: "mwamunda_web";
+/**
+ * Database connection. Defines $conn (mysqli).
+ *
+ * Settings come from the server environment:
+ *   DB_HOST (default "localhost"), DB_USER, DB_PASSWORD, DB_NAME.
+ *
+ * They are looked up the same way api.php reads its own settings, because
+ * hosts differ in where they put them: the process environment, Apache
+ * SetEnv ($_SERVER), or SetEnv after a rewrite ($_SERVER['REDIRECT_...']).
+ */
 
-header("Content-Type: application/json");
-
-try {
-    if (!class_exists('mysqli')) {
-        throw new RuntimeException('mysqli extension is not available on this server');
-    }
-
-    $conn = @new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_errno) {
-        throw new RuntimeException($conn->connect_error);
-    }
-
-    // Match the utf8mb4 tables created by the cleaned SQL dump.
-    if (!$conn->set_charset("utf8mb4")) {
-        throw new RuntimeException($conn->error);
-    }
-} catch (Throwable $e) {
-    http_response_code(500);
-    echo json_encode(["error" => "Database connection failed: " . $e->getMessage()]);
-    exit;
+// This file sits in the web root. If it is requested directly, or included
+// from somewhere that has not hidden errors, a failed connection must not
+// print the host, user or password to the visitor.
+if (PHP_SAPI !== 'cli') {
+    ini_set('display_errors', '0');
 }
+
+// Shared hosting often has no way to set environment variables, so the
+// settings can also live in config.local.php next to this file. That file is
+// never committed (.gitignore) and never served (.htaccess); it returns an
+// array, e.g. <?php return ['DB_USER' => '...', 'DB_PASSWORD' => '...', 'DB_NAME' => '...'];
+// The server environment, when set, takes precedence.
+$dbLocal = [];
+if (is_file(__DIR__ . '/config.local.php')) {
+    $loaded = require __DIR__ . '/config.local.php';
+    if (is_array($loaded)) {
+        $dbLocal = $loaded;
+    }
+}
+
+$dbSetting = function ($key) use ($dbLocal) {
+    $value = getenv($key);
+    if ($value === false || $value === '') {
+        $value = $_SERVER[$key] ?? ($_SERVER['REDIRECT_' . $key] ?? ($_ENV[$key] ?? ($dbLocal[$key] ?? null)));
+    }
+    return ($value === null || $value === false || $value === '') ? null : (string) $value;
+};
+
+// The reason goes to the server log (and the terminal for scripts/admin.php),
+// never to a web visitor.
+$dbStop = function ($reason) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, $reason . PHP_EOL);
+        exit(1);
+    }
+    error_log('[connection.php] ' . $reason);
+    if (!headers_sent()) {
+        header('Content-Type: application/json');
+        http_response_code(500);
+    }
+    die(json_encode(['error' => 'Server error. Please try again later.']));
+};
+
+$servername = $dbSetting('DB_HOST') ?? 'localhost';
+$username = $dbSetting('DB_USER');
+$password = $dbSetting('DB_PASSWORD') ?? '';
+$database = $dbSetting('DB_NAME');
+
+if ($username === null || $database === null) {
+    if ($dbSetting('APP_ENV') === 'development') {
+        // Local development only: a stock local MySQL.
+        $username = $username ?? 'root';
+        $database = $database ?? 'mwamunda';
+    } else {
+        $dbStop('Database settings are missing: set DB_USER, DB_PASSWORD and DB_NAME '
+            . '(and DB_HOST if it is not localhost) in the server environment or in config.local.php.');
+    }
+}
+
+// Create connection. mysqli throws on failure from PHP 8.1 (and whenever the
+// caller has asked it to); older versions set connect_error instead.
+try {
+    $conn = new mysqli($servername, $username, $password, $database);
+} catch (mysqli_sql_exception $error) {
+    $dbStop('Database connection failed: ' . $error->getMessage());
+}
+if ($conn->connect_error) {
+    $dbStop('Database connection failed: ' . $conn->connect_error);
+}
+
+// utf8mb4 is full UTF-8. Plain "utf8" in MySQL is 3-byte only, and a 4-byte
+// character such as an emoji in a form message would make the insert fail.
+$conn->set_charset('utf8mb4');

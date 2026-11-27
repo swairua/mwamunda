@@ -39,7 +39,6 @@ export async function submitContact(
           phone: contact.phone || null,
           subject: contact.subject,
           message: contact.message,
-          status: "new",
         },
       }),
     });
@@ -199,7 +198,6 @@ export async function sendResponseEmail(
         id,
         data: {
           response_email: responseEmail,
-          response_sent_at: new Date().toISOString(),
           status: "responded",
         },
       }),

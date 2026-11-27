@@ -4,13 +4,13 @@ import {
   Mail,
   Phone,
   MapPin,
+  Clock,
   ArrowRight,
   CheckCircle,
   AlertCircle,
-  Clock,
 } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import { submitContact } from "@/lib/contacts";
+import { site } from "@/lib/site";
 import { useToast } from "@/hooks/use-toast";
 import OptimizedImage from "@/components/OptimizedImage";
 
@@ -75,16 +75,12 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
-
+    <>
       {/* Hero Section */}
-      <section className="relative pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+      <section className="relative pt-12 sm:pt-14 md:pt-20 pb-12 sm:pb-16 border-b border-border bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center animate-slide-in-down">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
-              Get In Touch
-            </h1>
+          <div className="text-center">
+            <h1 className="h-page mb-5">Get In Touch</h1>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
               Have questions? We'd love to hear from you. Reach out to our team
               today.
@@ -96,26 +92,26 @@ export default function Contact() {
       {/* Contact Info Cards */}
       <section className="py-12 sm:py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-20">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-20">
             {/* Email */}
-            <div className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 animate-slide-in-up">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-primary/20 text-primary flex items-center justify-center mx-auto mb-3 sm:mb-4">
+            <div className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-accent text-primary flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <Mail className="w-5 sm:w-6 h-5 sm:h-6" />
               </div>
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">
                 Email
               </h3>
               <a
-                href="mailto:info@mwamunda.co.ke"
+                href={`mailto:${site.email}`}
                 className="text-primary hover:underline mb-2 block text-xs sm:text-sm break-all"
               >
-                info@mwamunda.co.ke
+                {site.email}
               </a>
               <a
-                href="mailto:customercare@mwamunda.co.ke"
+                href={`mailto:${site.customerCareEmail}`}
                 className="text-primary hover:underline block text-xs sm:text-sm break-all"
               >
-                customercare@mwamunda.co.ke
+                {site.customerCareEmail}
               </a>
               <p className="text-muted-foreground text-xs sm:text-sm mt-3 sm:mt-4">
                 We'll respond within 24 hours
@@ -123,26 +119,23 @@ export default function Contact() {
             </div>
 
             {/* Phone */}
-            <div
-              className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-secondary/50 hover:shadow-lg transition-all duration-300 animate-slide-in-up"
-              style={{ animationDelay: "0.1s" }}
-            >
-              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center mx-auto mb-3 sm:mb-4">
+            <div className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-secondary/50 hover:shadow-lg transition-all duration-300">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-accent text-primary flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <Phone className="w-5 sm:w-6 h-5 sm:h-6" />
               </div>
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">
                 Phone & WhatsApp
               </h3>
               <div className="space-y-2">
-                <p className="text-primary font-semibold text-xs sm:text-sm">
-                  Safaricom: Corporate line pending
-                </p>
-                <a
-                  href="tel:+254789698601"
-                  className="text-primary hover:underline block font-semibold text-xs sm:text-sm"
-                >
-                  Airtel: 0789698601
-                </a>
+                {site.phones.map((phone) => (
+                  <a
+                    key={phone.href}
+                    href={phone.href}
+                    className="text-primary hover:underline block font-semibold text-base"
+                  >
+                    {phone.display}
+                  </a>
+                ))}
               </div>
               <p className="text-muted-foreground text-xs sm:text-sm mt-3 sm:mt-4">
                 Call / SMS / WhatsApp anytime
@@ -150,11 +143,8 @@ export default function Contact() {
             </div>
 
             {/* Address */}
-            <div
-              className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 animate-slide-in-up"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-accent/20 text-accent flex items-center justify-center mx-auto mb-3 sm:mb-4">
+            <div className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-accent text-primary flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <MapPin className="w-5 sm:w-6 h-5 sm:h-6" />
               </div>
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">
@@ -167,37 +157,33 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* Working Hours */}
-            <div
-              className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 animate-slide-in-up"
-              style={{ animationDelay: "0.3s" }}
-            >
-              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-primary/20 text-primary flex items-center justify-center mx-auto mb-3 sm:mb-4">
+            {/* Working hours */}
+            <div className="text-center p-5 sm:p-6 md:p-8 rounded-2xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-accent text-primary flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <Clock className="w-5 sm:w-6 h-5 sm:h-6" />
               </div>
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">
                 Working Hours
               </h3>
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">
-                  <strong>Mon – Fri:</strong> 7.30am – 6.00pm
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  <strong>Saturday:</strong> 8.30am – 6.00pm
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  <strong>Sunday:</strong> Closed
-                </p>
-              </div>
+              <dl className="space-y-2 text-sm text-muted-foreground">
+                {site.hours.map((slot) => (
+                  <div key={slot.days}>
+                    <dt className="inline font-semibold text-foreground">
+                      {slot.days}:
+                    </dt>{" "}
+                    <dd className="inline">{slot.time}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 md:py-20 bg-surface">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-slide-in-down">
+          <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-foreground mb-4">
               Send Us a Message
             </h2>
@@ -207,12 +193,9 @@ export default function Contact() {
             </p>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6 animate-slide-in-up"
-          >
+          <form onSubmit={handleSubmit} className="space-y-6">
             {submitted && (
-              <div className="p-6 rounded-xl bg-green-50 border border-green-200 flex items-center gap-3 animate-slide-in-down">
+              <div className="p-6 rounded-xl bg-green-50 border border-green-200 flex items-center gap-3">
                 <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold text-green-900">
@@ -226,7 +209,7 @@ export default function Contact() {
             )}
 
             {error && (
-              <div className="p-6 rounded-xl bg-red-50 border border-red-200 flex items-center gap-3 animate-slide-in-down">
+              <div className="p-6 rounded-xl bg-red-50 border border-red-200 flex items-center gap-3">
                 <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold text-red-900">Error</h4>
@@ -237,11 +220,16 @@ export default function Contact() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label
+                  htmlFor="contact-name"
+                  className="block text-sm font-semibold text-foreground mb-2"
+                >
                   Full Name *
                 </label>
                 <input
                   type="text"
+                  id="contact-name"
+                  autoComplete="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
@@ -252,11 +240,16 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label
+                  htmlFor="contact-email"
+                  className="block text-sm font-semibold text-foreground mb-2"
+                >
                   Email Address *
                 </label>
                 <input
                   type="email"
+                  id="contact-email"
+                  autoComplete="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -269,11 +262,16 @@ export default function Contact() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label
+                  htmlFor="contact-phone"
+                  className="block text-sm font-semibold text-foreground mb-2"
+                >
                   Phone Number
                 </label>
                 <input
                   type="tel"
+                  id="contact-phone"
+                  autoComplete="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
@@ -283,10 +281,14 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label
+                  htmlFor="contact-subject"
+                  className="block text-sm font-semibold text-foreground mb-2"
+                >
                   Subject *
                 </label>
                 <select
+                  id="contact-subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
@@ -304,10 +306,14 @@ export default function Contact() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
+              <label
+                htmlFor="contact-message"
+                className="block text-sm font-semibold text-foreground mb-2"
+              >
                 Message *
               </label>
               <textarea
+                id="contact-message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
@@ -321,7 +327,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
+              className="w-full px-6 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
             >
               {isLoading ? "Sending..." : "Send Message"}
               {!isLoading && (
@@ -337,7 +343,7 @@ export default function Contact() {
       </section>
 
       {/* Additional Info */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-blue-50 to-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
             Why Get In Touch?
@@ -372,7 +378,7 @@ export default function Contact() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 animate-slide-in-up"
+                className="p-6 rounded-xl border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 <h3 className="text-lg font-bold text-foreground mb-2">
@@ -384,128 +390,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-foreground/95 text-white py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <div className="mb-4">
-                <OptimizedImage
-                  src="https://cdn.builder.io/api/v1/image/assets%2F675a5c01881345b88968fcdd971866d7%2F7e6019eab478401686a679312028d4e8?format=webp&width=800"
-                  alt="Mwamunda Investment Limited"
-                  className="h-32 w-auto"
-                  containerClassName="h-32 w-auto"
-                  placeholderColor="bg-gray-700"
-                />
-              </div>
-              <p className="text-white/70 text-sm">
-                Financial solutions for the underserved since 2019
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link
-                    to="/"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Products</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link
-                    to="/products/fair-personal-loans"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Fair Personal Loans
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products/chama-loans"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Chama Loans
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products/debt-advice-services"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Debt Advice Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products/financial-capability-training"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    Financial Capability Training
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-white mb-4">Contact</h4>
-              <p className="text-white/70 text-sm mb-3">
-                <strong>Email:</strong>
-                <br />
-                <a href="mailto:info@mwamunda.co.ke" className="hover:text-white">info@mwamunda.co.ke</a>
-                <br />
-                <a href="mailto:customercare@mwamunda.co.ke" className="hover:text-white">customercare@mwamunda.co.ke</a>
-              </p>
-              <p className="text-white/70 text-sm">
-                <strong>Phone:</strong>
-                <br />
-                Safaricom: Corporate line pending
-                <br />
-                Airtel: <a href="tel:+254789698601" className="hover:text-white">0789698601</a>
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-8 flex items-center justify-between">
-            <p className="text-white/60 text-sm">
-              &copy; 2024 Mwamunda Investment Limited. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }

@@ -1,377 +1,158 @@
-# PHP API Setup & Deployment Guide
+# PHP API Reference
 
-This directory contains the PHP backend files for the Mwamunda Investment Limited application.
+`api.php` is the site's only backend. It is served from the same origin as the
+site (`/api.php`) and talks to MySQL through `connection.php`.
 
-## Files Overview
+Requires PHP 7.4+ with mysqli (mysqlnd).
 
-- **api.php** - Main API endpoint (generic CRUD operations for any table)
-- **connection.php** - Database connection configuration
-- **PHP_API_README.md** - This documentation file
+## Who can do what
 
-## Current Architecture
+| Request                                              | Anyone                               | Signed-in admin        |
+| ---------------------------------------------------- | ------------------------------------ | ---------------------- |
+| `POST` `contacts`, `applications` (the public forms) | Yes: fixed columns, validated        | Yes                    |
+| `GET` `careers`, `products`                          | Live postings / active products only | All rows               |
+| `GET` `contacts`, `applications`, `users`            | 401                                  | Yes (never a password) |
+| `POST`/`PUT`/`DELETE` `careers`, `products`          | 401                                  | Yes                    |
+| `PUT`/`DELETE` `contacts`, `applications`            | 401                                  | Yes, listed columns    |
+| `POST`/`PUT`/`DELETE` `users`                        | 401                                  | 405: use `create_user` |
+| Any other table                                      | 404                                  | 404                    |
 
-The Node.js/Express frontend calls the **external PHP API** at:
+The tables, their columns, and which columns each kind of caller may write are
+all listed in `api_schema()` at the top of `api.php`. Nothing outside that list
+can be reached: table and column names are never taken from the request.
 
-```
-https://mwamunda.ziratech.com/api.php
-```
+## Actions
 
-All database operations (users, contacts, etc.) are handled by this PHP API.
+Send as `POST` with a JSON body.
 
-## Local Development Setup
+| Action             | Who    | Body                           | Result                                           |
+| ------------------ | ------ | ------------------------------ | ------------------------------------------------ |
+| `check_connection` | Anyone | -                              | `{ success, message }`                           |
+| `login`            | Anyone | `email`, `password`            | Sets the session cookie; `{ success, user }`     |
+| `logout`           | Anyone | -                              | Ends the session and clears the cookie           |
+| `session`          | Admin  | - (also `GET ?action=session`) | `{ success, user }`, or 401 when not signed in   |
+| `create_user`      | Admin  | `email`, `password`, `name`    | Creates another admin (password: 10 to 72 bytes) |
 
-### 1. Configure Database Connection
+There is no public registration. The old `register`, `create_table` and
+`init_*_table` actions were removed; they now answer `400 Unknown action`.
 
-Edit `connection.php` with your local database credentials:
+## Table requests
 
-```php
-$servername = "localhost";    // Your database host
-$username = "root";           // Your database username
-$password = "";               // Your database password
-$database = "mwamunda";       // Your database name
-```
+```http
+GET    /api.php?table=careers
+GET    /api.php?table=careers&id=3
+GET    /api.php?table=products&orderBy=created_at&order=DESC&limit=5
 
-### 2. Create Database
-
-Create a MySQL database:
-
-```sql
-CREATE DATABASE mwamunda;
-USE mwamunda;
-```
-
-### 3. Test Locally (Optional)
-
-If testing locally with XAMPP/WAMP:
-
-1. Copy `api.php` and `connection.php` to your local web root
-2. Update `connection.php` with local database credentials
-3. Access via: `http://localhost/api.php?table=users`
-
-## Deployment to Live Server
-
-### Step 1: Upload Files
-
-Upload to your live server's public directory:
-
-- `api.php`
-- `connection.php`
-
-### Step 2: Configure Database
-
-Update `connection.php` on the live server with production database credentials:
-
-```php
-$servername = "your-db-host.com";
-$username = "your-db-username";
-$password = "your-db-password";
-$database = "mwamunda";
+POST   /api.php    { "table": "contacts", "data": { "name": "...", "email": "...", "subject": "...", "message": "..." } }
+PUT    /api.php    { "table": "applications", "id": 12, "data": { "status": "approved", "approved_amount": 25000 } }
+DELETE /api.php?table=careers&id=3
 ```
 
-### Step 3: Test API
+- `POST` and `PUT` must send `Content-Type: application/json`.
+- `orderBy` must be a column of that table; `limit` is capped at 1000.
+- Public form posts ignore fields a visitor may not set (`status`, notes,
+  approved amount, and anything unknown). Admin writes reject unknown fields
+  with a 400 naming the field.
+- `status` is set by the server on public inserts (`new` for contacts,
+  `pending` for applications). `response_sent_at` is set by the server when a
+  contact's `response_email` is saved.
 
-Verify the API works by testing an endpoint:
+## Responses
+
+Success: `200` (or `201` for a created record) with JSON.
+
+Errors always carry a matching HTTP status and `{ "error": "..." }`:
+
+| Status | Meaning                                                         |
+| ------ | --------------------------------------------------------------- |
+| 400    | Invalid input (the message says which field)                    |
+| 401    | Not signed in, or wrong email/password                          |
+| 403    | Origin not allowed, or the account is not an admin              |
+| 404    | Unknown table, or record not found                              |
+| 405    | Method not allowed for that table                               |
+| 409    | Email already registered                                        |
+| 415    | Body is not `application/json`                                  |
+| 429    | Too many failed logins (see `Retry-After`)                      |
+| 500    | Server error. Details go to the PHP error log, not the response |
+
+## Sessions
+
+- Signing in starts a PHP session. The cookie (`mwamunda_admin`) is `HttpOnly`,
+  `Secure` and `SameSite=Strict`, so page scripts cannot read it and other
+  sites cannot send it.
+- A session ends after 30 minutes without activity, after 8 hours in any case,
+  on logout, or as soon as the account is deleted or stops being an admin.
+- Sign-in attempts are counted in the `login_attempts` table over 15 minutes.
+  More than 10 for one email from one address answers 429 with `Retry-After`.
+  The limit is per email and address together, so guesses from elsewhere
+  cannot lock an admin out. Higher ceilings (200 per email from all
+  addresses, 300 per address across all emails) only stop large-scale
+  guessing.
+- Attempts made while blocked are not recorded, old rows are deleted on every
+  attempt, and a missing table is logged and does not stop logins.
+- The address is `REMOTE_ADDR` unless `TRUSTED_PROXY_IP_HEADER` names a header
+  set by your own proxy or CDN. See "Login rate limiting and the visitor's
+  address" in `PRODUCTION_DEPLOYMENT.md` before setting it.
+
+## Passwords
+
+Passwords are stored with `password_hash()` (bcrypt) and must be 10 to 72
+bytes long (bcrypt ignores anything after 72 bytes).
+
+Accounts created before this used unsalted SHA-256, and the old API exposed
+those hashes. Such a hash is never accepted: signing in fails exactly like a
+wrong password (the refusal is written to the PHP error log), and the account
+needs a new password from `php scripts/admin.php create-admin <email>`.
+
+## Configuration
+
+Set on the server (Apache `SetEnv`, the hosting control panel, or the
+container environment):
+
+| Variable                  | Default                                             | Purpose                                                                                    |
+| ------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `DB_HOST`                 | `localhost`                                         | MySQL host                                                                                 |
+| `DB_USER`                 | (required)                                          | MySQL user                                                                                 |
+| `DB_PASSWORD`             | (empty)                                             | MySQL password                                                                             |
+| `DB_NAME`                 | (required)                                          | Database name                                                                              |
+| `ALLOWED_ORIGINS`         | `https://mwamunda.co.ke,https://www.mwamunda.co.ke` | Other origins allowed to call the API from a browser                                       |
+| `APP_ENV`                 | `production`                                        | `development` lets the cookie work over plain http                                         |
+| `TRUSTED_PROXY_IP_HEADER` | (unset)                                             | Header your own proxy or CDN sets with the visitor's address; used for login rate limiting |
+
+Requests from the host that serves `api.php` are always accepted, so a normal
+same-origin deployment needs no `ALLOWED_ORIGINS`. Do not add CORS headers in
+`.htaccess`: a `Header set` there would override the API's own.
+
+## Database and admin accounts
+
+The schema lives in `database/schema.sql` (safe to re-run; it only creates
+missing tables). Accounts are managed from the command line:
 
 ```bash
-# Test with curl
-curl -X GET "https://your-domain.com/api.php?table=users"
-
-# Or POST request
-curl -X POST "https://your-domain.com/api.php" \
-  -H "Content-Type: application/json" \
-  -d '{"table":"users","data":{"email":"test@example.com","password":"hash","name":"Test User","role":"user"}}'
+php scripts/admin.php init-schema                 # create missing tables
+php scripts/admin.php list-users                  # who has an account
+php scripts/admin.php create-admin you@example.com "Your Name"   # asks for a password
+php scripts/admin.php remove-user old@example.com
 ```
 
-## API Endpoints & Usage
-
-### 1. CREATE TABLE
-
-```http
-POST /api.php
-Content-Type: application/json
-
-{
-  "table": "users",
-  "action": "create_table",
-  "columns": {
-    "email": "VARCHAR(255) UNIQUE NOT NULL",
-    "password": "VARCHAR(255) NOT NULL",
-    "name": "VARCHAR(255)",
-    "role": "VARCHAR(50) DEFAULT 'user'",
-    "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "success": true,
-  "message": "Table created successfully"
-}
-```
-
-### 2. READ (GET)
-
-Get all records:
-
-```http
-GET /api.php?table=users
-```
-
-Get single record:
-
-```http
-GET /api.php?table=users&id=1
-```
-
-**Response:**
-
-```json
-[
-  {
-    "id": 1,
-    "email": "admin@mwamunda.com",
-    "name": "Admin",
-    "role": "admin",
-    "created_at": "2024-01-15 10:30:00"
-  }
-]
-```
-
-### 3. CREATE (INSERT)
-
-```http
-POST /api.php
-Content-Type: application/json
-
-{
-  "table": "users",
-  "data": {
-    "email": "user@example.com",
-    "password": "hashed_password_here",
-    "name": "User Name",
-    "role": "user"
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "success": true,
-  "id": 2
-}
-```
-
-### 4. UPDATE
-
-```http
-PUT /api.php
-Content-Type: application/json
-
-{
-  "table": "users",
-  "id": 1,
-  "data": {
-    "name": "Updated Name",
-    "role": "admin"
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "success": true
-}
-```
-
-### 5. DELETE
-
-```http
-DELETE /api.php?table=users&id=1
-```
-
-**Response:**
-
-```json
-{
-  "success": true
-}
-```
-
-## Database Tables
-
-### users
-
-| Column     | Type                                | Notes             |
-| ---------- | ----------------------------------- | ----------------- |
-| id         | INT AUTO_INCREMENT PRIMARY KEY      |                   |
-| email      | VARCHAR(255) UNIQUE NOT NULL        |                   |
-| password   | VARCHAR(255) NOT NULL               | SHA256 hashed     |
-| name       | VARCHAR(255)                        |                   |
-| role       | VARCHAR(50)                         | 'admin' or 'user' |
-| created_at | TIMESTAMP DEFAULT CURRENT_TIMESTAMP |                   |
-| updated_at | TIMESTAMP                           | Auto-updated      |
-
-### contacts
-
-| Column     | Type                                | Notes                            |
-| ---------- | ----------------------------------- | -------------------------------- |
-| id         | INT AUTO_INCREMENT PRIMARY KEY      |                                  |
-| name       | VARCHAR(255) NOT NULL               | Contact person name              |
-| email      | VARCHAR(255) NOT NULL               | Contact email                    |
-| phone      | VARCHAR(50)                         | Optional phone number            |
-| subject    | VARCHAR(255) NOT NULL               | Contact subject                  |
-| message    | TEXT NOT NULL                       | Contact message                  |
-| status     | VARCHAR(50)                         | 'new', 'in_progress', 'resolved' |
-| created_at | TIMESTAMP DEFAULT CURRENT_TIMESTAMP |                                  |
-| updated_at | TIMESTAMP                           | Auto-updated                     |
-
-## CORS Configuration
-
-The API allows CORS requests with these headers:
-
-```php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-```
-
-⚠️ **For Production:** Consider restricting the origin to your domain:
-
-```php
-header("Access-Control-Allow-Origin: https://your-domain.com");
-```
-
-## Node.js Backend Configuration
-
-The Node.js/Express backend calls the PHP API via the `API_URL` variable in `server/routes/auth.ts`:
-
-```typescript
-const API_URL = "https://mwamunda.ziratech.com/api.php";
-```
-
-**To change the API endpoint:**
-
-1. Edit `server/routes/auth.ts`
-2. Update the `API_URL` constant to your new PHP API URL
-3. Restart the dev server
-
-## Error Handling
-
-All API responses follow standard JSON format:
-
-### Success Response
-
-```json
-{
-  "success": true,
-  "id": 123,
-  "message": "Operation successful"
-}
-```
-
-### Error Response
-
-```json
-{
-  "error": "Error message describing what went wrong"
-}
-```
-
-## Security Best Practices
-
-⚠️ **Important for Production:**
-
-1. **Input Validation**
-   - Add input validation before processing
-   - Sanitize all user inputs
-
-2. **Authentication**
-   - Implement token-based authentication
-   - Validate user permissions for admin operations
-
-3. **CORS**
-   - Restrict to your domain instead of `*`
-   - Only allow necessary methods
-
-4. **HTTPS**
-   - Always use HTTPS in production
-   - Never trust HTTP requests
-
-5. **Database**
-   - Use parameterized queries (already implemented)
-   - Regular backups
-   - Strong credentials
-
-6. **Rate Limiting**
-   - Implement rate limiting to prevent abuse
-
-7. **Logging**
-   - Log all API requests for audit trail
-
-## Updating the API
-
-When you need to update the API:
-
-1. **Make changes locally** to `api.php` and `connection.php`
-2. **Test thoroughly** in development
-3. **Push to live server** when ready
-4. **Monitor** for any issues
-
-### Common Updates
-
-**Add new table:**
-
-1. Use CREATE TABLE endpoint
-2. Verify in database: `SHOW TABLES;`
-
-**Add new column to existing table:**
-
-1. Use MySQL directly: `ALTER TABLE table_name ADD COLUMN ...;`
-2. Or recreate table with new schema
-
-**Modify API logic:**
-
-1. Edit `api.php` locally
-2. Test all endpoints
-3. Deploy to live server
-
-## Troubleshooting
-
-### "Table name is required"
-
-- Ensure `table` parameter is passed in request
-
-### "Failed to fetch users"
-
-- Check if PHP API is reachable
-- Verify database connection in `connection.php`
-- Check server error logs
-
-### "Data is required" (POST)
-
-- Ensure `data` object is included in request body
-
-### "Column definitions are required"
-
-- When creating table, include `columns` object
-
-### CORS errors
-
-- Verify `api.php` has CORS headers
-- Check that request URL matches configured API endpoint
-
-## Support
-
-For issues or questions:
-
-1. Check the error message in the JSON response
-2. Review server logs for detailed errors
-3. Verify database credentials
-4. Test API directly with curl or Postman
+`create-admin` on an existing email makes that account an admin and replaces
+its password. Without shell access, run `database/schema.sql` in phpMyAdmin and
+see "Admin accounts" in `PRODUCTION_DEPLOYMENT.md`.
+
+## Adding a table
+
+1. Add the `CREATE TABLE IF NOT EXISTS` statement to `database/schema.sql`.
+2. Add an entry to `api_schema()` in `api.php` listing its columns and who may
+   read, insert, update and delete.
+3. Mirror the entry in `SCHEMA` in `api-server.js` so local development matches.
+4. Add a client module in `client/lib/` that calls it through `apiFetch`.
+
+## Local development
+
+`npm run dev:api` starts `api-server.js`, a Node stand-in that follows the same
+rules (tested in `api-server.spec.js`). With an empty `db.json` it creates a
+local admin and prints its password once; set `DEV_ADMIN_EMAIL` and
+`DEV_ADMIN_PASSWORD` to choose your own.
+
+To run the real PHP API instead: `npm run dev:php` with a local MySQL database
+and `APP_ENV=development`.

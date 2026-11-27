@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Mail,
@@ -10,7 +10,7 @@ import {
   Send,
   Loader,
 } from "lucide-react";
-import { getStoredUser, clearUser } from "@/lib/auth";
+import { getStoredUser, logoutUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import {
   getAllContacts,
@@ -25,7 +25,9 @@ import AdminSidebar from "@/components/AdminSidebar";
 export default function AdminContacts() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const currentUser = getStoredUser();
+  // Read once: a fresh object on every render would re-run the effects
+  // below in a loop, re-fetching without end.
+  const currentUser = useMemo(() => getStoredUser(), []);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
@@ -71,8 +73,8 @@ export default function AdminContacts() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  const handleLogout = () => {
-    clearUser();
+  const handleLogout = async () => {
+    await logoutUser();
     toast({
       title: "Success",
       description: "Logged out successfully",

@@ -1,5 +1,10 @@
 # Admin System Setup Guide
 
+> **Outdated.** This describes the first version of the admin area. The
+> `/admin/init`, `/admin/setup` and public `/admin/register` pages no longer
+> exist, sign-in uses server sessions, and admin accounts are created with
+> `scripts/admin.php`. See `PHP_API_README.md` and `PRODUCTION_DEPLOYMENT.md`.
+
 ## Overview
 
 The Mwamunda Investment Limited application includes an admin system for user management and dashboard functionality. The system is connected to an external API at `https://mwamunda.ziratech.com/api.php`.
